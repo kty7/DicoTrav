@@ -1,0 +1,1075 @@
+# Translation of Plugins - Easy Table of Contents - Stable (latest release) in French (France)
+# This file is distributed under the same license as the Plugins - Easy Table of Contents - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2025-01-12 10:49:01+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: fr\n"
+"Project-Id-Version: Plugins - Easy Table of Contents - Stable (latest release)\n"
+
+#: includes/inc.admin-options-page.php:831
+msgid "Yes. You can cancel your membership by contacting us."
+msgstr "Oui. Vous pouvez annuler votre adhésion en nous contactant."
+
+#: includes/inc.admin-options-page.php:815
+msgid "We accepts PayPal and Credit Card payments."
+msgstr "Nous acceptons les paiements par PayPal et par carte de crédit."
+
+#: includes/inc.admin-options-page.php:785
+msgid "Lifetime License"
+msgstr "Licence à vie"
+
+#: includes/inc.admin-options-page.php:768
+#: includes/inc.admin-options-page.php:783
+msgid "Unlimited Sites"
+msgstr "Sites illimités"
+
+#: includes/inc.admin-options-page.php:766
+#: includes/inc.admin-options-page.php:781
+msgid "(Save $199)"
+msgstr "(économisez 199$)"
+
+#: includes/inc.admin-options-page.php:763
+msgid "AGENCY"
+msgstr "Agence"
+
+#: includes/inc.admin-options-page.php:751
+msgid "(Save $119)"
+msgstr "(économisez 119$)"
+
+#: includes/inc.admin-options-page.php:748
+msgid "FREELANCER"
+msgstr "Entrepreneur individuel"
+
+#: includes/inc.admin-options-page.php:709
+#: includes/inc.admin-options-page.php:724
+#: includes/inc.admin-options-page.php:740
+#: includes/inc.admin-options-page.php:755
+#: includes/inc.admin-options-page.php:770
+msgid "1 year Updates"
+msgstr "1 an de mises à jour"
+
+#: includes/inc.admin-options-page.php:706
+#: includes/inc.admin-options-page.php:721
+#: includes/inc.admin-options-page.php:737
+#: includes/inc.admin-options-page.php:752
+#: includes/inc.admin-options-page.php:767
+msgid "Billed Annually"
+msgstr "Facturé annuellement"
+
+#: includes/inc.admin-options-page.php:683
+msgid "We create tutorials for every possible feature and keep it updated for you."
+msgstr "Nous créons des didacticiels pour chaque fonctionnalité possible et les tenons à jour pour vous."
+
+#: includes/inc.admin-options-page.php:675
+msgid "We're continuously updating our premium features and releasing them."
+msgstr "Nous mettons continuellement à jour nos fonctionnalités premium et les publions."
+
+#: includes/inc.admin-options-page.php:673
+msgid "Continuous Updates"
+msgstr "Mises à jour permanentes"
+
+#: includes/inc.admin-options-page.php:667
+msgid "Generates a table of contents with your existing setup and makes them AMP automatically."
+msgstr "Génère une table des matières avec votre configuration existante et les rend AMP automatiquement."
+
+#: includes/inc.admin-options-page.php:586
+msgid "PRO"
+msgstr "Pro"
+
+#: includes/inc.admin-options-page.php:518
+msgid "Lead Dev"
+msgstr "Responsable du développement"
+
+#: includes/inc.admin-options-page.php:511
+msgid "Vision & Mission"
+msgstr "Vision et mission"
+
+#: includes/inc.admin-options-page.php:461
+msgid "ez_toc_after_widget"
+msgstr "ez_toc_after_widget"
+
+#: includes/inc.admin-options-page.php:852
+msgid "Contact a Human"
+msgstr "Contacter un humain"
+
+#: includes/inc.admin-options-page.php:849
+msgid "I have other pre-sale questions, can you help?"
+msgstr "J’ai d’autres questions préalables à la vente, pouvez-vous m’aider ?"
+
+#: includes/inc.admin-options-page.php:843
+msgid "Yes, you will get updates for all the premium plugins until your subscription is active."
+msgstr "Oui, vous recevrez des mises à jour pour toutes les extensions premium aussi longtemps que votre abonnement sera actif."
+
+#: includes/inc.admin-options-page.php:842
+msgid "Do I get updates for the premium plugin?"
+msgstr "Recevrai-je des mises à jour pour l’extension premium ?"
+
+#: includes/inc.admin-options-page.php:838
+msgid "Do you offer refunds?"
+msgstr "Offrez-vous des remboursements ?"
+
+#: includes/inc.admin-options-page.php:839
+msgid "You are fully protected by our 100% Money-Back Guarantee Unconditional. If during the next 14 days you experience an issue that makes the plugin unusable, and we are unable to resolve it, we’ll happily offer a full refund."
+msgstr "Vous êtes entièrement protégé par notre garantie de remboursement 100% sans condition. Si, au cours des 14 jours suivants, vous rencontrez un problème qui rend l’extension inutilisable et que nous ne sommes pas en mesure de le résoudre, nous serons heureux de vous offrir un remboursement complet."
+
+#: includes/inc.admin-options-page.php:835
+msgid "Yes. You can upgrade your plan by contacting us."
+msgstr "Oui. Vous pouvez mettre à niveau votre offre en nous contactant."
+
+#: includes/inc.admin-options-page.php:850
+msgid "All the plans are year-to-year which are subscribed annually."
+msgstr "Toutes les offres sont annuelles et sont souscrites annuellement."
+
+#: includes/inc.admin-options-page.php:834
+msgid "Can I change my plan later on?"
+msgstr "Puis-je modifier mon offre ultérieurement ?"
+
+#: includes/inc.admin-options-page.php:830
+msgid "Can I cancel my membership at any time?"
+msgstr "Puis-je annuler mon adhésion à tout moment ?"
+
+#: includes/inc.admin-options-page.php:823
+msgid "Yes, you can use the plugins, but you will not get future updates for those plugins."
+msgstr "Oui, vous pouvez utiliser les extensions, mais vous ne recevrez pas leurs futures mises à jour."
+
+#: includes/inc.admin-options-page.php:822
+msgid "Can I use the plugins after my subscription is expired?"
+msgstr "Puis-je utiliser les extensions après l’expiration de mon abonnement ?"
+
+#: includes/inc.admin-options-page.php:801
+msgid "Frequently Asked Questions"
+msgstr "Foire aux questions"
+
+#: includes/inc.admin-options-page.php:778
+msgid "LIFETIME"
+msgstr "À vie"
+
+#: includes/inc.admin-options-page.php:771
+#: includes/inc.admin-options-page.php:786
+msgid "UNLIMITED"
+msgstr "Illimités"
+
+#: includes/inc.admin-options-page.php:756
+msgid "Save 90%"
+msgstr "Économiser 90%"
+
+#: includes/inc.admin-options-page.php:753
+msgid "25 Site License"
+msgstr "Licence 25 sites"
+
+#: includes/inc.admin-options-page.php:741
+msgid "Save 83%"
+msgstr "Économiser 83%"
+
+#: includes/inc.admin-options-page.php:738
+msgid "10 Site License"
+msgstr "Licence 10 sites"
+
+#: includes/inc.admin-options-page.php:736
+msgid "(Save $99)"
+msgstr "(économisez 99 $)"
+
+#: includes/inc.admin-options-page.php:733
+msgid "WEBMASTER"
+msgstr "Webmestre"
+
+#: includes/inc.admin-options-page.php:727
+msgid "RECOMMENDED"
+msgstr "Recommandée"
+
+#: includes/inc.admin-options-page.php:725
+msgid "Save 78%"
+msgstr "Économiser 78%"
+
+#: includes/inc.admin-options-page.php:722
+msgid "3 Site License"
+msgstr "Licence 3 sites"
+
+#: includes/inc.admin-options-page.php:720
+msgid "(Save $79)"
+msgstr "(économisez 79 $)"
+
+#: includes/inc.admin-options-page.php:711
+#: includes/inc.admin-options-page.php:726
+#: includes/inc.admin-options-page.php:742
+#: includes/inc.admin-options-page.php:757
+#: includes/inc.admin-options-page.php:772
+#: includes/inc.admin-options-page.php:787
+msgid "Buy Now"
+msgstr "Acheter maintenant"
+
+#: includes/inc.admin-options-page.php:707
+msgid "1 Site License"
+msgstr "Licence 1 site"
+
+#: includes/inc.admin-options-page.php:705
+msgid "(Save $59)"
+msgstr "(économisez 59 $)"
+
+#: includes/inc.admin-options-page.php:573
+msgid "FREE"
+msgstr "Gratuite"
+
+#: includes/inc.admin-options-page.php:524
+#: includes/inc.admin-options-page.php:530
+msgid "Developer"
+msgstr "Développeur/développeuse"
+
+#: includes/inc.admin-options-page.php:498
+msgid "Get this following code and paste into your theme\\'s function.php file:"
+msgstr "Récupérez le code suivant et collez-le dans le fichier function.php de votre thème :"
+
+#: includes/inc.admin-options-page.php:448
+msgid "ez_toc_sticky_toggle_before"
+msgstr "ez_toc_sticky_toggle_before"
+
+#: includes/inc.admin-options-page.php:459
+msgid "ez_toc_after_widget_container"
+msgstr "ez_toc_after_widget_container"
+
+#: includes/inc.admin-options-page.php:456
+msgid "ez_toc_before_widget"
+msgstr "ez_toc_before_widget"
+
+#: includes/inc.admin-options-page.php:454
+msgid "ez_toc_before_widget_container"
+msgstr "ez_toc_before_widget_container"
+
+#: includes/inc.admin-options-page.php:451
+msgid "ez_toc_sticky_toggle_after"
+msgstr "ez_toc_sticky_toggle_after"
+
+#: includes/inc.admin-options-page.php:445
+msgid "ez_toc_after"
+msgstr "ez_toc_after"
+
+#: includes/inc.admin-options-page.php:443
+msgid "ez_toc_before"
+msgstr "ez_toc_before"
+
+#: includes/inc.admin-options-page.php:438
+msgid "Hooks"
+msgstr "Crochets"
+
+#: includes/inc.admin-options-page.php:320
+msgid "Paid"
+msgstr "Payé"
+
+#: includes/inc.admin-options-page.php:319
+msgid "Select Customer Type"
+msgstr "Sélectionnez le type de client"
+
+#: includes/inc.admin-options-page.php:316
+msgid "Type"
+msgstr "Type"
+
+#: includes/inc.admin-options-page.php:301
+msgid "Query"
+msgstr "Requête"
+
+#: includes/inc.admin-options-page.php:296
+msgid "Enter your Email"
+msgstr "Saisir votre e-mail"
+
+#: includes/inc.admin-options-page.php:424
+msgid "More Documentation"
+msgstr "Plus de documentation"
+
+#: includes/inc.admin-options-page.php:424
+msgid "You can visit this link "
+msgstr "Vous pouvez visiter ce lien "
+
+#: includes/inc.admin-options-page.php:512
+msgid "We strive to provide the best TOC in the world."
+msgstr "Nous nous efforçons de fournir la meilleure table des matières au monde."
+
+#: includes/inc.admin-options-page.php:441
+msgid "Actions:"
+msgstr "Actions :"
+
+#: includes/inc.admin-options-page.php:323
+msgid "Free"
+msgstr "Gratuite"
+
+#: includes/inc.admin-options-page.php:323
+msgid "( Avg Response within 48-72 hrs)"
+msgstr "(réponse moyenne dans les 48-72 heures)"
+
+#: includes/inc.admin-options-page.php:320
+msgid "(Response within 24 hrs)"
+msgstr "(réponse dans les 24 heures)"
+
+#: includes/inc.admin-options-page.php:292
+msgid "Email"
+msgstr "E-mail"
+
+#: includes/inc.admin-options-page.php:424
+msgid " for more documentation of `Easy Table of Contents`"
+msgstr " pour plus de documentation sur « Easy Table of Contents »"
+
+#: includes/inc.admin-options-page.php:374
+msgid "You can also choose Custom Theme colors of `Easy Table of Contents`. according to your requirements"
+msgstr "Vous pouvez également choisir les couleurs du thème personnalisé de « Easy Table of Contents » selon vos prérequis"
+
+#: includes/inc.admin-options-page.php:372
+msgid "You can also choose Theme color of `Easy Table of Contents` on Theme Options section according to your choice."
+msgstr "Vous pouvez également choisir la couleur du thème de « Easy Table of Contents » dans la section « Options du thème » selon votre choix."
+
+#: includes/inc.admin-options-page.php:687
+msgid "Upgrade to Pro"
+msgstr "Passer à la version Pro"
+
+#: includes/class-eztoc-admin.php:289 includes/class-eztoc-option.php:232
+msgid "After first paragraph"
+msgstr "Après le 1er paragraphe"
+
+#: includes/class-eztoc-pointers.php:60
+msgid "No Thanks"
+msgstr "Non merci"
+
+#: includes/class-eztoc-pointers.php:66
+msgid "before others and some best resources on Easy TOC in a single email? - Free just for users of Easy TOC!"
+msgstr "avant les autres et quelques-unes des meilleures ressources sur Easy TOC dans un unique e-mail ? - Gratuit uniquement pour les utilisateurs et utilisatrices d’Easy TOC !"
+
+#: includes/class-eztoc-pointers.php:65
+msgid " Easy TOC "
+msgstr " Easy TOC "
+
+#: includes/class-eztoc-pointers.php:64
+msgid "Do you want the latest update on"
+msgstr "Voulez-vous la dernière mise à jour sur"
+
+#: includes/class-eztoc-pointers.php:63
+msgid "Thank You for using Easy TOC!"
+msgstr "Merci d’utiliser Easy TOC !"
+
+#: includes/deactivate-feedback.php:50
+msgid "Don't deactivate"
+msgstr "Ne pas désactiver"
+
+#: includes/deactivate-feedback.php:49
+msgid "Only Deactivate"
+msgstr "Désactiver uniquement"
+
+#: includes/deactivate-feedback.php:48
+msgid "Submit & Deactivate"
+msgstr "Envoyer & désactiver"
+
+#: includes/deactivate-feedback.php:36
+msgid "If you have a moment, please let us know why you are deactivating:"
+msgstr "Si vous avez un moment, veuillez nous faire savoir pourquoi vous désactivez :"
+
+#: includes/deactivate-feedback.php:27
+msgid "Please specify, if possible"
+msgstr "Veuillez préciser, si possible"
+
+#: includes/deactivate-feedback.php:26
+msgid "Other reason"
+msgstr "Autre raison"
+
+#: includes/deactivate-feedback.php:24
+msgid "I switched to another plugin"
+msgstr "J’ai basculé vers une autre extension"
+
+#: includes/deactivate-feedback.php:23
+msgid "Can we help? Please describe your problem"
+msgstr "Pouvons-nous aider ? Veuillez décrire votre problème"
+
+#: includes/deactivate-feedback.php:22
+msgid "Technical Issue"
+msgstr "Problème technique"
+
+#: includes/deactivate-feedback.php:20
+msgid "I miss a feature"
+msgstr "Il me manque une fonctionnalité"
+
+#: includes/deactivate-feedback.php:19
+msgid "I stopped showing TOC on my site"
+msgstr "J’ai cessé d’afficher la table des matières sur mon site"
+
+#: includes/deactivate-feedback.php:18
+msgid "It is only temporary"
+msgstr "Ce n’est que temporaire"
+
+#: includes/class-eztoc-option.php:798
+msgid "Remove ':' from TOC Title"
+msgstr "Retirer « : » du titre TOC"
+
+#: includes/class-eztoc-option.php:689
+msgid "Improve your  website performance by inlining your CSS."
+msgstr "Améliorez les performances de votre site en mettant en ligne vos CSS."
+
+#: includes/class-eztoc-option.php:688
+msgid "Inline CSS"
+msgstr "CSS en ligne"
+
+#: includes/class-eztoc-option.php:530
+msgid "Theme Options"
+msgstr "Options du thème"
+
+#: includes/class-eztoc-option.php:524
+msgid "Child Font Size"
+msgstr "Taille de la police enfant"
+
+#: includes/class-eztoc-option.php:473
+msgid "Font Option"
+msgstr "Option de police"
+
+#: includes/class-eztoc-option.php:1272
+msgid "Hyphen"
+msgstr "Trait d’union"
+
+#: includes/class-eztoc-option.php:1269
+msgid "Disc"
+msgstr "Disque"
+
+#: includes/inc.admin-options-page.php:604
+msgid "Easily create TOC in Elementor with the widget without the need any coding or shortcode."
+msgstr "Créez facilement une table des matières dans Elementor avec le widget sans avoir besoin de code ou de code court."
+
+#: includes/inc.admin-options-page.php:602
+msgid "Elementor Widget"
+msgstr "Widget Elementor"
+
+#: includes/inc.admin-options-page.php:596
+msgid "Easily create TOC in Gutenberg block without the need any coding or shortcode."
+msgstr "Créez facilement une table des matières dans le bloc Gutenberg sans avoir besoin de code ou de code court."
+
+#: includes/inc.admin-options-page.php:594
+msgid "Gutenberg Block"
+msgstr "Bloc Gutenberg"
+
+#: includes/inc.admin-options-page.php:588
+msgid "Everything in Free, and:"
+msgstr "Toutes les fonctionnalité de la version gratuite, et :"
+
+#: includes/inc.admin-options-page.php:581
+msgid "We're constantly expanding the plugin and make it more useful. We have wide variety of features which will fit any use-case."
+msgstr "Nous développons constamment l’extension et la rendons plus utile. Nous avons une grande variété de fonctionnalités qui s’adapteront à tous les cas d’utilisation."
+
+#: includes/inc.admin-options-page.php:580
+msgid "50+ Features"
+msgstr "Plus de 50 fonctionnalités"
+
+#: includes/inc.admin-options-page.php:577
+msgid "We take bug reports and feature requests seriously. We’re continiously developing &amp; improve this product for last 2 years with passion and love."
+msgstr "Nous prenons au sérieux les rapports de bogues et les demandes de fonctionnalités. Nous développons continuellement et améliorons ce produit depuis les 2 dernière années avec passion et amour."
+
+#: includes/inc.admin-options-page.php:576
+msgid "Continious Development"
+msgstr "Développement continu"
+
+#: includes/inc.admin-options-page.php:569
+msgid "See what you'll get with the professional version"
+msgstr "Voyez ce que vous obtiendrez avec la version professionnelle"
+
+#: includes/inc.admin-options-page.php:568
+msgid "Compare Pro vs. Free Version"
+msgstr "Comparez la version Pro et la version gratuite"
+
+#: includes/inc.admin-options-page.php:563
+msgid "Get private ticketing help from our full-time technical staff & developers who helps you with the technical issues."
+msgstr "Obtenez l’aide privée de notre personnel technique et de nos développeurs et développeuses qui vous aideront à résoudre les problèmes techniques."
+
+#: includes/inc.admin-options-page.php:562
+#: includes/inc.admin-options-page.php:708
+#: includes/inc.admin-options-page.php:723
+#: includes/inc.admin-options-page.php:739
+#: includes/inc.admin-options-page.php:754
+msgid "Tech Support"
+msgstr "Support technique"
+
+#: includes/inc.admin-options-page.php:559
+msgid "We are planning to continiously build premium features and release them. We have a roadmap and we listen to our customers to turn their feedback into reality."
+msgstr "Nous prévoyons d’élaborer et de diffuser en permanence des fonctionnalités premium. Nous avons une feuille de route et nous sommes à l’écoute de nos clients pour transformer leurs retours en réalité."
+
+#: includes/inc.admin-options-page.php:558
+msgid "Continuous Innovation"
+msgstr "Innovation continue"
+
+#: includes/inc.admin-options-page.php:555
+msgid "Easy TOC Pro will enhances your website table of contents and takes it to a next level to help you reach more engagement and personalization with your users."
+msgstr "Easy TOC Pro améliorera la table des matières de votre site et l’élèvera à un niveau supérieur pour vous aider à obtenir plus d’engagement et de personnalisation avec vos utilisateurs et utilisatrices."
+
+#: includes/inc.admin-options-page.php:554
+msgid "Premium Features"
+msgstr "Fonctionnalités premium"
+
+#: includes/inc.admin-options-page.php:549
+msgid "Purchase Now"
+msgstr "Acheter maintenant"
+
+#: includes/inc.admin-options-page.php:548
+msgid "Take your Table of Contents to the NEXT Level!"
+msgstr "Faites passer votre table des matières au niveau supérieur !"
+
+#: includes/inc.admin-options-page.php:547
+msgid "UPGRADE to PRO Version"
+msgstr "Mettre à niveau vers la version Pro"
+
+#: includes/inc.admin-options-page.php:330
+msgid "Send Support Request"
+msgstr "Envoyer la demande de support"
+
+#: includes/inc.admin-options-page.php:286
+msgid "You can also contact us from "
+msgstr "Vous pouvez également nous contacter depuis "
+
+#: includes/inc.admin-options-page.php:285
+msgid "We are dedicated to provide Technical support & Help to our users. Use the below form for sending your questions."
+msgstr "Nous nous efforçons de fournir un support technique et une aide à nos utilisateurs et utilisatrices. Utilisez le formulaire ci-dessous pour envoyer vos questions."
+
+#: includes/inc.admin-options-page.php:18
+#: includes/inc.admin-options-page.php:238
+msgid "PRO Settings"
+msgstr "Réglages Pro"
+
+#: includes/class-eztoc-admin.php:382 includes/class-eztoc-option.php:431
+msgid "Center"
+msgstr "Centrer"
+
+#: includes/class-eztoc-admin.php:372 includes/class-eztoc-option.php:425
+#: includes/class-eztoc-option.php:1121
+msgid "Alignment"
+msgstr "Alignement"
+
+#: includes/class-eztoc-option.php:344
+msgid "Pure CSS"
+msgstr "CSS pur"
+
+#: includes/class-eztoc-option.php:343
+msgid "JavaScript (default)"
+msgstr "JavaScript (par défaut)"
+
+#: includes/class-eztoc-option.php:340
+msgid "TOC Loading Method"
+msgstr "Méthode de chargement de la table des matières"
+
+#: includes/class-eztoc-admin.php:81
+msgid " Website"
+msgstr " Site"
+
+#: includes/class-eztoc-admin.php:80
+msgid " Upgrade"
+msgstr " Mettre à niveau"
+
+#: includes/class-eztoc-admin.php:79
+msgid " Support"
+msgstr " Support"
+
+#: includes/inc.admin-options-page.php:335
+msgid "Message not sent. please check your network connection"
+msgstr "Message non envoyé. Veuillez vérifier votre connexion réseau"
+
+#: includes/inc.admin-options-page.php:334
+msgid "Message sent successfully, Please wait we will get back to you shortly"
+msgstr "Message bien envoyé, veuillez patienter, nous vous répondrons sous peu"
+
+#. Author of the plugin
+#: easy-table-of-contents.php
+msgid "Magazine3"
+msgstr "Magazine3"
+
+#: includes/class-eztoc-option.php:742
+msgid "This provides the same function as the Smooth Scroll Offset option above but applied when the user is visiting your site on a mobile device."
+msgstr "Cela fournit la même fonction que l’option de décalage de défilement lissé ci-dessus mais appliquée lorsque l’utilisateur visite votre site sur un appareil mobile."
+
+#: includes/class-eztoc-option.php:741
+msgid "Mobile Smooth Scroll Offset"
+msgstr "Décalage de défilement lissé sur mobile"
+
+#: includes/class-eztoc-option.php:495 includes/class-eztoc-option.php:518
+msgid "Heavy"
+msgstr "Épais"
+
+#: includes/class-eztoc-option.php:494 includes/class-eztoc-option.php:517
+msgid "Extra Bold"
+msgstr "Extra gras"
+
+#: includes/class-eztoc-option.php:493 includes/class-eztoc-option.php:516
+msgid "Bold"
+msgstr "Gras"
+
+#: includes/class-eztoc-option.php:492 includes/class-eztoc-option.php:515
+msgid "Semi Bold"
+msgstr "Semi gras"
+
+#: includes/class-eztoc-option.php:491 includes/class-eztoc-option.php:514
+msgid "Medium"
+msgstr "Moyen"
+
+#: includes/class-eztoc-option.php:490 includes/class-eztoc-option.php:513
+msgid "Normal"
+msgstr "Normal"
+
+#: includes/class-eztoc-option.php:489 includes/class-eztoc-option.php:512
+msgid "Light"
+msgstr "Léger"
+
+#: includes/class-eztoc-option.php:488 includes/class-eztoc-option.php:511
+msgid "Extra Light"
+msgstr "Extra léger"
+
+#: includes/class-eztoc-option.php:487 includes/class-eztoc-option.php:510
+msgid "Thin"
+msgstr "Fin"
+
+#: includes/class-eztoc-option.php:484 includes/class-eztoc-widget.php:476
+#: includes/class-eztoc-widgetsticky.php:593
+msgid "Title Font Weight"
+msgstr "Graisse de police de titre"
+
+#: includes/class-eztoc-option.php:478 includes/class-eztoc-widget.php:464
+#: includes/class-eztoc-widgetsticky.php:581
+msgid "Title Font Size"
+msgstr "Taille de police de titre"
+
+#. Description of the plugin
+#: easy-table-of-contents.php
+msgid "Adds a user friendly and fully automatic way to create and display a table of contents generated from the page content."
+msgstr "Ajoute pour l’utilisateur un moyen convivial et entièrement automatique de créer et d’afficher une table des matières générée à partir du contenu de la page."
+
+#. Plugin Name of the plugin
+#: easy-table-of-contents.php includes/inc.functions.php:143
+msgid "Easy Table of Contents"
+msgstr "Easy Table of Contents"
+
+#: includes/inc.admin-options-page.php:253
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#: includes/inc.admin-options-page.php:82
+#: includes/inc.admin-options-page.php:127
+msgid "Advanced"
+msgstr "Avancé"
+
+#: includes/class-eztoc-widget.php:454
+#: includes/class-eztoc-widgetsticky.php:578
+#: includes/inc.admin-options-page.php:82
+#: includes/inc.admin-options-page.php:108
+msgid "Appearance"
+msgstr "Apparence"
+
+#: includes/inc.admin-options-page.php:82
+#: includes/inc.admin-options-page.php:90
+msgid "General"
+msgstr "Général"
+
+#: includes/class-eztoc-widget.php:542
+msgid "If you choose to affix the widget, do not add any other widgets on the sidebar. Also, make sure you have only one instance Table of Contents widget on the page."
+msgstr "Si vous choisissez d’apposer le widget, n’ajoutez aucun autre widget dans la colonne latérale. Assurez-vous également que vous disposez uniquement d’un seul widget de table des matières sur la page."
+
+#: includes/class-eztoc-widget.php:538
+msgid "Affix or pin the widget."
+msgstr "Apposer ou épingler le widget."
+
+#: includes/class-eztoc-widget.php:526
+#: includes/class-eztoc-widgetsticky.php:647
+msgid "Active Section Highlight Color:"
+msgstr "Couleur de surbrillance de section active :"
+
+#: includes/class-eztoc-widget.php:444
+#: includes/class-eztoc-widgetsticky.php:571
+msgid "Title"
+msgstr "Titre"
+
+#: includes/class-eztoc-widget.php:22 includes/class-eztoc-widgetsticky.php:26
+msgid "Display the table of contents."
+msgstr "Afficher la table des matières."
+
+#: includes/class-eztoc-option.php:784
+msgid "Since every theme is different, this can not be determined automatically. If you are unsure how to find the sidebar's class or id, please ask the theme's support persons."
+msgstr "Puisque chaque thème est différent, cela ne peut pas être déterminé automatiquement. Si vous ne savez pas comment trouver la classe ou l’identifiant de la colonne latérale, veuillez demander aux personnes du support du thème."
+
+#: includes/class-eztoc-option.php:783
+msgid "To enable the option to affix or pin the Table of Contents widget enter the theme's sidebar class or id."
+msgstr "Pour activer l’option d’apposition ou d’épinglage du widget de table des matières, saisissez la classe ou l’ID de la colonne latérale du thème."
+
+#: includes/class-eztoc-option.php:782
+msgid "Widget Affix Selector"
+msgstr "Sélecteur d’apposition de widget"
+
+#: includes/class-eztoc-option.php:769
+msgid "Eg: i, toc_index, index, _"
+msgstr "Ex : i, toc_index, index, _"
+
+#: includes/class-eztoc-option.php:768
+msgid "This option normally applies to content written in character sets other than ASCII."
+msgstr "Cette option s’applique normalement au contenu écrit dans des jeux de caractères autres que ASCII."
+
+#: includes/class-eztoc-option.php:767
+msgid "Anchor targets are restricted to alphanumeric characters as per HTML specification (see readme for more detail). The default anchor prefix will be used when no characters qualify. When left blank, a number will be used instead."
+msgstr "Les cibles d’ancre sont limitées aux caractères alphanumériques selon la spécification HTML (voir le fichier readme pour plus de détails). Le préfixe d’ancre par défaut sera utilisé lorsqu’aucun caractère n’est qualifié. Lorsque laissé vide, un nombre sera utilisé à la place."
+
+#: includes/class-eztoc-option.php:766
+msgid "Default Anchor Prefix"
+msgstr "Préfixe d’ancre par défaut"
+
+#: includes/class-eztoc-option.php:750
+msgid "Restrict generation of the table of contents to pages that match the required path. This path is from the root of your site and always begins with a forward slash."
+msgstr "Restreindre la génération de la table des matières aux pages correspondant au chemin nécessité. Ce chemin provient de la racine de votre site et commence toujours par une barre oblique."
+
+#: includes/class-eztoc-option.php:749
+msgid "Limit Path"
+msgstr "Chemin de limite"
+
+#: includes/class-eztoc-option.php:733
+msgid "Smooth Scroll Offset"
+msgstr "Décalage de défilement régulier"
+
+#: includes/class-eztoc-option.php:682
+msgid "Prevent the loading the core CSS styles. When selected, the appearance options from above will be ignored."
+msgstr "Empêcher le chargement des styles CSS de base. Lorsque cette option est sélectionnée, les options d’apparence ci-dessus seront ignorées."
+
+#: includes/class-eztoc-option.php:681
+msgid "CSS"
+msgstr "CSS"
+
+#. translators: %s: URL to the documentation
+#: includes/class-eztoc-option.php:623
+msgid "Show the table of contents for qualifying items on the homepage."
+msgstr "Afficher la table des matières pour les éléments admissibles sur la page d’accueil."
+
+#: includes/class-eztoc-option.php:621 includes/class-eztoc-option.php:1063
+msgid "Homepage"
+msgstr "Page d’accueil"
+
+#: includes/class-eztoc-option.php:615
+msgid "Use - rather than _ in anchors."
+msgstr "Utilisez - plutôt que _ dans les ancres."
+
+#: includes/class-eztoc-option.php:614
+msgid "Hyphenate"
+msgstr "Trait d’union"
+
+#: includes/class-eztoc-option.php:608
+msgid "Ensure anchors are in lowercase."
+msgstr "Assurez-vous que les ancres sont en minuscules."
+
+#: includes/class-eztoc-option.php:607
+msgid "Lowercase"
+msgstr "Minuscule"
+
+#: includes/class-eztoc-option.php:586
+msgid "Link Visited Color"
+msgstr "Couleur de lien visité"
+
+#: includes/class-eztoc-option.php:580
+msgid "Link Hover Color"
+msgstr "Couleur de lien au survol"
+
+#: includes/class-eztoc-option.php:574
+msgid "Link Color"
+msgstr "Couleur de lien"
+
+#: includes/class-eztoc-option.php:568
+msgid "Title Color"
+msgstr "Couleur de titre"
+
+#: includes/class-eztoc-option.php:562
+msgid "Border Color"
+msgstr "Couleur de bordure"
+
+#: includes/class-eztoc-option.php:556
+msgid "Background Color"
+msgstr "Couleur d’arrière-plan"
+
+#: includes/class-eztoc-option.php:543
+msgid "Transparent"
+msgstr "Transparent"
+
+#: includes/class-eztoc-option.php:542
+msgid "Black"
+msgstr "Noir"
+
+#: includes/class-eztoc-option.php:541
+msgid "White"
+msgstr "Blanc"
+
+#: includes/class-eztoc-option.php:540
+msgid "Light Blue"
+msgstr "Bleu clair"
+
+#: includes/class-eztoc-option.php:539
+msgid "Grey"
+msgstr "Gris"
+
+#: includes/class-eztoc-option.php:536
+msgid "The theme is only applied to the table of contents which is auto inserted into the post. The Table of Contents widget will inherit the theme widget styles."
+msgstr "Le thème est uniquement appliqué à la table des matières qui est automatiquement insérée dans le contenu. Le widget de table des matières héritera des styles des widgets du thème."
+
+#: includes/class-eztoc-option.php:535
+msgid "Theme"
+msgstr "Thème"
+
+#: includes/class-eztoc-option.php:501
+msgid "Font Size"
+msgstr "﻿Taille de police"
+
+#: includes/class-eztoc-admin.php:381 includes/class-eztoc-option.php:430
+msgid "Right"
+msgstr "À droite"
+
+#: includes/class-eztoc-admin.php:380 includes/class-eztoc-option.php:429
+msgid "Left"
+msgstr "À gauche"
+
+#: includes/class-eztoc-admin.php:379 includes/class-eztoc-option.php:428
+msgid "None (Default)"
+msgstr "Aucun (par défaut)"
+
+#: includes/class-eztoc-option.php:419
+msgid "Select the User Defined option from the Width option to utilitze the custom width."
+msgstr "Sélectionnez l’option « Défini par l’utilisateur » dans l’option « Largeur » pour utiliser la largeur personnalisée."
+
+#: includes/class-eztoc-option.php:418 includes/class-eztoc-option.php:1148
+msgid "Custom Width"
+msgstr "Largeur personnalisée"
+
+#: includes/class-eztoc-option.php:410 includes/class-eztoc-option.php:1142
+#: includes/class-eztoc-option.php:1158
+msgid "User Defined"
+msgstr "Défini par l’utilisateur"
+
+#: includes/class-eztoc-option.php:408 includes/class-eztoc-option.php:544
+msgid "Custom"
+msgstr "Personaliser"
+
+#: includes/class-eztoc-option.php:396
+msgid "Relative"
+msgstr "Relative"
+
+#: includes/class-eztoc-option.php:382
+msgid "Fixed"
+msgstr "Fixe"
+
+#: includes/class-eztoc-option.php:378 includes/class-eztoc-option.php:1138
+msgid "Width"
+msgstr "Largeur"
+
+#: includes/class-eztoc-option.php:351
+msgid "Smooth Scroll"
+msgstr "Défilement en douceur"
+
+#: includes/class-eztoc-option.php:1268
+msgid "None"
+msgstr "Aucun"
+
+#: includes/class-eztoc-option.php:1276
+msgid "Numeric"
+msgstr "Numérique"
+
+#: includes/class-eztoc-option.php:1289
+msgid "Decimal (default)"
+msgstr "Décimal (par défaut)"
+
+#: includes/class-eztoc-option.php:326
+msgid "Counter"
+msgstr "Compteur"
+
+#: includes/class-eztoc-option.php:320
+msgid "Show as Hierarchy"
+msgstr "Afficher comme hiérarchie"
+
+#: includes/class-eztoc-admin.php:440 includes/class-eztoc-option.php:314
+msgid "Initially hide the table of contents."
+msgstr "Initialement masquer la table des matières."
+
+#: includes/class-eztoc-admin.php:433 includes/class-eztoc-admin.php:439
+#: includes/class-eztoc-option.php:313
+msgid "Initial View"
+msgstr "Vue initiale"
+
+#: includes/class-eztoc-option.php:306
+msgid "Toggle View"
+msgstr "Basculer la vue"
+
+#: includes/class-eztoc-option.php:290
+msgid "Contents"
+msgstr "Contenus"
+
+#: includes/class-eztoc-admin.php:268 includes/class-eztoc-option.php:288
+msgid "Eg: Contents, Table of Contents, Page Contents"
+msgstr "Ex : Contenus, Table des matières, Contenus de la page"
+
+#: includes/class-eztoc-admin.php:262 includes/class-eztoc-option.php:287
+msgid "Header Label"
+msgstr "Libellé de l’en-tête"
+
+#: includes/class-eztoc-option.php:273
+msgid "Display Header Label"
+msgstr "Afficher le libellé d’en-tête"
+
+#: includes/class-eztoc-option.php:266
+msgid "or more headings are present"
+msgstr "ou plus de titrages sont présents"
+
+#: includes/class-eztoc-option.php:265
+msgid "Show when"
+msgstr "Afficher lorsque"
+
+#: includes/class-eztoc-admin.php:293 includes/class-eztoc-option.php:236
+msgid "Bottom"
+msgstr "Inférieure"
+
+#: includes/class-eztoc-admin.php:292 includes/class-eztoc-option.php:235
+msgid "Top"
+msgstr "Supérieure"
+
+#: includes/class-eztoc-admin.php:288 includes/class-eztoc-option.php:231
+msgid "After first heading"
+msgstr "Après le premier titrage"
+
+#: includes/class-eztoc-admin.php:287 includes/class-eztoc-option.php:230
+msgid "Before first heading (default)"
+msgstr "Avant le premier titrage (par défaut)"
+
+#: includes/class-eztoc-admin.php:284 includes/class-eztoc-option.php:227
+msgid "Choose where where you want to display the table of contents."
+msgstr "Choisissez où vous voulez afficher la table des matières."
+
+#: includes/class-eztoc-admin.php:278 includes/class-eztoc-option.php:226
+#: includes/class-eztoc-option.php:1110
+msgid "Position"
+msgstr "Position"
+
+#: includes/class-eztoc-option.php:209 includes/class-eztoc-option.php:1054
+msgid "Enable Support"
+msgstr "Activer le support"
+
+#: includes/class-eztoc-admin.php:502 includes/class-eztoc-option.php:711
+msgid "Exclude Headings"
+msgstr "Exclure les titrages"
+
+#: includes/class-eztoc-admin.php:491 includes/class-eztoc-admin.php:525
+#: includes/class-eztoc-option.php:720
+msgid "Examples:"
+msgstr "Exemples :"
+
+#: includes/class-eztoc-admin.php:423 includes/class-eztoc-option.php:704
+msgid "Heading 6 (h6)"
+msgstr "Titrage 6 (h6)"
+
+#: includes/class-eztoc-admin.php:422 includes/class-eztoc-option.php:703
+msgid "Heading 5 (h5)"
+msgstr "Titrage 5 (h5)"
+
+#: includes/class-eztoc-admin.php:421 includes/class-eztoc-option.php:702
+msgid "Heading 4 (h4)"
+msgstr "Titrage 4 (h4)"
+
+#: includes/class-eztoc-admin.php:420 includes/class-eztoc-option.php:701
+msgid "Heading 3 (h3)"
+msgstr "Titrage 3 (h3)"
+
+#: includes/class-eztoc-admin.php:419 includes/class-eztoc-option.php:700
+msgid "Heading 2 (h2)"
+msgstr "Titrage 2 (h2)"
+
+#: includes/class-eztoc-admin.php:418 includes/class-eztoc-option.php:699
+msgid "Heading 1 (h1)"
+msgstr "Titrage 1 (h1)"
+
+#: includes/class-eztoc-admin.php:410 includes/class-eztoc-option.php:695
+msgid "Headings:"
+msgstr "Titrages :"
+
+#: includes/class-eztoc-admin.php:361 includes/class-eztoc-admin.php:399
+msgid "NOTE:"
+msgstr "Remarque :"
+
+#: includes/class-eztoc-admin.php:392
+msgid "Advanced:"
+msgstr "Avancé :"
+
+#: includes/class-eztoc-admin.php:130 includes/class-eztoc-admin.php:131
+#: includes/class-eztoc-admin.php:184 includes/class-eztoc-widget.php:27
+#: includes/class-eztoc-widget.php:424
+msgid "Table of Contents"
+msgstr "Table des matières"
+
+#: includes/class-eztoc-admin.php:78 includes/inc.admin-options-page.php:15
+msgid "Settings"
+msgstr "Réglages"
+
+#. translators: %s: Setting ID
+#: includes/class-eztoc-option.php:1625
+msgid "The callback function used for the <strong>%s</strong> setting is missing."
+msgstr "La fonction de rappel utilisée pour le réglage <strong>%s</strong> est manquante."
+
+#: includes/class-eztoc-option.php:217 includes/class-eztoc-option.php:1034
+msgid "Auto Insert"
+msgstr "Insertion auto"
+
+#: includes/class-eztoc-option.php:210
+msgid "Select the post types to enable the support for table of contents."
+msgstr "Sélectionnez les types de contenu sur lesquels activer la prise en charge de la table des matières."
+
+#: includes/class-eztoc-option.php:219 includes/inc.admin-options-page.php:347
+msgid "NOTE: The table of contents will only be automatically inserted on post types for which it has been enabled."
+msgstr "Remarque : la table des matières sera uniquement insérée automatiquement aux types de contenu pour lesquels elle a été activée."
+
+#: includes/class-eztoc-option.php:218 includes/inc.admin-options-page.php:346
+msgid "Select the post types which will have the table of contents automatically inserted."
+msgstr "Sélectionnez les types de contenu dans lesquels la table des matières sera automatiquement insérée."
+
+#: includes/class-eztoc-admin.php:508
+msgid "Specify headings to be excluded from appearing in the table of contents. Separate multiple headings with a pipe <code>|</code>. Use an asterisk <code>*</code> as a wildcard to match other text."
+msgstr "Indiquez les titrages à exclure de la table des matières. Séparer les titrages multiples avec une barre verticale <code>|</code>. Utilisez un astérisque <code>*</code> comme joker pour correspondre à un autre texte."
+
+#: includes/class-eztoc-admin.php:416 includes/class-eztoc-option.php:696
+msgid "Select the heading to consider when generating the table of contents. Deselecting a heading will exclude it."
+msgstr "Sélectionnez le titrage à prendre en compte lors de la génération de la table des matières. Désélectionner un titrage l’exclura."
+
+#: includes/class-eztoc-admin.php:401
+msgid "Using the advanced options below will override the global advanced settings."
+msgstr "L’utilisation des options avancées ci-dessous remplacera les réglages avancés globaux."
+
+#: includes/class-eztoc-admin.php:250
+msgid "Insert table of contents."
+msgstr "Insérer une table des matières."
+
+#: includes/class-eztoc-admin.php:239
+msgid "Disable the automatic insertion of the table of contents."
+msgstr "Désactiver l’insertion automatique de la table des matières."
+
+#: includes/class-eztoc-option.php:551
+msgid "For the following settings to apply, select the Custom Theme option."
+msgstr "Pour appliquer les réglages suivants, sélectionnez « Personnaliser » dans l’option « Thème »."
+
+#: includes/class-eztoc-option.php:550
+msgid "Custom Theme"
+msgstr "Personnaliser le thème"
+
+#: includes/class-eztoc-admin.php:468
+msgid "Alternate Headings"
+msgstr "Titrages alternatifs"
+
+#: includes/class-eztoc-admin.php:474
+msgid "Specify alternate table of contents header string. Add the header to be replaced and the alternate header on a single line separated with a pipe <code>|</code>. Put each additional original and alternate header on its own line."
+msgstr "Spécifiez une autre chaîne de titrage de table des matières. Ajoutez le titrage à remplacer et le titrage alternatif sur une seule ligne séparés par une barre verticale <code>|</code>. Placez chaque titrage original et alternatif supplémentaire sur sa propre ligne."
+
+#: includes/class-eztoc-option.php:785
+msgid "Eg: .widget-area or #sidebar"
+msgstr "Ex : .widget-area ou #sidebar"
+
+#: includes/class-eztoc-option.php:751
+msgid "Eg: /wiki/, /corporate/annual-reports/"
+msgstr "Ex : /wiki/, /corporate/annual-reports/"
+
+#: includes/class-eztoc-option.php:734
+msgid "If you have a consistent menu across the top of your site, you can adjust the top offset to stop the headings from appearing underneath the top menu. A setting of 30 accommodates the WordPress admin bar. This setting only has an effect after you have enabled Smooth Scroll option."
+msgstr "Si vous avez un menu conséquent en haut de votre site, vous pouvez ajuster le décalage supérieur pour empêcher les titres d’apparaître sous le menu supérieur. Un réglage de 30 s’adapte à la barre d’administration WordPress. Ce réglage n’a d’effet qu’après avoir activé l’option « Défilement régulier »."
+
+#: includes/class-eztoc-option.php:307
+msgid "Allow the user to toggle the visibility of the table of contents."
+msgstr "Autoriser l’utilisateur ou l’utilisatrice à permuter la visibilité de la table des matières."
+
+#: includes/class-eztoc-option.php:274
+msgid "Show header text above the table of contents."
+msgstr "Afficher le texte de l’en-tête au-dessus de la table des matières."
