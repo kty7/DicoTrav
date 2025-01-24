@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: n/a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: n/a\n"
+"PO-Revision-Date: 2023-11-06 12:57+0000\n"
+"Last-Translator: Matthias Günter <matthias.guenter@devowl.io>\n"
+"Language-Team: French (formal) <https://translate.devowl.io/projects/devowl-"
+"wp-customize-backend-php/develop/fr@formal/>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.1.1\n"
+
+#: AbstractCustomizePanel.php:143
+msgid "Cookie Banner"
+msgstr "Bannière de Cookies"
+
+#: AbstractCustomizePanel.php:144
+msgid "Design your cookie banner."
+msgstr "Concevez votre bannière de cookies."

@@ -1,0 +1,507 @@
+# Translation of Plugins - Easy Table of Contents - Stable (latest release) in Italian
+# This file is distributed under the same license as the Plugins - Easy Table of Contents - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-09-11 09:49:32+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: it\n"
+"Project-Id-Version: Plugins - Easy Table of Contents - Stable (latest release)\n"
+
+#: includes/class-eztoc-option.php:493 includes/class-eztoc-option.php:516
+msgid "Bold"
+msgstr "Grassetto"
+
+#: includes/class-eztoc-option.php:491 includes/class-eztoc-option.php:514
+msgid "Medium"
+msgstr "Medio"
+
+#: includes/class-eztoc-option.php:490 includes/class-eztoc-option.php:513
+msgid "Normal"
+msgstr "Normale"
+
+#: includes/class-eztoc-option.php:489 includes/class-eztoc-option.php:512
+msgid "Light"
+msgstr "Leggero"
+
+#: includes/class-eztoc-option.php:487 includes/class-eztoc-option.php:510
+msgid "Thin"
+msgstr "Sottile"
+
+#: includes/class-eztoc-option.php:484 includes/class-eztoc-widget.php:476
+#: includes/class-eztoc-widgetsticky.php:593
+msgid "Title Font Weight"
+msgstr "Spessore del carattere"
+
+#: includes/class-eztoc-option.php:478 includes/class-eztoc-widget.php:464
+#: includes/class-eztoc-widgetsticky.php:581
+msgid "Title Font Size"
+msgstr "Dimensione del font del titolo"
+
+#: includes/class-eztoc-option.php:494 includes/class-eztoc-option.php:517
+msgid "Extra Bold"
+msgstr "Grassetto extra"
+
+#: includes/class-eztoc-option.php:492 includes/class-eztoc-option.php:515
+msgid "Semi Bold"
+msgstr "Grassetto leggero"
+
+#: includes/class-eztoc-option.php:741
+msgid "Mobile Smooth Scroll Offset"
+msgstr "Offset scorrimento fluido per mobile"
+
+#: includes/class-eztoc-option.php:742
+msgid "This provides the same function as the Smooth Scroll Offset option above but applied when the user is visiting your site on a mobile device."
+msgstr "È la stessa funzionalità dell'opzione Offset scorrimento fluido qui sopra, ma applicata agli utenti che visitano il tuo sito da un dispositivo mobile."
+
+#: includes/class-eztoc-option.php:495 includes/class-eztoc-option.php:518
+msgid "Heavy"
+msgstr "Grassetto molto marcato"
+
+#: includes/class-eztoc-option.php:488 includes/class-eztoc-option.php:511
+msgid "Extra Light"
+msgstr "Molto leggero"
+
+#: includes/inc.admin-options-page.php:253
+msgid "Save Changes"
+msgstr "Salva le modifiche"
+
+#: includes/class-eztoc-widget.php:454
+#: includes/class-eztoc-widgetsticky.php:578
+#: includes/inc.admin-options-page.php:82
+#: includes/inc.admin-options-page.php:108
+msgid "Appearance"
+msgstr "Aspetto"
+
+#: includes/inc.admin-options-page.php:82
+#: includes/inc.admin-options-page.php:90
+msgid "General"
+msgstr "Generale"
+
+#. Plugin Name of the plugin
+#: easy-table-of-contents.php includes/inc.functions.php:143
+msgid "Easy Table of Contents"
+msgstr "Easy Table of Contents"
+
+#: includes/class-eztoc-widget.php:444
+#: includes/class-eztoc-widgetsticky.php:571
+msgid "Title"
+msgstr "Titolo"
+
+#: includes/class-eztoc-option.php:681
+msgid "CSS"
+msgstr "CSS"
+
+#: includes/class-eztoc-option.php:607
+msgid "Lowercase"
+msgstr "Minuscolo"
+
+#: includes/class-eztoc-option.php:574
+msgid "Link Color"
+msgstr "Colore link"
+
+#: includes/class-eztoc-option.php:568
+msgid "Title Color"
+msgstr "Colore titolo"
+
+#: includes/class-eztoc-option.php:586
+msgid "Link Visited Color"
+msgstr "Colore link visitati"
+
+#: includes/class-eztoc-option.php:562
+msgid "Border Color"
+msgstr "Colore bordo"
+
+#: includes/class-eztoc-option.php:556
+msgid "Background Color"
+msgstr "Colore sfondo"
+
+#: includes/class-eztoc-option.php:543
+msgid "Transparent"
+msgstr "Trasparente"
+
+#: includes/class-eztoc-option.php:542
+msgid "Black"
+msgstr "Nero"
+
+#: includes/class-eztoc-option.php:541
+msgid "White"
+msgstr "Bianco"
+
+#: includes/class-eztoc-option.php:540
+msgid "Light Blue"
+msgstr "Azzurro"
+
+#: includes/class-eztoc-option.php:539
+msgid "Grey"
+msgstr "Grigio"
+
+#: includes/class-eztoc-option.php:535
+msgid "Theme"
+msgstr "Tema"
+
+#: includes/class-eztoc-admin.php:381 includes/class-eztoc-option.php:430
+msgid "Right"
+msgstr "Destra"
+
+#: includes/class-eztoc-admin.php:380 includes/class-eztoc-option.php:429
+msgid "Left"
+msgstr "Sinistra"
+
+#: includes/class-eztoc-option.php:408 includes/class-eztoc-option.php:544
+msgid "Custom"
+msgstr "Personalizzato"
+
+#: includes/class-eztoc-option.php:378 includes/class-eztoc-option.php:1138
+msgid "Width"
+msgstr "Larghezza"
+
+#: includes/class-eztoc-option.php:1276
+msgid "Numeric"
+msgstr "Numerico"
+
+#: includes/class-eztoc-option.php:1289
+msgid "Decimal (default)"
+msgstr "Decimale (predefinito)"
+
+#: includes/class-eztoc-option.php:290
+msgid "Contents"
+msgstr "Contenuti"
+
+#: includes/class-eztoc-option.php:265
+msgid "Show when"
+msgstr "Mostra quando"
+
+#: includes/class-eztoc-admin.php:278 includes/class-eztoc-option.php:226
+#: includes/class-eztoc-option.php:1110
+msgid "Position"
+msgstr "Posizione"
+
+#: includes/class-eztoc-admin.php:491 includes/class-eztoc-admin.php:525
+#: includes/class-eztoc-option.php:720
+msgid "Examples:"
+msgstr "Esempi:"
+
+#: includes/class-eztoc-admin.php:423 includes/class-eztoc-option.php:704
+msgid "Heading 6 (h6)"
+msgstr "Titolo 6 (h6)"
+
+#: includes/class-eztoc-admin.php:422 includes/class-eztoc-option.php:703
+msgid "Heading 5 (h5)"
+msgstr "Titolo 5 (h5) "
+
+#: includes/class-eztoc-admin.php:421 includes/class-eztoc-option.php:702
+msgid "Heading 4 (h4)"
+msgstr "Titolo 4 (h4) "
+
+#: includes/class-eztoc-admin.php:420 includes/class-eztoc-option.php:701
+msgid "Heading 3 (h3)"
+msgstr "Titolo 3 (h3) "
+
+#: includes/class-eztoc-admin.php:419 includes/class-eztoc-option.php:700
+msgid "Heading 2 (h2)"
+msgstr "Titolo 2 (h2) "
+
+#: includes/class-eztoc-admin.php:418 includes/class-eztoc-option.php:699
+msgid "Heading 1 (h1)"
+msgstr "Titolo 1 (h1) "
+
+#: includes/class-eztoc-admin.php:361 includes/class-eztoc-admin.php:399
+msgid "NOTE:"
+msgstr "NOTA:"
+
+#: includes/class-eztoc-admin.php:401
+msgid "Using the advanced options below will override the global advanced settings."
+msgstr "Usando le opzioni avanzate sottostanti verranno ignorate le impostazioni globali avanzate."
+
+#: includes/class-eztoc-admin.php:78 includes/inc.admin-options-page.php:15
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: includes/inc.admin-options-page.php:82
+#: includes/inc.admin-options-page.php:127
+msgid "Advanced"
+msgstr "Avanzate"
+
+#: includes/class-eztoc-admin.php:130 includes/class-eztoc-admin.php:131
+#: includes/class-eztoc-admin.php:184 includes/class-eztoc-widget.php:27
+#: includes/class-eztoc-widget.php:424
+msgid "Table of Contents"
+msgstr "Indice dei contenuti"
+
+#. Description of the plugin
+#: easy-table-of-contents.php
+msgid "Adds a user friendly and fully automatic way to create and display a table of contents generated from the page content."
+msgstr "Permette di creare e visualizzare un indice generato in base al contenuto della pagina in modo facile e completamente automatico."
+
+#: includes/class-eztoc-option.php:217 includes/class-eztoc-option.php:1034
+msgid "Auto Insert"
+msgstr "Inserimento automatico"
+
+#: includes/class-eztoc-option.php:418 includes/class-eztoc-option.php:1148
+msgid "Custom Width"
+msgstr "Larghezza personalizzata"
+
+#: includes/class-eztoc-option.php:351
+msgid "Smooth Scroll"
+msgstr "Scorrimento fluido"
+
+#: includes/class-eztoc-option.php:733
+msgid "Smooth Scroll Offset"
+msgstr "Offset scorrimento fluido"
+
+#: includes/class-eztoc-option.php:734
+msgid "If you have a consistent menu across the top of your site, you can adjust the top offset to stop the headings from appearing underneath the top menu. A setting of 30 accommodates the WordPress admin bar. This setting only has an effect after you have enabled Smooth Scroll option."
+msgstr "Se hai un menu fisso in alto nel tuo sito, puoi aggiustare l'offset dall'altro per prevenire la sovrapposizione del titolo al menu.Un'impostazione di 30 lascia lo spazio per la barra amministrativa di WordPress. Questa impostazione ha effetto solo se l'opzione Scorrimento fluido è abilitata."
+
+#: includes/class-eztoc-widget.php:22 includes/class-eztoc-widgetsticky.php:26
+msgid "Display the table of contents."
+msgstr "Visualizza l'indice dei contenuti."
+
+#: includes/class-eztoc-option.php:750
+msgid "Restrict generation of the table of contents to pages that match the required path. This path is from the root of your site and always begins with a forward slash."
+msgstr "Limita la generazione dell'indice dei contenuti alle pagina che hanno un percorso corrispondente a quello richiesto. Questo percorso è relativo alla radice del tuo sito e inizia sempre con una barra obliqua."
+
+#: includes/class-eztoc-option.php:749
+msgid "Limit Path"
+msgstr "Limita a questo percorso "
+
+#: includes/class-eztoc-option.php:766
+msgid "Default Anchor Prefix"
+msgstr "Prefisso predefinito per l'ancora"
+
+#: includes/class-eztoc-option.php:767
+msgid "Anchor targets are restricted to alphanumeric characters as per HTML specification (see readme for more detail). The default anchor prefix will be used when no characters qualify. When left blank, a number will be used instead."
+msgstr "I target delle ancore sono limitati a caratteri alfanumerici come da specifiche HTML (leggi il readme per maggiori dettagli). Il prefisso predefinito per le ancore sarà utilizzato quando nessun carattere è idoneo. Se lasciato vuoto sarà utilizzato un numero."
+
+#: includes/class-eztoc-admin.php:268 includes/class-eztoc-option.php:288
+msgid "Eg: Contents, Table of Contents, Page Contents"
+msgstr "Es: contenuti, indice dei contenuti, contenuti delle pagine"
+
+#: includes/class-eztoc-option.php:769
+msgid "Eg: i, toc_index, index, _"
+msgstr "Es: i, toc_index, index, _"
+
+#: includes/class-eztoc-option.php:751
+msgid "Eg: /wiki/, /corporate/annual-reports/"
+msgstr "Es: /wiki/, /corporate/report-annuali/"
+
+#: includes/class-eztoc-option.php:785
+msgid "Eg: .widget-area or #sidebar"
+msgstr "Es: .widget-area o #sidebar"
+
+#: includes/class-eztoc-option.php:501
+msgid "Font Size"
+msgstr "Dimensione del font"
+
+#: includes/class-eztoc-option.php:550
+msgid "Custom Theme"
+msgstr "Personalizza il tema"
+
+#: includes/class-eztoc-option.php:580
+msgid "Link Hover Color"
+msgstr "Colore link all'hover"
+
+#: includes/class-eztoc-option.php:615
+msgid "Use - rather than _ in anchors."
+msgstr "Utilizza - invece di _ nelle ancore."
+
+#: includes/class-eztoc-option.php:410 includes/class-eztoc-option.php:1142
+#: includes/class-eztoc-option.php:1158
+msgid "User Defined"
+msgstr "Definito dall'utente"
+
+#: includes/class-eztoc-option.php:621 includes/class-eztoc-option.php:1063
+msgid "Homepage"
+msgstr "Homepage"
+
+#: includes/class-eztoc-option.php:1268
+msgid "None"
+msgstr "Nessuno"
+
+#: includes/class-eztoc-option.php:326
+msgid "Counter"
+msgstr "Numeratore"
+
+#: includes/class-eztoc-admin.php:262 includes/class-eztoc-option.php:287
+msgid "Header Label"
+msgstr "Etichetta del titolo"
+
+#: includes/class-eztoc-option.php:273
+msgid "Display Header Label"
+msgstr "Visualizza il titolo"
+
+#: includes/class-eztoc-admin.php:292 includes/class-eztoc-option.php:235
+msgid "Top"
+msgstr "In alto"
+
+#: includes/class-eztoc-admin.php:293 includes/class-eztoc-option.php:236
+msgid "Bottom"
+msgstr "In basso"
+
+#: includes/class-eztoc-option.php:382
+msgid "Fixed"
+msgstr "Fissa"
+
+#: includes/class-eztoc-option.php:396
+msgid "Relative"
+msgstr "Relativa"
+
+#: includes/class-eztoc-admin.php:379 includes/class-eztoc-option.php:428
+msgid "None (Default)"
+msgstr "Nessuna (predefinito)"
+
+#: includes/class-eztoc-admin.php:288 includes/class-eztoc-option.php:231
+msgid "After first heading"
+msgstr "Dopo il primo titolo"
+
+#: includes/class-eztoc-admin.php:287 includes/class-eztoc-option.php:230
+msgid "Before first heading (default)"
+msgstr "Prima del primo titolo (predefinito)"
+
+#: includes/class-eztoc-option.php:209 includes/class-eztoc-option.php:1054
+msgid "Enable Support"
+msgstr "Abilita supporto"
+
+#: includes/class-eztoc-option.php:768
+msgid "This option normally applies to content written in character sets other than ASCII."
+msgstr "Questa opzione si applica normalmente al contenuto scritto in con un set di caratteri diverso da ASCII."
+
+#. translators: %s: Setting ID
+#: includes/class-eztoc-option.php:1625
+msgid "The callback function used for the <strong>%s</strong> setting is missing."
+msgstr "La funzione di callback usata per l'impostazione <strong>%s</strong> è mancante."
+
+#: includes/class-eztoc-option.php:614
+msgid "Hyphenate"
+msgstr "Unisci con un trattino"
+
+#: includes/class-eztoc-option.php:608
+msgid "Ensure anchors are in lowercase."
+msgstr "Assicurati che le ancore siano in minuscolo."
+
+#: includes/class-eztoc-admin.php:502 includes/class-eztoc-option.php:711
+msgid "Exclude Headings"
+msgstr "Escludi titoli"
+
+#: includes/class-eztoc-admin.php:392
+msgid "Advanced:"
+msgstr "Avanzate:"
+
+#: includes/class-eztoc-admin.php:410 includes/class-eztoc-option.php:695
+msgid "Headings:"
+msgstr "Titoli:"
+
+#: includes/class-eztoc-option.php:266
+msgid "or more headings are present"
+msgstr "o più titoli sono presenti"
+
+#. translators: %s: URL to the documentation
+#: includes/class-eztoc-option.php:623
+msgid "Show the table of contents for qualifying items on the homepage."
+msgstr "Mostra l'indice dei contenuti per gli elementi idonei nella homepage."
+
+#: includes/class-eztoc-option.php:682
+msgid "Prevent the loading the core CSS styles. When selected, the appearance options from above will be ignored."
+msgstr "Impedisci il caricamento degli stili CSS principali. Se selezionato, le opzioni di stile qui sopra verranno ignorate."
+
+#: includes/class-eztoc-option.php:551
+msgid "For the following settings to apply, select the Custom Theme option."
+msgstr "Per applicare le seguenti impostazioni, seleziona l'opzione Personalizzato per il tema."
+
+#: includes/class-eztoc-option.php:784
+msgid "Since every theme is different, this can not be determined automatically. If you are unsure how to find the sidebar's class or id, please ask the theme's support persons."
+msgstr "Poiché ogni tema è differente non lo si può determinare automaticamente. Se non sai come trovare la classe o l'id della barra laterale, contatta il supporto del tuo tema."
+
+#: includes/class-eztoc-widget.php:526
+#: includes/class-eztoc-widgetsticky.php:647
+msgid "Active Section Highlight Color:"
+msgstr "Colore di evidenziazione della sezione attiva:"
+
+#: includes/class-eztoc-option.php:783
+msgid "To enable the option to affix or pin the Table of Contents widget enter the theme's sidebar class or id."
+msgstr "Per abilitare l'opzione e rendere fisso il widget della tabella dei contenuti, inserisci la classe o l'id della barra laterale del tema."
+
+#: includes/class-eztoc-option.php:782
+msgid "Widget Affix Selector"
+msgstr "Selettore per rendere fisso il widget"
+
+#: includes/class-eztoc-widget.php:538
+msgid "Affix or pin the widget."
+msgstr "Rendi fisso il widget"
+
+#: includes/class-eztoc-option.php:218 includes/inc.admin-options-page.php:346
+msgid "Select the post types which will have the table of contents automatically inserted."
+msgstr "Seleziona i tipi di post type per i quali l'indice dei contenuti sarà inserito in automatico."
+
+#: includes/class-eztoc-option.php:210
+msgid "Select the post types to enable the support for table of contents."
+msgstr "Seleziona i tipi di post type per i quali l'indice dei contenuti sarà abilitato."
+
+#: includes/class-eztoc-option.php:306
+msgid "Toggle View"
+msgstr "Attiva/disattiva visualizzazione"
+
+#: includes/class-eztoc-admin.php:284 includes/class-eztoc-option.php:227
+msgid "Choose where where you want to display the table of contents."
+msgstr "Scegli dove vuoi visualizzare l'indice dei contenuti."
+
+#: includes/class-eztoc-admin.php:416 includes/class-eztoc-option.php:696
+msgid "Select the heading to consider when generating the table of contents. Deselecting a heading will exclude it."
+msgstr "Seleziona i titoli da includere nella generazione automatica dell'indice dei contenuti. Deseleziona i titoli che vuoi escludere."
+
+#: includes/class-eztoc-admin.php:508
+msgid "Specify headings to be excluded from appearing in the table of contents. Separate multiple headings with a pipe <code>|</code>. Use an asterisk <code>*</code> as a wildcard to match other text."
+msgstr "Specifica i titoli da escludere dall'indice dei contenuti. Separa titoli multipli con una barra verticale <code>|</code>. Utilizza un asterisco <code>*</code> come carattere jolly per far corrispondere un testo."
+
+#: includes/class-eztoc-admin.php:474
+msgid "Specify alternate table of contents header string. Add the header to be replaced and the alternate header on a single line separated with a pipe <code>|</code>. Put each additional original and alternate header on its own line."
+msgstr "Specifica un testo alternativo per il titolo dell'indice dei contenuti. Aggiungi il titolo che deve essere sostituito e il titolo alternativo su una singola riga separati da una barra verticale <code>|</code>. Inserisci ogni titolo originale e alternativo sulla propria riga."
+
+#: includes/class-eztoc-option.php:320
+msgid "Show as Hierarchy"
+msgstr "Mostra la gerarchia"
+
+#: includes/class-eztoc-option.php:274
+msgid "Show header text above the table of contents."
+msgstr "Mostra il titolo sopra all'indice dei contenuti."
+
+#: includes/class-eztoc-admin.php:468
+msgid "Alternate Headings"
+msgstr "Titoli alternativi"
+
+#: includes/class-eztoc-admin.php:239
+msgid "Disable the automatic insertion of the table of contents."
+msgstr "Disabilita l'inserimento automatico dell'indice dei contenuti."
+
+#: includes/class-eztoc-admin.php:433 includes/class-eztoc-admin.php:439
+#: includes/class-eztoc-option.php:313
+msgid "Initial View"
+msgstr "Visualizzazione iniziale"
+
+#: includes/class-eztoc-admin.php:440 includes/class-eztoc-option.php:314
+msgid "Initially hide the table of contents."
+msgstr "Inizialmente nascondi l'indice dei contenuti."
+
+#: includes/class-eztoc-option.php:307
+msgid "Allow the user to toggle the visibility of the table of contents."
+msgstr "Permetti all'utente di attivare/disattivare la visualizzazione dell'indice dei contenuti."
+
+#: includes/class-eztoc-widget.php:542
+msgid "If you choose to affix the widget, do not add any other widgets on the sidebar. Also, make sure you have only one instance Table of Contents widget on the page."
+msgstr "Se scegli di rendere fissa la posizione del widget, non aggiungere nessun altro widget alla barra laterale. Inoltre assicurati che ci sia una sola istanza del widget di Easy Table of Contents nella pagina."
+
+#: includes/class-eztoc-admin.php:250
+msgid "Insert table of contents."
+msgstr "Inserisci l'indice dei contenuti."
+
+#: includes/class-eztoc-option.php:219 includes/inc.admin-options-page.php:347
+msgid "NOTE: The table of contents will only be automatically inserted on post types for which it has been enabled."
+msgstr "NOTA: l'indice dei contenuti sarà inserito in automatico solo per i tipi di articoli per i quali è stato abilitato."
+
+#: includes/class-eztoc-option.php:536
+msgid "The theme is only applied to the table of contents which is auto inserted into the post. The Table of Contents widget will inherit the theme widget styles."
+msgstr "Il tema si applica solo all'indice dei contenuti che viene inserito automaticamente nell'articolo. Il widget Table of Contents erediterà lo stile del tema del widget."

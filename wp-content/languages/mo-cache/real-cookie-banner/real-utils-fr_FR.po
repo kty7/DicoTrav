@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: n/a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: n/a\n"
+"PO-Revision-Date: 2024-08-24 04:08+0000\n"
+"Last-Translator: Jan Karres <jan.karres@devowl.io>\n"
+"Language-Team: French (formal) <https://translate.owlinfra.de/projects/"
+"devowl-wp-real-utils-backend-php/develop/fr@formal/>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#: cross/CrossRealCategoryLibrary.php:50
+msgid "Do you manage many categories?"
+msgstr "Vous gérez plusieurs catégories ?"
+
+#: cross/CrossRealCategoryLibrary.php:52
+msgid ""
+"Do you still create your categories this way? Get an explorer-like tree view "
+"directly in your posts/page tables!"
+msgstr ""
+"Créez-vous encore vos catégories de cette manière ? Obtenez une vue en "
+"arborescence semblable à celle d'un explorateur directement dans vos "
+"tableaux d'articles/de pages !"
+
+#: cross/CrossRealCategoryLibrary.php:59
+msgid "Manage product categories/attributes?"
+msgstr "Gérer les catégories/attributs de produits ?"
+
+#: cross/CrossRealCategoryLibrary.php:61
+msgid ""
+"Do you still create your product categories and attributes this way? Get an "
+"explorer-like tree view directly into your WooCommerce products table!"
+msgstr ""
+"Vous créez toujours vos catégories et attributs de produits de cette "
+"manière ? Obtenez une vue en arborescence semblable à celle d'un explorateur "
+"directement dans votre table de produits WooCommerce !"
+
+#: cross/CrossRealCategoryLibrary.php:68
+msgid "Paginate without reload?"
+msgstr "Paginer sans recharger ?"
+
+#: cross/CrossRealCategoryLibrary.php:70
+msgid ""
+"Do you want to paginate through your posts and pages without having to "
+"reload the complete page?"
+msgstr ""
+"Voulez-vous paginer à travers vos articles et vos pages sans avoir à "
+"recharger toute la page ?"
+
+#: cross/CrossRealCategoryLibrary.php:77
+msgid "Assigning much faster?"
+msgstr "L'affectation est beaucoup plus rapide ?"
+
+#: cross/CrossRealCategoryLibrary.php:79
+msgid ""
+"You can move or insert a post or page directly into a category without "
+"having to deal with checkboxes."
+msgstr ""
+"Vous pouvez déplacer ou insérer un article ou une page directement dans une "
+"catégorie sans avoir à utiliser de cases à cocher."
+
+#: cross/CrossRealCookieBanner.php:88
+msgid "Is your website GDPR compliant?"
+msgstr "Votre site web est-il conforme au RGPD ?"
+
+#: cross/CrossRealCookieBanner.php:89
+msgid "cookie-banner-frontend.png"
+msgstr "cookie-banner-frontend.png"
+
+#: cross/CrossRealCookieBanner.php:90
+msgid ""
+"Websites targeting EU users and setting non-essential cookies need an opt-in "
+"cookie banner. We recommend Real Cookie Banner as an ePrivacy Policy and "
+"GDPR compliant solution for WordPress."
+msgstr ""
+"Les sites web qui ciblent les utilisateurs de l'UE et qui installent des "
+"cookies non essentiels ont besoin d'une bannière de cookies opt-in. Nous "
+"recommandons Real Cookie Banner comme solution conforme à la Politique "
+"ePrivacy et au RGPD pour WordPress."
+
+#: cross/CrossRealCookieBanner.php:94
+msgid "https://devowl.io/go/real-cookie-banner?source=cross-rcb"
+msgstr "https://devowl.io/go/real-cookie-banner?source=cross-rcb"
+
+#: cross/CrossRealMediaLibrary.php:49
+msgid "File finally found?"
+msgstr "Fichier enfin trouvé ?"
+
+#: cross/CrossRealMediaLibrary.php:51
+msgid ""
+"Your WordPress site will certainly continue to grow. Organize your media "
+"library with folders!"
+msgstr ""
+"Votre site WordPress va certainement continuer à se développer. Organisez "
+"votre médiathèque avec des dossiers !"
+
+#: cross/CrossRealMediaLibrary.php:58
+msgid "Does it take long to find a file?"
+msgstr "La recherche d'un fichier est-elle longue ?"
+
+#: cross/CrossRealMediaLibrary.php:60
+msgid ""
+"Inserting media into a post or page can be stressful. Use folders to "
+"organize your media library!"
+msgstr ""
+"L'insertion de médias dans un article ou une page peut s'avérer stressante. "
+"Utilisez des dossiers pour organiser votre médiathèque !"
+
+#: cross/CrossRealPhysicalMedia.php:47 cross/CrossRealPhysicalMedia.php:56
+msgid "Did you know that?"
+msgstr "Le saviez-vous ?"
+
+#: cross/CrossRealPhysicalMedia.php:49 cross/CrossRealPhysicalMedia.php:58
+msgid ""
+"Your uploads can say more than a thousand words. Unfortunately, search "
+"engines do not understand the content of images, for example. Organize your "
+"uploads directly in meaningful folder names and achieve a better ranking in "
+"search engines!"
+msgstr ""
+"Vos téléchargements peuvent en dire plus que mille mots. Malheureusement, "
+"les moteurs de recherche ne comprennent pas le contenu des images, par "
+"exemple. Organisez vos téléchargements directement dans des noms de dossiers "
+"significatifs et obtenez un meilleur classement dans les moteurs de "
+"recherche !"
+
+#: Service.php:162 Service.php:276
+msgid "No such plugin slug available."
+msgstr "Aucun plugin de ce type n'est disponible."
+
+#: Service.php:214
+msgid "The abstract implementation for your slug could not be found."
+msgstr "L'implémentation abstraite de votre libellé n'a pas pu être trouvée."
+
+#: Service.php:269
+msgid "You must agree to our privacy policy to continue."
+msgstr "Vous devez accepter notre politique de confidentialité pour continuer."
+
+#. translators:
+#: view/Options.php:48
+msgid "Products of %s"
+msgstr "Articles de %s"
+
+#. translators:
+#: view/Options.php:70
+msgid ""
+"Show advertising for not yet installed %s products in the WordPress backend"
+msgstr ""
+"Afficher la publicité pour les produits %s qui ne sont pas encore installés "
+"dans le backend de WordPress"
+
+#: WelcomePage.php:59
+msgid "Learn more about this plugin"
+msgstr "En savoir plus sur ce plugin"
+
+#: WelcomePage.php:66 WelcomePage.php:160
+msgid "Support"
+msgstr "Support"
+
+#: WelcomePage.php:71 WelcomePage.php:163
+msgid "Rate plugin"
+msgstr "Note du plugin"
+
+#: WelcomePage.php:152
+msgid "Version"
+msgstr "Version"
+
+#: WelcomePage.php:157
+msgid "Info"
+msgstr "Info"
+
+#: WelcomePage.php:171
+msgid "Key feature"
+msgid_plural "Key features"
+msgstr[0] "Principale fonctionnalité"
+msgstr[1] "Principales fonctionnalités"
+
+#: WelcomePage.php:179
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: WelcomePage.php:182
+msgid ""
+"Receive the latest news about devowl.io WordPress plugins directly in your "
+"inbox"
+msgstr ""
+"Recevez les dernières nouvelles sur les plugins WordPress devowl.io "
+"directement dans votre boîte de réception"
+
+#: WelcomePage.php:186
+msgid "Enter your email..."
+msgstr "Saisissez votre email..."
+
+#. translators:
+#: WelcomePage.php:194
+msgctxt "legal-text"
+msgid ""
+"I hereby consent to the processing of my data by devowl.io GmbH for the "
+"purpose of sending the newsletter. The consent can be revoked at any time "
+"with effect for the future by clicking on the \"Unsubscribe\" button or by e-"
+"mail."
+msgstr ""
+"Je consens par la présente au traitement de mes données par devowl.io GmbH "
+"dans le but d'envoyer la newsletter. Le consentement peut être révoqué à "
+"tout moment avec effet pour l'avenir en cliquant sur le bouton \"Se "
+"désinscrire\" ou par e-mail."
+
+#. translators:
+#: WelcomePage.php:206
+msgctxt "legal-text"
+msgid ""
+"Information on the processing of your personal data can be found in our <a "
+"%s>privacy policy</a>."
+msgstr ""
+"Vous trouverez des informations sur le traitement de vos données "
+"personnelles dans notre <a %s>politique de confidentialité</a>."
+
+#: WelcomePage.php:211
+msgid "https://devowl.io/privacy-policy/"
+msgstr "https://devowl.io/privacy-policy/"
+
+#: WelcomePage.php:216
+msgid "Subscribe"
+msgstr "S'abonner"
+
+#: WelcomePage.php:290
+msgid "Additional plugins by devowl.io"
+msgstr "Plugins supplémentaires de devowl.io"
+
+#: WelcomePage.php:366
+msgid "Available in"
+msgstr "Disponible dans"
+
+#~ msgctxt "legal-text"
+#~ msgid ""
+#~ "I want to receive WordPress news from devowl.io via email and agree to "
+#~ "the <a %s>privacy policy</a>."
+#~ msgstr ""
+#~ "Je souhaite recevoir les actualités WordPress de devowl.io par email et "
+#~ "j'accepte la <a %s>politique de confidentialité</a>."

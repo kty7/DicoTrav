@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: n/a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: n/a\n"
+"PO-Revision-Date: 2024-02-05 06:21+0000\n"
+"Last-Translator: Matthias Günter <matthias.guenter@devowl.io>\n"
+"Language-Team: Italian (formal) <https://translate.devowl.io/projects/devowl-"
+"wp-utils-backend-php/develop/it@formal/>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.3.1\n"
+
+#. translators:
+#: Localization.php:455
+msgid ""
+"Some language packs could not be downloaded for the textdomain %1$s (Error: "
+"%2$s, Endpoint: %3$s)."
+msgstr ""
+"Non è stato possibile scaricare alcuni pacchetti linguistici per il dominio "
+"testuale %1$s (Errore: %2$s, Punto finale: %3$s)."
+
+#: Localization.php:506
+msgid "Retry"
+msgstr "Riprovare"
+
+#: RateLimitNotice.php:62
+msgid " and "
+msgstr " e "
+
+#. translators:
+#: RateLimitNotice.php:69
+msgid ""
+"Your WordPress unexpectedly requests the license server and cloud services "
+"of <strong>%1$s</strong> exceptionally often (URL: <code>%3$s</code>). This "
+"indicates a misconfiguration of your WordPress system, which can also affect "
+"the loading speed of your website or cause malfunctions. Please check with "
+"your technical contact what is configured incorrectly! Alternatively, you "
+"can <a href=\"%2$s\" target=\"_blank\">open a support ticket</a> at the "
+"plugin manufacturer support."
+msgstr ""
+"Il suo WordPress richiede inaspettatamente il server di licenza e i servizi "
+"cloud di <strong>%1$s</strong> in modo eccezionale (URL: <code>%3$s</"
+"code> ). Questo indica una configurazione errata del suo sistema WordPress, "
+"che può anche influire sulla velocità di caricamento del suo sito web o "
+"causare malfunzionamenti. Verifichi con il suo contatto tecnico cosa è "
+"configurato in modo errato! In alternativa, può <a href=\"%2$s\" "
+"target=\"_blank\">aprire un ticket di assistenza</a> presso il supporto del "
+"produttore del plugin."
+
+#: RateLimitNotice.php:74
+msgid "https://devowl.io/support/"
+msgstr "https://devowl.io/support/"
+
+#: RateLimitNotice.php:83
+msgid ""
+"I have solved the problem (hide the message until the next occurrence of the "
+"error)"
+msgstr ""
+"Ho risolto il problema (nasconde il messaggio fino al successivo verificarsi "
+"dell'errore)"
+
+#. translators:
+#: Service.php:118
+msgid ""
+"<strong>An unexpected network error has occurred!</strong> One or more "
+"WordPress plugins tried to call the WordPress REST API, which failed. Most "
+"likely a <strong>security plugin%s</strong>, a web <strong>server "
+"configuration</strong> or active <strong>ad-blocker extension</strong> "
+"installed on your browser disabled the REST API. Please make sure that the "
+"following REST API namespaces are reachable to use your plugin without "
+"problems:"
+msgstr ""
+"<strong>Si è verificato un errore di rete inatteso!</strong> Uno o più "
+"plugin di WordPress hanno tentato di chiamare l'API REST di WordPress, ma "
+"non è riuscito. Molto probabilmente un <strong>plugin di sicurezza%s</"
+"strong>, una configurazione del server web <strong></strong> o un'estensione "
+"attiva <strong>di ad-blocker</strong> installata sul suo browser ha "
+"disabilitato l'API REST. Si assicuri che i seguenti spazi dei nomi dell'API "
+"REST siano raggiungibili per utilizzare il plugin senza problemi:"
+
+#. translators:
+#: Service.php:126
+msgid ""
+"What is the WordPress REST API and how to enable it? %1$sLearn more%2$s."
+msgstr ""
+"Che cos'è l'API REST di WordPress e come attivarla? %1$sPer saperne di "
+"più%2$s."
+
+#: Service.php:129
+msgid "https://devowl.io/knowledge-base/wordpress-rest-api-does-not-respond/"
+msgstr "https://devowl.io/knowledge-base/wordpress-rest-api-does-not-respond/"
+
+#: Service.php:137
+msgid ""
+"In the text box below you will find a technical listing of the last 10 "
+"failed network requests:"
+msgstr ""
+"Nella casella di testo sottostante troverà un elenco tecnico delle ultime 10 "
+"richieste di rete fallite:"

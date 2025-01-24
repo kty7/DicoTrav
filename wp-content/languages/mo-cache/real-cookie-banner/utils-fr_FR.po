@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: n/a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: n/a\n"
+"PO-Revision-Date: 2024-08-23 22:16+0000\n"
+"Last-Translator: French translator <account+rcb-fr@devowl.io>\n"
+"Language-Team: French (formal) <https://translate.owlinfra.de/projects/"
+"devowl-wp-utils-backend-php/develop/fr@formal/>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. translators:
+#: Localization.php:455
+msgid ""
+"Some language packs could not be downloaded for the textdomain %1$s (Error: "
+"%2$s, Endpoint: %3$s)."
+msgstr ""
+"Certains packs linguistiques n'ont pas pu être téléchargés pour le domaine "
+"textuel %1$s (Erreur : %2$s, Point final : %3$s)."
+
+#: Localization.php:506
+msgid "Retry"
+msgstr "Réessayer"
+
+#: RateLimitNotice.php:62
+msgid " and "
+msgstr " et "
+
+#. translators:
+#: RateLimitNotice.php:69
+msgid ""
+"Your WordPress unexpectedly requests the license server and cloud services "
+"of <strong>%1$s</strong> exceptionally often (URL: <code>%3$s</code>). This "
+"indicates a misconfiguration of your WordPress system, which can also affect "
+"the loading speed of your website or cause malfunctions. Please check with "
+"your technical contact what is configured incorrectly! Alternatively, you "
+"can <a href=\"%2$s\" target=\"_blank\">open a support ticket</a> at the "
+"plugin manufacturer support."
+msgstr ""
+"Votre WordPress demande de manière inattendue le serveur de licence et les "
+"services cloud de <strong>%1$s</strong> exceptionnellement souvent (URL : "
+"<code>%3$s</code> ). Cela indique une mauvaise configuration de votre "
+"système WordPress, qui peut également affecter la vitesse de chargement de "
+"votre site web ou provoquer des dysfonctionnements. Veuillez vérifier auprès "
+"de votre support technique ce qui n'est pas configuré correctement ! Vous "
+"pouvez également <a href=\"%2$s\" target=\"_blank\">ouvrir un ticket "
+"d'assistance</a> auprès de l'assistance de l'éditeur du plugin."
+
+#: RateLimitNotice.php:74
+msgid "https://devowl.io/support/"
+msgstr "https://devowl.io/support/"
+
+#: RateLimitNotice.php:83
+msgid ""
+"I have solved the problem (hide the message until the next occurrence of the "
+"error)"
+msgstr ""
+"J'ai résolu le problème (masquer le message jusqu'à la prochaine occurrence "
+"de l'erreur)"
+
+#. translators:
+#: Service.php:118
+msgid ""
+"<strong>An unexpected network error has occurred!</strong> One or more "
+"WordPress plugins tried to call the WordPress REST API, which failed. Most "
+"likely a <strong>security plugin%s</strong>, a web <strong>server "
+"configuration</strong> or active <strong>ad-blocker extension</strong> "
+"installed on your browser disabled the REST API. Please make sure that the "
+"following REST API namespaces are reachable to use your plugin without "
+"problems:"
+msgstr ""
+"<strong>Une erreur réseau inattendue s'est produite !</strong> Un ou "
+"plusieurs plugins WordPress ont tenté d'appeler l'API REST WordPress, qui a "
+"échoué. Il est très probable qu'un <strong>plugin de sécurité%s</strong>, "
+"une <strong>configuration du serveur web</strong> ou une <strong>extension "
+"de bloquage de publicités</strong> activée dans votre navigateur ait "
+"désactivé l'API REST. Veuillez vous assurer que les espaces de noms suivants "
+"de l'API REST sont accessibles afin d'utiliser votre plugin sans problème :"
+
+#. translators:
+#: Service.php:126
+msgid ""
+"What is the WordPress REST API and how to enable it? %1$sLearn more%2$s."
+msgstr ""
+"Qu'est-ce que l'API REST de WordPress et comment l'activer ? %1$sEn savoir "
+"plus%2$s."
+
+#: Service.php:129
+msgid "https://devowl.io/knowledge-base/wordpress-rest-api-does-not-respond/"
+msgstr "https://devowl.io/knowledge-base/wordpress-rest-api-does-not-respond/"
+
+#: Service.php:137
+msgid ""
+"In the text box below you will find a technical listing of the last 10 "
+"failed network requests:"
+msgstr ""
+"Dans la zone de texte ci-dessous, vous trouverez une liste technique des 10 "
+"dernières demandes de réseau qui ont échoué :"
