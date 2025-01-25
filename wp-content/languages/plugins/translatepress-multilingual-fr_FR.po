@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Translate Multilingual sites &#8211; TranslatePress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-10 14:45:33+0000\n"
+"PO-Revision-Date: 2025-01-25 16:57:41+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -717,11 +717,6 @@ msgid "There is a new version of %1$s available. %2$sView version %3$s details%4
 msgstr "Une nouvelle version de %1$s est disponible. %2$sVoir les détails de la version %3$s%4$s ou %5$smettre à jour maintenant%6$s."
 
 #: includes/class-edd-sl-plugin-updater.php:418
-#: languages/translatepress-multilingual.catalog.php:21
-msgid "You do not have permission to install plugin updates"
-msgstr "Vous n’avez pas les droits nécessaires pour effectuer les mises à jour de l’extension."
-
-#: includes/class-edd-sl-plugin-updater.php:418
 #: languages/translatepress-multilingual.catalog.php:22
 msgid "Error"
 msgstr "Erreur"
@@ -733,6 +728,11 @@ msgstr "Votre licence de <strong>TranslatePress</strong> a expirée. <br/>Veuill
 #: includes/class-plugin-notices.php:364
 msgid "Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s"
 msgstr "Votre numéro de série de <strong>TranslatePress</strong> n’est pas valide ou absent. <br/>Veuillez %1$srenouveller votre version%2$s pour continuer à recevoir l’accès aux mises à jour automatiques et au support. Besoin d’une clé de licence ? %3$sAchetez en une maintenant %4$s"
+
+#: includes/class-edd-sl-plugin-updater.php:418
+#: languages/translatepress-multilingual.catalog.php:21
+msgid "You do not have permission to install plugin updates"
+msgstr "Vous n’avez pas les droits suffisants pour installer les mises à jour de l’extension."
 
 #: includes/class-upgrade.php:419
 #: languages/translatepress-multilingual.catalog.php:270

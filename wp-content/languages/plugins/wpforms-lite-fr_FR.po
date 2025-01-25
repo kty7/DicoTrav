@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WPForms &#8211; Easy Form Builder for WordPress &#8211; Contact Forms, Payment Forms, Surveys, &amp; More - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-12 10:29:02+0000\n"
+"PO-Revision-Date: 2025-01-25 10:46:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4335,6 +4335,10 @@ msgstr "Vous voulez être un VIP ? Rejoignez-nous maintenant !"
 msgid "Don’t Miss Your Form Notification Emails!"
 msgstr "Ne manquez pas vos e-mails de notification de formulaire !"
 
+#: src/Admin/Notifications/EventDriven.php:537
+msgid "Read the Guide"
+msgstr "Lire le guide"
+
 #: src/Admin/Notifications/EventDriven.php:642
 msgid "Are your forms converting fewer visitors than you hoped? Often, visitors quit forms partway through. That can prevent you from getting all the leads you deserve to capture. With our Form Abandonment addon, you can capture partial entries even if your visitor didn’t hit Submit! From there, it’s easy to follow up with leads and turn them into loyal customers."
 msgstr "Vos formulaires convertissent-ils moins d‘internautes que vous ne l’espériez ? Souvent, les visiteurs quittent les formulaires en cours de route. Cela peut vous empêcher d’obtenir tous les prospects que vous méritez de capturer. Avec notre module d’abandon de formulaire, vous pouvez capturer des entrées partielles même si votre visiteur n’a pas cliqué sur Envoyer ! À partir de là, il est facile de suivre les prospects et de les transformer en clients fidèles."
@@ -4346,10 +4350,6 @@ msgstr "Rien ne vaut les vrais commentaires de vos clients, clientes et internau
 #: src/Admin/Notifications/EventDriven.php:576
 msgid "Running a WordPress site can be challenging. But help is just around the corner! Our Facebook group contains tons of tips and help to get your business growing! When you join our VIP Circle, you’ll get instant access to tips, tricks, and answers from a community of loyal WPForms users. Best of all, membership is 100% free!"
 msgstr "Gérer un site WordPress peut être difficile. Mais l’aide est juste au coin ! Notre groupe Facebook contient des tonnes de conseils et d’aide pour faire croître votre entreprise ! Lorsque vous rejoignez notre cercle VIP, vous obtenez un accès instantané aux conseils, astuces et réponses d’une communauté d’utilisateurs et d‘utilisatrices fidèles de WPForms. Mieux encore, l’adhésion est 100 % gratuite !"
-
-#: src/Admin/Notifications/EventDriven.php:537
-msgid "Read the Guide"
-msgstr "Lire le guide"
 
 #: src/Admin/Notifications/EventDriven.php:530
 msgid "Start Building"
@@ -11903,10 +11903,6 @@ msgstr "Ignorer le défi"
 msgid "You completed the WPForms Challenge in <b>%1$s %2$s %3$s %4$s</b>. Share your success story with other WPForms users and help us spread the word <b>by giving WPForms a 5-star rating (%5$s) on WordPress.org</b>. Thanks for your support and we look forward to bringing you more awesome features."
 msgstr "Vous avez terminé le défi WPForms en <b>%1$s %2$s %3$s %4$s</b>. Partagez votre succès avec d’autres utilisateurs ou utilisatrices de WPForms et aidez-nous à répandre la nouvelle <b>en donnant à WPForms une note de 5 étoiles (%5$s) sur WordPress.org</b>. Merci pour votre soutien et nous nous réjouissons déjà de vous apporter encore plus de fonctionnalités impressionnantes."
 
-#: src/Admin/Education/Builder/Captcha.php:124 src/Frontend/Amp.php:360
-msgid "hCaptcha"
-msgstr "CAPTCHA"
-
 #: src/Admin/Education/StringsTrait.php:170
 msgid "Already purchased?"
 msgstr "Déjà acheté ?"
@@ -12163,3 +12159,7 @@ msgstr "Malheureusement, les %1$s ne sont pas disponibles dans votre offre. Veui
 #: includes/admin/class-welcome.php:266 src/Admin/Builder/Templates.php:1000
 msgid "Upgrade to PRO"
 msgstr "Passer à la version Pro"
+
+#: src/Admin/Education/Builder/Captcha.php:124 src/Frontend/Amp.php:360
+msgid "hCaptcha"
+msgstr "hCaptcha"

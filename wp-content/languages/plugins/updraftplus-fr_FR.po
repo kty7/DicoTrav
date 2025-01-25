@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - UpdraftPlus: WP Backup &amp; Migration Plugin - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-18 14:02:55+0000\n"
+"PO-Revision-Date: 2025-01-25 16:33:02+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,36 @@ msgstr ""
 "X-Generator: GlotPress/4.0.1\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - UpdraftPlus: WP Backup &amp; Migration Plugin - Stable (latest release)\n"
+
+#: admin.php:648
+msgid "Sorry, you are not allowed to access this page."
+msgstr "Désolé, vous n’êtes pas autorisé à accéder à cette page."
+
+#: templates/wp-admin/settings/tab-addons.php:62
+msgid "Features comparison"
+msgstr "Comparaison des fonctionnalités"
+
+#. translators: %1$s - opening link tag to Rackspace Cloud console, %2$s -
+#. closing link tag, %3$s - opening link tag to instructions.
+#: methods/cloudfiles.php:463
+msgid "Get your API key from your %1$sRackspace Cloud console%2$s (%3$sread instructions here%2$s), then pick a container name to use for storage."
+msgstr "Obtenez votre clé de l’API depuis votre %1$sconsole Rackspace Cloud%2$s (%3$slisez les instructions ici%2$s), puis choisissez un nom de conteneur à utiliser pour le stockage."
+
+#: includes/migrator-lite.php:376
+msgid "To take advantage of the feature, please upgrade your PHP version to at least 5.3."
+msgstr "Pour profiter de cette fonctionnalité, veuillez mettre à niveau votre version PHP vers au moins la version 5.3."
+
+#: includes/migrator-lite.php:293
+msgid "This feature isn't suitable for PHP %s users."
+msgstr "Cette fonctionnalité ne convient pas aux utilisateurs/utilisatrices de PHP %s."
+
+#: includes/migrator-lite.php:234 includes/migrator-lite.php:293
+msgid "To take advantage of this feature, please upgrade your PHP version to at least 5.3."
+msgstr "Pour profiter de cette fonctionnalité, veuillez mettre à niveau votre version PHP vers au minimum à 5.3."
+
+#: includes/migrator-lite.php:234
+msgid "The search and replace feature isn't suitable for PHP %s users."
+msgstr "La fonction rechercher/remplacer ne convient pas aux utilisateurs/utilisatrices de PHP %s."
 
 #: admin.php:6344
 msgid "To see which remote storage locations are included in free and premium, please see here: %s"
@@ -3142,7 +3172,7 @@ msgstr "Une installation WordPress vide"
 
 #: admin.php:1118
 msgid "credentials"
-msgstr "données de connexion"
+msgstr "informations de connexion"
 
 #: admin.php:6161
 msgid "This current site"
@@ -4765,7 +4795,7 @@ msgstr "Recommandé : optimisez votre base de données avec WP-Optimize."
 #: templates/wp-admin/notices/report-plain.php:29
 #: templates/wp-admin/notices/report.php:26
 msgid "Read more"
-msgstr "Lire plus"
+msgstr "Lire la suite"
 
 #: includes/updraftplus-notices.php:210
 msgid "After you've backed up your database, we recommend you install our WP-Optimize plugin to streamline it for better website performance."
@@ -6693,6 +6723,10 @@ msgstr "Erreur %s : %s"
 #: backup.php:4380
 msgid "check your log for more details."
 msgstr "vérifiez votre journal pour plus d’informations."
+
+#: backup.php:4030
+msgid "A very large file was encountered: %s (size: %s Mb)"
+msgstr "Un fichier très volumineux a été trouvé : %s (taille : %s Mo)"
 
 #: backup.php:3995 backup.php:4320
 msgid "Failed to open the zip file (%s) - %s"
