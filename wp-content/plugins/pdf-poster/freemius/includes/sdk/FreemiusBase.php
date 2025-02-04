@@ -127,8 +127,9 @@
              *
              * @return object[]|object|null
              */
-            private function _Api( $pPath, $pMethod = 'GET', $pParams = array('name' => 'raju') ) {
+            private function _Api( $pPath, $pMethod = 'GET', $pParams = array() ) {
                 $pMethod = strtoupper( $pMethod );
+
                 try {
                     $result = $this->MakeRequest( $pPath, $pMethod, $pParams );
                 } catch ( Freemius_Exception $e ) {

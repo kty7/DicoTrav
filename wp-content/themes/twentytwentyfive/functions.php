@@ -156,3 +156,9 @@ if ( ! function_exists( 'twentytwentyfive_format_binding' ) ) :
 		}
 	}
 endif;
+
+function enable_classic_menus() {
+    remove_theme_support('block-template');
+    add_theme_support('menus');
+}
+add_action('after_setup_theme', 'enable_classic_menus');
