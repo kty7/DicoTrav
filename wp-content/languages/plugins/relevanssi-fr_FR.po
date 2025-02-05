@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Relevanssi &#8211; A Better Search - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-13 09:31:49+0000\n"
+"PO-Revision-Date: 2025-02-04 18:20:03+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -302,7 +302,7 @@ msgstr "Utiliser le noindex de Rank Math SEO."
 
 #: lib/compatibility/seopress.php:89
 msgid "If checked, Relevanssi will not index posts marked as \"No index\" in SEOPress settings."
-msgstr "Si coché, Relevanssi n’indexera pas les publications marquées comme « Ne pas indexer » dans les réglages de Rank Math SEO."
+msgstr "Si coché, Relevanssi n’indexera pas les publications marquées comme « Ne pas indexer » dans les réglages de SEOPress."
 
 #: lib/compatibility/seopress.php:87
 msgid "Use SEOPress noindex."
