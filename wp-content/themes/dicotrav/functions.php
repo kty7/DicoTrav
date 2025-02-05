@@ -31,3 +31,63 @@ function davis_blocks_register_block_styles() {
 	) );
 }
 add_action( 'init', 'davis_blocks_register_block_styles' );
+
+/*	-----------------------------------------------------------------------------------------------
+	Index alphabetique pour le dictionnaire
+--------------------------------------------------------------------------------------------------- */
+
+function alphabetical_index_shortcode() {
+    $args = array(
+        'post_type'      => 'post',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+    );
+
+    $query = new WP_Query($args);
+    $posts_by_letter = array();
+    $letters = range('A', 'Z');
+    $special_characters = '#';
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $first_letter = strtoupper(mb_substr(get_the_title(), 0, 1));
+
+            // Si ce n'est pas une lettre, on le met dans la section "#"
+            if (!preg_match('/[A-Z]/', $first_letter)) {
+                $first_letter = $special_characters;
+            }
+
+            if (!isset($posts_by_letter[$first_letter])) {
+                $posts_by_letter[$first_letter] = array();
+            }
+
+            $posts_by_letter[$first_letter][] = '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+        }
+    }
+    wp_reset_postdata();
+
+    // **Création du menu d'index**
+    $output = '<div class="alphabet-index">';
+    $output .= '<a href="#special">#</a> '; // Bouton "#"
+
+    foreach ($letters as $letter) {
+        if (isset($posts_by_letter[$letter])) {
+            $output .= '<a href="#' . $letter . '">' . $letter . '</a> ';
+        } else {
+            $output .= '<span class="inactive">' . $letter . '</span> ';
+        }
+    }
+    $output .= '</div>';
+
+    // **Création du contenu des articles**
+    $output .= '<div class="alphabetical-index">';
+    foreach ($posts_by_letter as $letter => $posts) {
+        $output .= '<h2 id="' . ($letter == '#' ? 'special' : $letter) . '">' . $letter . '</h2><ul>' . implode('', $posts) . '</ul>';
+    }
+    $output .= '</div>';
+
+    return $output;
+}
+add_shortcode('alphabetical_index', 'alphabetical_index_shortcode');
