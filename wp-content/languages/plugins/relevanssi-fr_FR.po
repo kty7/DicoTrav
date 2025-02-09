@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Relevanssi &#8211; A Better Search - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-02-04 18:20:03+0000\n"
+"PO-Revision-Date: 2025-02-07 08:14:44+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -736,7 +736,7 @@ msgstr "Les données que nous collectons et pourquoi nous les collectons"
 
 #: lib/log.php:224
 msgid "IP address"
-msgstr "Adresse IP"
+msgstr "Adresse IP"
 
 #: lib/log.php:220
 msgid "Hits found"
@@ -1817,7 +1817,7 @@ msgstr "Vous avez déjà installé Relevanssi. C’est un excellent premier pas 
 
 #: lib/tabs/overview-tab.php:41
 msgid "Getting started"
-msgstr "Commencer"
+msgstr "Premiers pas"
 
 #: lib/tabs/overview-tab.php:22
 msgid "Welcome to Relevanssi!"

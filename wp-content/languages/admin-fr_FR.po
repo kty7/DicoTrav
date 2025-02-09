@@ -1089,7 +1089,7 @@ msgstr "<a href=\"%1$s\" lang=\"en\"><i>Learn WordPress</i></a> est une ressourc
 #: wp-admin/comment.php:73 wp-admin/edit-comments.php:232
 #: wp-admin/edit-form-advanced.php:320 wp-admin/edit-form-advanced.php:338
 #: wp-admin/edit-form-advanced.php:356 wp-admin/edit-link-form.php:77
-#: wp-admin/edit-tags.php:312 wp-admin/edit.php:302 wp-admin/edit.php:327
+#: wp-admin/edit-tags.php:315 wp-admin/edit.php:302 wp-admin/edit.php:327
 #: wp-admin/erase-personal-data.php:66 wp-admin/export-personal-data.php:66
 #: wp-admin/export.php:60 wp-admin/includes/class-custom-background.php:111
 #: wp-admin/includes/class-custom-image-header.php:146 wp-admin/index.php:133
@@ -2789,7 +2789,7 @@ msgid "Unable to generate personal data export file. ZipArchive not available."
 msgstr "Impossible de générer le fichier d’exportation de confidentialité du compte. La fonction ZipArchive n’est pas disponible."
 
 #. translators: %s: Search query.
-#: wp-admin/edit-comments.php:282 wp-admin/edit-tags.php:340
+#: wp-admin/edit-comments.php:282 wp-admin/edit-tags.php:343
 #: wp-admin/edit.php:429 wp-admin/link-manager.php:111 wp-admin/plugins.php:778
 #: wp-admin/upload.php:430 wp-admin/users.php:795 wp-admin/js/updates.js:3139
 #: wp-admin/network/sites.php:399 wp-admin/network/themes.php:374
@@ -4068,11 +4068,11 @@ msgstr "Vue globale du rapport sur les exportations."
 msgid "<a href=\"https://wordpress.org/documentation/article/settings-writing-screen/\">Documentation on Writing Settings</a>"
 msgstr "<a href=\"https://fr.wordpress.org/support/article/settings-writing-screen/\">Documentation sur les réglages d’écriture</a>"
 
-#: wp-admin/edit-tags.php:309
+#: wp-admin/edit-tags.php:312
 msgid "<a href=\"https://wordpress.org/documentation/article/posts-tags-screen/\">Documentation on Tags</a>"
 msgstr "<a href=\"https://fr.wordpress.org/support/article/posts-tags-screen/\">Documentation sur les étiquettes</a>"
 
-#: wp-admin/edit-tags.php:305
+#: wp-admin/edit-tags.php:308
 msgid "<a href=\"https://wordpress.org/documentation/article/posts-categories-screen/\">Documentation on Categories</a>"
 msgstr "<a href=\"https://fr.wordpress.org/support/article/posts-categories-screen/\">Documentation sur les catégories</a>"
 
@@ -5670,7 +5670,7 @@ msgid "Could not resume the theme."
 msgstr "Impossible de relancer le thème."
 
 #. translators: %s: Default category.
-#: wp-admin/edit-tags.php:629
+#: wp-admin/edit-tags.php:632
 msgid "Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the default category %s. The default category cannot be deleted."
 msgstr "Supprimer une catégorie ne supprime pas les articles de cette catégorie. Les articles ayant été assignés uniquement à cette catégorie se voient assignés à la catégorie par défaut, « %s ». La catégorie par défaut ne peut pas être supprimée."
 
@@ -6925,7 +6925,7 @@ msgstr "Activer"
 msgid "Allow link notifications from other blogs (pingbacks and trackbacks) on new posts"
 msgstr "Autoriser les notifications de lien en provenance d’autres blogs (pings et rétroliens) sur les nouvelles publications"
 
-#: wp-admin/menu-header.php:281 wp-admin/js/common.js:2109
+#: wp-admin/menu-header.php:281 wp-admin/js/common.js:2114
 msgid "Collapse Main menu"
 msgstr "Replier le menu principal"
 
@@ -8659,7 +8659,7 @@ msgstr "Vous pouvez également insérer des contenus en provenance de nombreux s
 msgid "<a href=\"https://codex.wordpress.org/Appearance_Background_Screen\">Documentation on Custom Background</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Appearance_Background_Screen\">Documentation sur l’arrière-plan personnalisé (en anglais)</a>"
 
-#: wp-admin/edit-tags.php:307
+#: wp-admin/edit-tags.php:310
 msgid "<a href=\"https://codex.wordpress.org/Links_Link_Categories_Screen\">Documentation on Link Categories</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Links_Link_Categories_Screen\">Documentation sur les catégories de liens (en anglais)</a>"
 
@@ -10434,7 +10434,7 @@ msgstr "Si vous souhaitez utiliser le gestionnaire de liens, veuillez installer 
 msgid "When changing themes, there is often some variation in the number and setup of widget areas/sidebars and sometimes these conflicts make the transition a bit less smooth. If you changed themes and seem to be missing widgets, scroll down on this screen to the Inactive Widgets area, where all of your widgets and their settings will have been saved."
 msgstr "En changeant de thème, il y a souvent des variations sur le nombre et l’agencement des zones de widgets et des colonnes latérales, et parfois tout cela entre en conflit, rendant la transition moins aisée. Si vous avez changé de thème et que certains widgets semblent manquer, faites défiler cet écran jusqu’en bas pour les retrouver dans la zone des widgets inactifs, où ils ont été conservés avec leurs derniers réglages."
 
-#: wp-admin/edit-tags.php:286
+#: wp-admin/edit-tags.php:289
 msgid "<strong>Parent</strong> &mdash; Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have child categories for Bebop and Big Band. Totally optional. To create a subcategory, just choose another category from the Parent dropdown."
 msgstr "<strong>Parent</strong> &mdash; Les catégories, contrairement aux étiquettes, peuvent avoir une hiérarchie. Vous pouvez avoir une catégorie nommée « Jazz », et à l’intérieur, plusieurs catégories comme « Bebop » et « Big Band ». Le fait d’avoir une hiérarchie est totalement facultatif. Pour créer une sous-catégorie, choisissez juste une autre catégorie depuis la liste déroulante « Parente »."
 
@@ -10647,11 +10647,11 @@ msgid "Select comment"
 msgstr "Sélectionnez un commentaire"
 
 #. translators: %s: URL to Categories to Tags Converter tool.
-#: wp-admin/edit-tags.php:653
+#: wp-admin/edit-tags.php:656
 msgid "Tags can be selectively converted to categories using the <a href=\"%s\">tag to category converter</a>."
 msgstr "Les étiquettes peuvent être converties de manière sélective en catégories via le <a href=\"%s\">convertisseur étiquettes vers catégories</a>."
 
-#: wp-admin/edit-tags.php:260
+#: wp-admin/edit-tags.php:263
 msgid "You can delete Link Categories in the Bulk Action pull-down, but that action does not delete the links within the category. Instead, it moves them to the default Link Category."
 msgstr "Vous pouvez supprimer des catégories de liens avec la liste déroulante « Actions groupées », mais cette action ne supprime pas les liens contenus dans la catégorie. Au lieu de cela, ils sont déplacés dans la catégorie de liens par défaut."
 
@@ -11352,11 +11352,11 @@ msgstr "Bienvenue sur WordPress %1$s. <a href=\"%2$s\">En savoir plus</a>."
 msgid "You can upload media files here without creating a post first. This allows you to upload files to use with posts and pages later and/or to get a web link for a particular file that you can share. There are three options for uploading files:"
 msgstr "Vous pouvez ici téléverser des fichiers sans avoir besoin de créer un publication au préalable. Ceci vous permet de téléverser des fichiers qui seront utilisables par les articles et les pages ultérieurement et/ou seront utilisés via un lien internet pour partager un fichier particulier. Il y a 3 méthodes pour téléverser des fichiers :"
 
-#: wp-admin/edit-tags.php:296
+#: wp-admin/edit-tags.php:299
 msgid "Adding Tags"
 msgstr "Ajout d’étiquettes"
 
-#: wp-admin/edit-tags.php:296
+#: wp-admin/edit-tags.php:299
 msgid "Adding Categories"
 msgstr "Ajout de catégories"
 
@@ -11498,11 +11498,11 @@ msgstr "Un clic sur <strong>Sélectionner des fichiers</strong> ouvre la fenêtr
 msgid "<strong>Drag and drop</strong> your files into the area below. Multiple files are allowed."
 msgstr "<strong>Glissez/déposez</strong> vos fichiers dans la zone ci-dessous. Vous pouvez en déposer plusieurs à la fois."
 
-#: wp-admin/edit-tags.php:256
+#: wp-admin/edit-tags.php:259
 msgid "You can assign keywords to your posts using <strong>tags</strong>. Unlike categories, tags have no hierarchy, meaning there is no relationship from one tag to another."
 msgstr "Vous pouvez assigner des <strong>étiquettes</strong> à vos articles via la section dédiée. Au contraire des catégories, les étiquettes n’ont aucune hiérarchie, ce qui signifie qu’elles ne peuvent pas être liées entre elles."
 
-#: wp-admin/edit-tags.php:254
+#: wp-admin/edit-tags.php:257
 msgid "You can create groups of links by using Link Categories. Link Category names must be unique and Link Categories are separate from the categories you use for posts."
 msgstr "Vous pouvez créer des groupes de liens en utilisant les catégories de liens. Le nom d’une catégorie de liens doit être unique, et les catégories de liens ne sont pas les mêmes que les catégories de vos articles."
 
@@ -11743,7 +11743,7 @@ msgstr "La navigation située à gauche de l’écran fournit tous les liens pou
 
 #: wp-admin/comment.php:63 wp-admin/edit-comments.php:208
 #: wp-admin/edit-form-advanced.php:344 wp-admin/edit-link-form.php:66
-#: wp-admin/edit-tags.php:268 wp-admin/edit.php:252 wp-admin/edit.php:309
+#: wp-admin/edit-tags.php:271 wp-admin/edit.php:252 wp-admin/edit.php:309
 #: wp-admin/erase-personal-data.php:23 wp-admin/export-personal-data.php:23
 #: wp-admin/export.php:51 wp-admin/import.php:24
 #: wp-admin/includes/class-custom-background.php:99
@@ -11891,7 +11891,7 @@ msgstr "Réglages enregistrés."
 #: wp-admin/comment.php:71 wp-admin/edit-comments.php:228
 #: wp-admin/edit-form-advanced.php:318 wp-admin/edit-form-advanced.php:335
 #: wp-admin/edit-form-advanced.php:354 wp-admin/edit-link-form.php:75
-#: wp-admin/edit-tags.php:302 wp-admin/edit.php:300 wp-admin/edit.php:325
+#: wp-admin/edit-tags.php:305 wp-admin/edit.php:300 wp-admin/edit.php:325
 #: wp-admin/erase-personal-data.php:64 wp-admin/export-personal-data.php:64
 #: wp-admin/export.php:58 wp-admin/import.php:31
 #: wp-admin/includes/class-custom-background.php:109
@@ -12014,7 +12014,7 @@ msgstr "Il semble que vous utilisez une version peu sûre de %s. Un navigateur d
 msgid "There are some invalid menu items. Please check or delete them."
 msgstr "Certains éléments du menu ne sont pas valides. Veuillez les vérifier ou les effacer."
 
-#: wp-admin/edit-tag-form.php:150 wp-admin/edit-tags.php:461
+#: wp-admin/edit-tag-form.php:150 wp-admin/edit-tags.php:464
 #: wp-admin/includes/class-wp-terms-list-table.php:192
 #: wp-admin/includes/class-wp-terms-list-table.php:219
 #: wp-admin/includes/class-wp-terms-list-table.php:696
@@ -12643,7 +12643,7 @@ msgstr "Si vous supprimez un lien, il sera supprimé définitivement, car les li
 msgid "You can add links here to be displayed on your site, usually using <a href=\"%s\">Widgets</a>. By default, links to several sites in the WordPress community are included as examples."
 msgstr "Vous pouvez ajouter ici les liens que vous voulez voir affichés sur votre site, généralement par le biais de <a href=\"%s\">widgets</a>. Des liens vers de nombreux sites de la communauté WordPress sont inclus par défaut."
 
-#: wp-admin/edit-tags.php:283
+#: wp-admin/edit-tags.php:286
 msgid "<strong>Slug</strong> &mdash; The &#8220;slug&#8221; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."
 msgstr "<strong>Slug</strong> &mdash; Le slug est la version normalisée du nom. Il ne contient généralement que des lettres minuscules non accentuées, des chiffres et des traits d’union."
 
@@ -12745,7 +12745,7 @@ msgid "You can add or edit links on this screen by entering information in each 
 msgstr "Vous pouvez ajouter ou modifier des liens sur cet écran, en saisissant dans chacune des sections. Seuls sont nécessaires les champs « Adresse web » et « Nom » (le texte que vous voulez voir affiché sur votre site pour cette adresse)."
 
 #. translators: %s: URL to Categories to Tags Converter tool.
-#: wp-admin/edit-tags.php:640
+#: wp-admin/edit-tags.php:643
 msgid "Categories can be selectively converted to tags using the <a href=\"%s\">category to tag converter</a>."
 msgstr "Les catégories peuvent être converties de manière sélective en étiquettes via le <a href=\"%s\">convertisseur catégories vers étiquettes</a>."
 
@@ -12813,32 +12813,32 @@ msgstr "<strong>Parent</strong> &mdash; Vous pouvez arranger vos pages en hiéra
 msgid "All updates have been completed."
 msgstr "Toutes les mises à jour sont terminées."
 
-#: wp-admin/edit-tags.php:291
+#: wp-admin/edit-tags.php:294
 msgid "You can change the display of this screen using the Screen Options tab to set how many items are displayed per screen and to display/hide columns in the table."
 msgstr "Vous pouvez modifier l’affichage de cet écran via l’onglet « Options de l’écran », afin de définir le nombre d’éléments à afficher par écran, et afficher/masquer les colonnes du tableau."
 
-#: wp-admin/edit-tags.php:289
+#: wp-admin/edit-tags.php:292
 msgid "<strong>Description</strong> &mdash; The description is not prominent by default; however, some themes may display it."
 msgstr "<strong>Description</strong> &mdash; La description n’est pas très utilisée par défaut, cependant de plus en plus de thèmes l’affichent."
 
-#: wp-admin/edit-tags.php:281
+#: wp-admin/edit-tags.php:284
 msgid "<strong>Name</strong> &mdash; The name is how it appears on your site."
 msgstr "<strong>Nom</strong> &mdash; Le nom est utilisé un peu partout sur votre site."
 
-#: wp-admin/edit-tags.php:277
+#: wp-admin/edit-tags.php:280
 msgid "When adding a new tag on this screen, you&#8217;ll fill in the following fields:"
 msgstr "Quand vous ajoutez une nouvelle étiquette via cet écran, vous devez remplir les champs suivants :"
 
-#: wp-admin/edit-tags.php:275
+#: wp-admin/edit-tags.php:278
 msgid "When adding a new category on this screen, you&#8217;ll fill in the following fields:"
 msgstr "Quand vous ajoutez une nouvelle catégorie via cet écran, vous devez remplir les champs suivants :"
 
-#: wp-admin/edit-tags.php:262
+#: wp-admin/edit-tags.php:265
 msgid "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
 msgstr "Quelle est la différence entre les catégories et les étiquettes ? Normalement, les étiquettes identifient les informations importantes dans votre article (noms, sujets, etc.) qui seraient susceptibles de revenir dans d’autres articles, ou pas. De leur côté, les catégories ont des sections prédéterminées. Si vous voyez votre site comme un livre, alors les catégories sont la table des matières, et les étiquettes forment l’index."
 
 #. translators: %s: URL to Writing Settings screen.
-#: wp-admin/edit-tags.php:250
+#: wp-admin/edit-tags.php:253
 msgid "You can use categories to define sections of your site and group related posts. The default category is &#8220;Uncategorized&#8221; until you change it in your <a href=\"%s\">writing settings</a>."
 msgstr "Vous pouvez utiliser les catégories pour donner des sections à votre site, et grouper les articles connexes. La catégorie par défaut est « Non classé » ; vous pouvez la modifier dans vos <a href=\"%s\">options d’écriture</a>."
 
@@ -15971,7 +15971,7 @@ msgstr "Contenu mis à jour."
 msgid "Item deleted."
 msgstr "Contenu supprimé."
 
-#: wp-admin/edit-tag-form.php:198 wp-admin/edit-tags.php:512
+#: wp-admin/edit-tag-form.php:198 wp-admin/edit-tags.php:515
 msgid "Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have children categories for Bebop and Big Band. Totally optional."
 msgstr "Les catégories, contrairement aux étiquettes, peuvent avoir une hiérarchie. Vous pouvez avoir une catégorie nommée Jazz, et à l’intérieur, plusieurs catégories comme Bebop et Big Band. Ceci est totalement facultatif."
 

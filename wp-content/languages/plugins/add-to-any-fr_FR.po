@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - AddToAny Share Buttons - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-12 12:45:52+0000\n"
+"PO-Revision-Date: 2025-02-05 07:09:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -196,10 +196,6 @@ msgstr "Enregistrer"
 msgid "Subscribe"
 msgstr "S'abonner"
 
-#: add-to-any.php:545
-msgid "Bookmark"
-msgstr "Signet"
-
 #: add-to-any.php:546
 msgid "Show all"
 msgstr "Montrer tout"
@@ -373,3 +369,7 @@ msgstr "Cette option désactivera le partage universel. Confirmez-vous vouloir d
 #: add-to-any.php:1287
 msgid "Settings"
 msgstr "Réglages"
+
+#: add-to-any.php:545
+msgid "Bookmark"
+msgstr "Marque-page"

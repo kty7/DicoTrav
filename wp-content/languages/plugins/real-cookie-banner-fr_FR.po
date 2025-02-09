@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Real Cookie Banner: GDPR &amp; ePrivacy Cookie Consent - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-10 16:52:23+0000\n"
+"PO-Revision-Date: 2025-02-07 12:50:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1996,7 +1996,7 @@ msgstr "Durée"
 #: inc/Assets.php:377
 msgctxt "legal-text"
 msgid "Host"
-msgstr "Hébergement"
+msgstr "Hébergeur"
 
 #: inc/Assets.php:375
 msgctxt "legal-text"
@@ -2585,7 +2585,7 @@ msgstr "Continuer sans consentement"
 #: inc/Assets.php:359 inc/view/customize/banner/Decision.php:63
 #: inc/view/customize/banner/Decision.php:67
 msgid "Hide"
-msgstr "Cacher"
+msgstr "Masquer"
 
 #: inc/view/customize/banner/Decision.php:63
 #: inc/view/customize/banner/Decision.php:67
@@ -2733,7 +2733,7 @@ msgstr "Bordure"
 #: inc/view/customize/banner/individual/Group.php:82
 #: inc/view/customize/banner/individual/SaveButton.php:64
 msgid "Font weight"
-msgstr "Taille de la police"
+msgstr "Graisse de la police"
 
 #: inc/view/customize/banner/BodyDesign.php:186
 #: inc/view/customize/banner/BodyDesign.php:193
@@ -2898,7 +2898,7 @@ msgstr "Définir la distance intérieure du corps."
 #: inc/view/customize/banner/individual/SaveButton.php:64
 #: inc/view/customize/banner/StickyLinks.php:101
 msgid "Padding"
-msgstr "Marge d'intérieure"
+msgstr "Marge interne"
 
 #: inc/view/customize/banner/BodyDesign.php:186
 msgid "Body"
@@ -4126,7 +4126,7 @@ msgid "Obtain GDPR (DSGVO) and ePrivacy (EU cookie law) compliant opt-in consent
 msgstr "Obtenez un consentement explicite conforme au RGPD (GDPR) et à l'ePrivacy (loi sur les cookies de l'UE). Recherchez les cookies et remplissez toutes les informations légales dans votre bannière de cookies. Bien plus qu'un simple affichage des cookies !"
 
 #. Plugin URI of the plugin
-#: index.php inc/view/Banner.php:182
+#: index.php inc/view/Banner.php:186
 msgid "https://devowl.io/wordpress-real-cookie-banner/"
 msgstr "https://devowl.io/wordpress-real-cookie-banner/"
 

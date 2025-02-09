@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - UpdraftPlus: WP Backup &amp; Migration Plugin - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-01-26 11:27:26+0000\n"
+"PO-Revision-Date: 2025-02-07 13:28:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,6 +36,10 @@ msgstr "Cette restauration ne peut pas utiliser la fonction rechercher/remplacer
 #: includes/migrator-lite.php:360
 msgid "If that is not yet set up, then you should set it up, or upgrade your PHP version to at least 5.3 in order to access the search and replace feature, allowing for the automatic replacement of non-HTTPS links."
 msgstr "Si cela n’est pas encore configuré, vous devez le configurer ou mettre à niveau votre version PHP vers au moins 5.3 afin d’accéder à la fonction rechercher/remplacer, permettant le remplacement automatique des liens non HTTPS."
+
+#: includes/migrator-lite.php:343
+msgid "Otherwise, you will want to upgrade your PHP version to at least 5.3 and take advantage of the search and replace feature."
+msgstr "Sinon, mettez à niveau la version PHP vers au moins la version 5.3 et profitez de la fonction rechercher/remplacer."
 
 #: includes/migrator-lite.php:328
 msgid "This restoration can search and replace your database if you upgrade your PHP version to at least 5.3."
@@ -4681,7 +4685,7 @@ msgstr "Certaines extensions de sauvegarde ne peuvent pas restaurer une sauvegar
 #: templates/wp-admin/settings/tab-addons.php:269
 #: templates/wp-admin/settings/tab-addons.php:270
 msgid "Importer"
-msgstr "Importateur"
+msgstr "Outil d’importation"
 
 #: templates/wp-admin/settings/tab-addons.php:258
 msgid "Tidy things up for clients and remove all adverts for our other products."
@@ -6342,6 +6346,10 @@ msgstr "Les réglages %s n’ont pas pu être trouvés"
 msgid "configure it here"
 msgstr "Pour retirer le bloc, veuillez aller ici."
 
+#: methods/email.php:110
+msgid "Your site's admin email address (%s) will be used."
+msgstr "L’adresse e-mail de l’admin du site (%s) sera utilisée."
+
 #: methods/email.php:106
 msgid "Note:"
 msgstr "Note :"
@@ -6610,6 +6618,10 @@ msgstr "restauration"
 msgid "Your hosting company must enable these functions before %s can work."
 msgstr "Votre prestataire hébergeur doit d’abord activer ces fonctions pour que %s puisse marcher."
 
+#: includes/class-filesystem-functions.php:305 methods/ftp.php:116
+msgid "Your web server's PHP installation has these functions disabled: %s."
+msgstr "Ces fonctions sont désactivées dans l’installation PHP du serveur : %s."
+
 #: class-updraftplus.php:5504
 msgid "UpdraftPlus was unable to find the table prefix when scanning the database backup."
 msgstr "UpdraftPlus n’as pas été en mesure de trouver le préfixe de la table lors de l’examen de la sauvegarde de la base de données."
@@ -6634,6 +6646,10 @@ msgstr "Information sur le site :"
 msgid "If you want to restore a multisite backup, you should first set up your WordPress installation as a multisite."
 msgstr "Si vous souhaitez restaurer une sauvegarde multisite, vous devez d’abord configurer votre installation WordPress comme étant de type multisite."
 
+#: class-updraftplus.php:5251 restorer.php:894
+msgid "You are running on WordPress multisite - but your backup is not of a multisite site."
+msgstr "Vous utilisez WordPress multisite, mais votre sauvegarde n’est pas celle d’un site multisite."
+
 #: class-updraftplus.php:5240
 msgid "Backup label:"
 msgstr "Libellé associé à la sauvegarde :"
@@ -6641,6 +6657,10 @@ msgstr "Libellé associé à la sauvegarde :"
 #: class-updraftplus.php:5230 class-updraftplus.php:5232
 msgid "Any support requests to do with %s should be raised with your web hosting company."
 msgstr "Toute demande d’assistance concernant %s doit être vue avec votre prestataire d’hébergement."
+
+#: class-updraftplus.php:5230
+msgid "You should only proceed if you cannot update the current server and are confident (or willing to risk) that your plugins/themes/etc are compatible with the older %s version."
+msgstr "Vous ne devez procéder que si vous ne pouvez pas mettre à jour le serveur actuel et que vous êtes sûr (ou prêt à prendre le risque) que vos extensions/thèmes/etc sont compatibles avec l’ancienne version %s."
 
 #: class-updraftplus.php:5230
 msgid "This is significantly newer than the server which you are now restoring onto (version %s)."
@@ -6711,6 +6731,10 @@ msgstr "La sauvegarde a réussi (avec des avertissements) et est maintenant term
 #: includes/class-backup-history.php:729
 msgid "One or more backups has been added from scanning remote storage; note that these backups will not be automatically deleted through the \"retain\" settings; if/when you wish to delete them then you must do so manually."
 msgstr "Une ou plusieurs sauvegardes ont été ajoutées à partir du scan d’un espace de stockage distant ; notez que ces sauvegardes ne seront pas supprimées automatiquement par le réglage « conservation » ; lorsque vous souhaiterez les supprimer (si vous souhaitez le faire un jour), vous devrez le faire manuellement."
+
+#: class-updraftplus.php:2400
+msgid "Your website is visited infrequently and UpdraftPlus is not getting the resources it hoped for; please read this page:"
+msgstr "Votre site est peu visité et UpdraftPlus ne reçoit pas les ressources escomptées. Veuillez lire cette page :"
 
 #: class-updraftplus.php:2121
 msgid "Others"
@@ -7698,7 +7722,7 @@ msgstr "Avez-vous besoin du support WordPress multisites ?"
 
 #: templates/wp-admin/settings/take-backup.php:95
 msgid "Multisite"
-msgstr "Multi-sites"
+msgstr "Multisite"
 
 #: templates/wp-admin/settings/migrator-no-migrator.php:9
 msgid "Do you want to migrate or clone/duplicate a site?"
