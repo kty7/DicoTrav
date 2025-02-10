@@ -91,3 +91,28 @@ function alphabetical_index_shortcode() {
     return $output;
 }
 add_shortcode('alphabetical_index', 'alphabetical_index_shortcode');
+
+function afficher_lien_connexion_compte() {
+    if (is_user_logged_in()) {
+        // Si l'utilisateur est connecté, afficher un lien vers la page "Mon Compte" Ultimate Member
+        $account_url = um_get_core_page('account'); // Récupère l'URL de la page "Mon Compte"
+        return '<a href="' . esc_url($account_url) . '">Mon Compte</a>';
+    } else {
+        // Si l'utilisateur n'est pas connecté, afficher un lien vers la page de connexion UM
+        $login_url = um_get_core_page('login'); // Récupère l'URL de la page de connexion
+        return '<a href="' . esc_url($login_url) . '">Se connecter</a>';
+    }
+}
+add_shortcode('lien_connexion_compte', 'afficher_lien_connexion_compte');
+
+function afficher_lien_admin_auteur_um() {
+    if (current_user_can('administrator')) {
+        // Lien pour administrateurs
+        return '<a href="' . esc_url(admin_url()) . '">Tableau de bord Admin</a>';
+    } elseif (current_user_can('edit_posts')) {
+        // Lien pour les auteurs
+        return '<a href="' . esc_url(admin_url('post-new.php')) . '">Écrire un article</a>';
+    }
+    return ''; // Rien pour les autres utilisateurs
+}
+add_shortcode('lien_admin_auteur', 'afficher_lien_admin_auteur_um');
