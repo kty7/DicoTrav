@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WPForms &#8211; Easy Form Builder for WordPress &#8211; Contact Forms, Payment Forms, Surveys, &amp; More - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-02-07 09:15:46+0000\n"
+"PO-Revision-Date: 2025-02-10 16:59:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1178,10 +1178,6 @@ msgstr "Annonces WPForms"
 msgid "%1$s &times; %2$d"
 msgstr "%1$s &times; %2$d"
 
-#: includes/fields/class-base.php:2316
-msgid "Range"
-msgstr "Gamme"
-
 #: includes/fields/class-base.php:2282
 msgid "Enable Quantity"
 msgstr "Activer la quantité"
@@ -1242,6 +1238,10 @@ msgstr "Vous utilisez une ancienne version du module Code promo qui ne prend pas
 #: src/Forms/Fields/PaymentTotal/Field.php:468
 msgid "Example data is shown in the form editor. Actual products and totals will be displayed when you preview or embed your form."
 msgstr "Des exemples de données sont affichés dans l’éditeur du formulaire. Les produits et les totaux réels seront affichés lorsque vous prévisualiserez ou embarquerez votre formulaire."
+
+#: includes/fields/class-base.php:2316
+msgid "Range"
+msgstr "Plage"
 
 #. translators: %1$s - addon download URL, %2$s - link to manual installation
 #. guide, %3$s - link to contact support.

@@ -116,3 +116,42 @@ function afficher_lien_admin_auteur_um() {
     return ''; // Rien pour les autres utilisateurs
 }
 add_shortcode('lien_admin_auteur', 'afficher_lien_admin_auteur_um');
+
+function enregistrer_like_utilisateur($post_id) {
+    if (is_user_logged_in()) {
+        $user_id = get_current_user_id();
+        $likes = get_user_meta($user_id, '_liked_posts', true);
+
+        if (!is_array($likes)) {
+            $likes = [];
+        }
+
+        if (!in_array($post_id, $likes)) {
+            $likes[] = $post_id;
+            update_user_meta($user_id, '_liked_posts', $likes);
+        }
+    }
+}
+add_action('wp_ulike_after_process', 'enregistrer_like_utilisateur');
+
+function afficher_likes_utilisateur() {
+    if (is_user_logged_in()) {
+        $user_id = get_current_user_id();
+        $likes = get_user_meta($user_id, '_liked_posts', true);
+
+        if (!empty($likes)) {
+            $output = '<ul>';
+            foreach ($likes as $post_id) {
+                $output .= '<li><a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a></li>';
+            }
+            $output .= '</ul>';
+            return $output;
+        } else {
+            return "<p>Vous n'avez encore aimé aucun article.</p>";
+        }
+    } else {
+        return "<p>Veuillez vous connecter pour voir vos coups de cœur.</p>";
+    }
+}
+add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
+

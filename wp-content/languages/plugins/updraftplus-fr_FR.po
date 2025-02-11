@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - UpdraftPlus: WP Backup &amp; Migration Plugin - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-02-07 13:28:24+0000\n"
+"PO-Revision-Date: 2025-02-10 17:14:55+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -808,7 +808,7 @@ msgstr "Chaque fois que votre clone est renouvelé (chaque semaine), il coûte %
 
 #: includes/updraftcentral.php:21 includes/updraftplus-clone.php:21
 msgid "Please try again later."
-msgstr "Veuillez réessayer plus tard."
+msgstr "Veuillez réessayer ultérieurement."
 
 #: includes/updraftcentral.php:21 includes/updraftplus-clone.php:21
 msgid "The server might be busy or you have lost your connection to the internet at the time of the request."
@@ -1985,7 +1985,7 @@ msgstr "Cela peut être dû à un dépassement de délai."
 
 #: admin.php:1060
 msgid "Unable to download file."
-msgstr "Impossible de télécharger le fichier ."
+msgstr "Impossible de télécharger le fichier."
 
 #: admin.php:1056
 msgid "Please check the following:"
@@ -6771,7 +6771,7 @@ msgstr "Erreur %s : impossible d’ouvrir le fichier local"
 
 #: class-updraftplus.php:1065
 msgid "Your free disk space is very low - only %s Mb remain"
-msgstr "Votre espace disque libre est très faible - il ne reste que %s Mb"
+msgstr "Vous disposez de très peu d’espace libre sur votre disque - il ne reste que %s Mo"
 
 #: class-updraftplus.php:1036
 msgid "The amount of memory (RAM) allowed for PHP is very low (%s Mb) - you should increase it to avoid failures due to insufficient memory (consult your web hosting company for more help)"
