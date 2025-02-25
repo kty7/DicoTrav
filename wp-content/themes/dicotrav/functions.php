@@ -154,4 +154,3 @@ function afficher_likes_utilisateur() {
     }
 }
 add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
-
