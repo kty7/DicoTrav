@@ -154,3 +154,102 @@ function afficher_likes_utilisateur() {
     }
 }
 add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
+
+/*	-----------------------------------------------------------------------------------------------
+	Carousel
+--------------------------------------------------------------------------------------------------- */
+
+// Enqueue d'un script "vide" pour pouvoir y ajouter notre code inline
+function enqueue_inline_carousel_script() {
+    // Enqueue jQuery (souvent déjà inclus, sinon il sera chargé ici)
+    wp_enqueue_script('jquery');
+    
+    // Enregistrer un script factice pour l'inline script
+    wp_register_script('custom-carousel-inline', '', array('jquery'), null, true);
+    wp_enqueue_script('custom-carousel-inline');
+    
+    // Code JavaScript du carousel
+    $custom_js = "
+    jQuery(document).ready(function($) {
+        var \$carousel = $('.carousel-container');
+        var \$items = \$carousel.find('.carousel-item');
+        var currentIndex = 0;
+        var itemCount = \$items.length;
+        
+        // Masquer tous les items sauf le premier
+        \$items.hide().eq(currentIndex).show();
+        
+        // Fonction pour passer à l'élément suivant
+        function showNextItem() {
+            \$items.eq(currentIndex).fadeOut(600);
+            currentIndex = (currentIndex + 1) % itemCount;
+            \$items.eq(currentIndex).fadeIn(600);
+        }
+        
+        // Changement automatique toutes les 5 secondes
+        setInterval(showNextItem, 5000);
+    });
+    ";
+    
+    // Ajout du script inline
+    wp_add_inline_script('custom-carousel-inline', $custom_js);
+}
+add_action('wp_enqueue_scripts', 'enqueue_inline_carousel_script');
+
+// Fonction qui construit le carousel et la mise en page, accessible via le shortcode [custom_carousel]
+function display_custom_carousel() {
+    ob_start();
+
+    // Récupérer les 3 derniers articles
+    $args = array(
+       'posts_per_page' => 3,
+       'post_status'    => 'publish'
+    );
+    $latest_posts = new WP_Query($args);
+    ?>
+
+    <div class="main-container">
+      <!-- Colonne de gauche : Carousel -->
+      <div class="left-column">
+         <?php if ( $latest_posts->have_posts() ) : ?>
+         <div class="carousel-container">
+            <?php while ( $latest_posts->have_posts() ) : $latest_posts->the_post();
+                // Si l'article n'a pas d'image à la une, on affiche une image par défaut
+                $featured_image = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : get_template_directory_uri() . '/images/default.jpg';
+            ?>
+             <div class="carousel-item">
+               <a href="<?php the_permalink(); ?>">
+                  <div class="carousel-image" style="background-image: url('<?php echo esc_url($featured_image); ?>');">
+                    <div class="overlay">
+                       <span>Dernière publication</span>
+                    </div>
+                  </div>
+               </a>
+             </div>
+            <?php endwhile; wp_reset_postdata(); ?>
+         </div>
+         <?php endif; ?>
+      </div>
+
+      <!-- Colonne de droite : 2 images (en haut et en bas) avec liens et overlay -->
+      <div class="right-column">
+         <a href="http://localhost/DicoTrav/index.php/atlas/" class="right-link top-link">
+            <div class="top-image" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/right-top.jpg');">
+              <div class="overlay">
+                 <span>Altas</span>
+              </div>
+            </div>
+         </a>
+         <a href="http://localhost/DicoTrav/index.php/frise/" class="right-link bottom-link">
+            <div class="bottom-image" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/right-bottom.jpg');">
+              <div class="overlay">
+                 <span>Frise Chronologique</span>
+              </div>
+            </div>
+         </a>
+      </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('custom_carousel', 'display_custom_carousel');
