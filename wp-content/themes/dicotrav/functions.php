@@ -257,13 +257,20 @@ add_shortcode('custom_carousel', 'display_custom_carousel');
 /*	-----------------------------------------------------------------------------------------------
 	Cartes
 --------------------------------------------------------------------------------------------------- */
+
 function display_search_results_cards_shortcode() {
     ob_start();
 
-    if (have_posts()) :
+    // Vérifier si on est dans une recherche
+    if (is_search() && have_posts()) {
         echo '<div class="article-cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">';
 
         while (have_posts()) : the_post();
+
+            // Filtrer pour n'afficher que les articles (exclut pages, produits WooCommerce, etc.)
+            if (get_post_type() !== 'post') {
+                continue;
+            }
 
             // Récupère l'image mise en avant ou une image par défaut
             $image_url = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : get_template_directory_uri() . '/images/default.jpg';
@@ -294,12 +301,13 @@ function display_search_results_cards_shortcode() {
             <?php
         endwhile;
         echo '</div>';
-    else :
+    } else {
         echo '<p>Aucun article trouvé pour cette recherche.</p>';
-    endif;
+    }
 
     return ob_get_clean();
 }
 
 // Ajout du shortcode [search_results_cards]
 add_shortcode('search_results_cards', 'display_search_results_cards_shortcode');
+
