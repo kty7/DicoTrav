@@ -253,3 +253,53 @@ function display_custom_carousel() {
     return ob_get_clean();
 }
 add_shortcode('custom_carousel', 'display_custom_carousel');
+
+/*	-----------------------------------------------------------------------------------------------
+	Cartes
+--------------------------------------------------------------------------------------------------- */
+function display_search_results_cards_shortcode() {
+    ob_start();
+
+    if (have_posts()) :
+        echo '<div class="article-cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">';
+
+        while (have_posts()) : the_post();
+
+            // Récupère l'image mise en avant ou une image par défaut
+            $image_url = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : get_template_directory_uri() . '/images/default.jpg';
+            ?>
+            <div class="article-card" style="border:1px solid #ddd; box-shadow:0 2px 5px rgba(0,0,0,0.1); overflow:hidden; background:#fff; border-radius:10px;">
+                <!-- Image de l'article -->
+                <div class="card-image" style="width:100%; height:200px; background-image: url('<?php echo esc_url($image_url); ?>'); background-size:cover; background-position:center; border-top-left-radius:10px; border-top-right-radius:10px;"></div>
+                
+                <!-- Contenu de la carte -->
+                <div class="card-content" style="padding:1em; background-color:#f5f5f5;">
+                    <h2 class="card-title" style="margin:0 0 10px;">
+                        <a href="<?php the_permalink(); ?>" style="color:#333; text-decoration:none;">
+                            <?php the_title(); ?>
+                        </a>
+                    </h2>
+                    <p class="card-date" style="color:#777; font-size:0.9em; margin-bottom:10px;">
+                        <?php echo get_the_date(); ?>
+                    </p>
+                    <p class="card-excerpt" style="margin-bottom:15px;">
+                        <?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
+                    </p>
+                    <a class="card-button" href="<?php the_permalink(); ?>" style="display:inline-block; background:#0073aa; color:#fff; padding:8px 15px; text-decoration:none; border-radius:3px; float:right;">
+                        Lire
+                    </a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <?php
+        endwhile;
+        echo '</div>';
+    else :
+        echo '<p>Aucun article trouvé pour cette recherche.</p>';
+    endif;
+
+    return ob_get_clean();
+}
+
+// Ajout du shortcode [search_results_cards]
+add_shortcode('search_results_cards', 'display_search_results_cards_shortcode');
