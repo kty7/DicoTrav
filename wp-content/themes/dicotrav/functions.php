@@ -258,56 +258,59 @@ add_shortcode('custom_carousel', 'display_custom_carousel');
 	Cartes
 --------------------------------------------------------------------------------------------------- */
 
+// Fonction pour afficher les résultats de recherche sous forme de cartes
 function display_search_results_cards_shortcode() {
     ob_start();
-
-    // Vérifier si on est dans une recherche
+    
+    // Charger le CSS
+    wp_enqueue_style('search-results-cards', get_template_directory_uri() . '/css/search-results-cards.css');
+    
     if (is_search() && have_posts()) {
-        echo '<div class="article-cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">';
-
+        echo '<div class="article-cards-grid">';
+        
         while (have_posts()) : the_post();
-
-            // Filtrer pour n'afficher que les articles (exclut pages, produits WooCommerce, etc.)
+            
             if (get_post_type() !== 'post') {
                 continue;
             }
-
-            // Récupère l'image mise en avant ou une image par défaut
+            
             $image_url = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : get_template_directory_uri() . '/images/default.jpg';
             ?>
-            <div class="article-card" style="border:1px solid #ddd; box-shadow:0 2px 5px rgba(0,0,0,0.1); overflow:hidden; background:#fff; border-radius:10px;">
-                <!-- Image de l'article -->
-                <div class="card-image" style="width:100%; height:200px; background-image: url('<?php echo esc_url($image_url); ?>'); background-size:cover; background-position:center; border-top-left-radius:10px; border-top-right-radius:10px;"></div>
-                
-                <!-- Contenu de la carte -->
-                <div class="card-content" style="padding:1em; background-color:#f5f5f5;">
-                    <h2 class="card-title" style="margin:0 0 10px;">
-                        <a href="<?php the_permalink(); ?>" style="color:#333; text-decoration:none;">
+            <div class="article-card">
+                <div class="card-image" style="background-image: url('<?php echo esc_url($image_url); ?>');"></div>
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <a href="<?php the_permalink(); ?>">
                             <?php the_title(); ?>
                         </a>
                     </h2>
-                    <p class="card-date" style="color:#777; font-size:0.9em; margin-bottom:10px;">
+                    <p class="card-date">
                         <?php echo get_the_date(); ?>
                     </p>
-                    <p class="card-excerpt" style="margin-bottom:15px;">
+                    <p class="card-excerpt">
                         <?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
                     </p>
-                    <a class="card-button" href="<?php the_permalink(); ?>" style="display:inline-block; background:#0073aa; color:#fff; padding:8px 15px; text-decoration:none; border-radius:3px; float:right;">
-                        Lire
-                    </a>
-                    <div style="clear:both;"></div>
+                    <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
                 </div>
             </div>
             <?php
         endwhile;
+        echo '</div>'; // Fermeture de la grille
+        
+        echo '<div class="pagination">';
+        echo paginate_links(array(
+            'total' => $GLOBALS['wp_query']->max_num_pages,
+            'current' => max(1, get_query_var('paged')),
+            'format' => '?paged=%#%',
+            'prev_text' => '← Précédent',
+            'next_text' => 'Suivant →',
+        ));
         echo '</div>';
     } else {
-        echo '<p>Aucun article trouvé pour cette recherche.</p>';
+        echo '<p class="info-msg">Désolé, mais rien n’a été trouvé. Veuillez réessayer avec d’autres mots-clés.</p>';
     }
-
+    
     return ob_get_clean();
 }
 
-// Ajout du shortcode [search_results_cards]
 add_shortcode('search_results_cards', 'display_search_results_cards_shortcode');
-
