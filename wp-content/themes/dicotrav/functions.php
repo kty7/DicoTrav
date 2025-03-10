@@ -134,27 +134,6 @@ function enregistrer_like_utilisateur($post_id) {
 }
 add_action('wp_ulike_after_process', 'enregistrer_like_utilisateur');
 
-function afficher_likes_utilisateur() {
-    if (is_user_logged_in()) {
-        $user_id = get_current_user_id();
-        $likes = get_user_meta($user_id, '_liked_posts', true);
-
-        if (!empty($likes)) {
-            $output = '<ul>';
-            foreach ($likes as $post_id) {
-                $output .= '<li><a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a></li>';
-            }
-            $output .= '</ul>';
-            return $output;
-        } else {
-            return "<p>Vous n'avez encore aimé aucun article.</p>";
-        }
-    } else {
-        return "<p>Veuillez vous connecter pour voir vos coups de cœur.</p>";
-    }
-}
-add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
-
 /*	-----------------------------------------------------------------------------------------------
 	Carousel
 --------------------------------------------------------------------------------------------------- */
@@ -255,7 +234,7 @@ function display_custom_carousel() {
 add_shortcode('custom_carousel', 'display_custom_carousel');
 
 /*	-----------------------------------------------------------------------------------------------
-	Cartes
+	Cartes quand on "recherche"
 --------------------------------------------------------------------------------------------------- */
 
 // Fonction pour afficher les résultats de recherche sous forme de cartes
@@ -314,3 +293,170 @@ function display_search_results_cards_shortcode() {
 }
 
 add_shortcode('search_results_cards', 'display_search_results_cards_shortcode');
+
+/*	-----------------------------------------------------------------------------------------------
+	Cartes pour les catégories
+--------------------------------------------------------------------------------------------------- */
+
+// Fonction pour afficher les articles d'une catégorie sous forme de cartes
+function display_category_cards_shortcode($atts) {
+    // Ici, on définit "main" comme wrapper par défaut
+    $atts = shortcode_atts(array(
+         'wrapper' => 'main',  // Par défaut, la balise générée sera <main>
+    ), $atts, 'category_cards');
+    
+    // Choisir la balise wrapper en fonction de l'attribut (main ou div)
+    $wrapper = ($atts['wrapper'] === 'main') ? 'main' : 'div';
+
+    ob_start();
+
+    // Charger le CSS des cartes (vérifie que le chemin est correct)
+    wp_enqueue_style('search-results-cards', get_template_directory_uri() . '/css/search-results-cards.css');
+
+    // Récupérer la catégorie actuelle depuis l'URL (sur une archive de catégorie)
+    $current_category = get_queried_object();
+    $cat_slug = '';
+    if ( $current_category && isset($current_category->slug) ) {
+        $cat_slug = $current_category->slug;
+    }
+
+    // Ouverture du conteneur avec la balise choisie (<main> par défaut)
+    echo '<' . $wrapper . ' class="wp-block-group has-global-padding is-layout-constrained wp-container-core-group-is-layout-8 wp-block-group-is-layout-constrained" id="wp--skip-link--target">';
+    echo '<div style="margin-top:0px !important" class="wp-block-group alignwide has-global-padding is-layout-constrained wp-container-core-group-is-layout-7 wp-block-group-is-layout-constrained">';
+
+    // Afficher le H1 avec le nom de la catégorie
+    if ( $current_category && isset($current_category->name) ) {
+        echo '<h1 style="padding:32px 0 0 0 !important; padding-top:var(--wp--preset--spacing--40); margin-top:0; margin-bottom:0;" class="has-text-align-left alignwide wp-block-post-title has-extra-large-font-size">' . esc_html($current_category->name) . '</h1>';
+    } else {
+        echo '<h1 style="padding:32px 0 0 0 !important; padding-top:var(--wp--preset--spacing--40); margin-top:0; margin-bottom:0;" class="has-text-align-left alignwide wp-block-post-title has-extra-large-font-size">Catégorie</h1>';
+    }
+
+    // Préparer la requête personnalisée
+    $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+    $args = array(
+        'post_type'     => 'post',
+        'category_name' => $cat_slug,
+        'paged'         => $paged,
+    );
+    $query = new WP_Query( $args );
+
+    if ( $query->have_posts() ) {
+        echo '<div class="article-cards-grid" style="padding: 32px;">';
+        while ( $query->have_posts() ) : $query->the_post();
+
+            // On s'assure d'afficher uniquement les articles de type "post"
+            if ( get_post_type() !== 'post' ) {
+                continue;
+            }
+            $image_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : get_template_directory_uri() . '/images/default.jpg';
+            ?>
+            <div class="article-card">
+                <div class="card-image" style="background-image: url('<?php echo esc_url( $image_url ); ?>');"></div>
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </a>
+                    </h2>
+                    <p class="card-date">
+                        <?php echo get_the_date(); ?>
+                    </p>
+                    <p class="card-excerpt">
+                        <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
+                    </p>
+                    <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                </div>
+            </div>
+            <?php
+        endwhile;
+        echo '</div>'; // Fermeture de la grille
+
+        // Pagination
+        $big = 999999999; // Un nombre improbable pour la pagination
+        echo '<div class="pagination">';
+        echo paginate_links( array(
+            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'format'    => '?paged=%#%',
+            'current'   => max( 1, $paged ),
+            'total'     => $query->max_num_pages,
+            'prev_text' => '← Précédent',
+            'next_text' => 'Suivant →',
+        ) );
+        echo '</div>';
+    } else {
+        echo '<p class="info-msg">Désolé, aucun article n’a été trouvé dans cette catégorie.</p>';
+    }
+    
+    // Fermeture des conteneurs
+    echo '</div>';
+    echo '</' . $wrapper . '>';
+
+    wp_reset_postdata();
+    return ob_get_clean();
+}
+
+add_shortcode('category_cards', 'display_category_cards_shortcode');
+
+/*	-----------------------------------------------------------------------------------------------
+	Cartes pour les coups de coeurs
+--------------------------------------------------------------------------------------------------- */
+
+function afficher_likes_utilisateur() {
+    ob_start();
+
+    // Charger le CSS pour les cartes
+    wp_enqueue_style('search-results-cards', get_template_directory_uri() . '/css/search-results-cards.css');
+
+    if ( is_user_logged_in() ) {
+        $user_id = get_current_user_id();
+        $likes = get_user_meta( $user_id, '_liked_posts', true );
+
+        if ( ! empty( $likes ) ) {
+            // Prépare la requête sur les articles aimés
+            $args = array(
+                'post_type' => 'post',
+                'post__in'  => $likes,
+                'orderby'   => 'post__in', // Pour conserver l'ordre des likes
+            );
+            $query = new WP_Query( $args );
+
+            if ( $query->have_posts() ) {
+                echo '<div class="article-cards-grid" style="padding: 32px; margin-block-start: 1.5rem;">';
+                while ( $query->have_posts() ) {
+                    $query->the_post();
+                    $image_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : get_template_directory_uri() . '/images/default.jpg';
+                    ?>
+                    <div class="article-card">
+                        <div class="card-image" style="background-image: url('<?php echo esc_url( $image_url ); ?>');"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">
+                                <a href="<?php the_permalink(); ?>">
+                                    <?php the_title(); ?>
+                                </a>
+                            </h2>
+                            <p class="card-date">
+                                <?php echo get_the_date(); ?>
+                            </p>
+                            <p class="card-excerpt">
+                                <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
+                            </p>
+                            <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                        </div>
+                    </div>
+                    <?php
+                }
+                echo '</div>'; // Fermeture de la grille
+            } else {
+                echo '<p>Vous n\'avez encore aimé aucun article.</p>';
+            }
+            wp_reset_postdata();
+        } else {
+            echo '<p>Vous n\'avez encore aimé aucun article.</p>';
+        }
+    } else {
+        echo '<p>Veuillez vous connecter pour voir vos coups de cœur.</p>';
+    }
+
+    return ob_get_clean();
+}
+add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
