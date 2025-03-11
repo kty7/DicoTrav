@@ -460,3 +460,141 @@ function afficher_likes_utilisateur() {
     return ob_get_clean();
 }
 add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
+
+/**
+ * Shortcode pour la recherche timeline
+ */
+function timeline_search_shortcode() {
+    ob_start();
+
+    // Charger le CSS des cartes
+    wp_enqueue_style('search-results-cards', get_template_directory_uri() . '/css/search-results-cards.css');
+    
+    // Charger le style de la timeline
+    wp_enqueue_style('timeline-style', get_template_directory_uri() . '/css/timeline-style.css');
+
+    // S'assurer que jQuery est chargé
+    wp_enqueue_script('jquery');
+
+    // Définition des périodes (le tableau doit correspondre aux slug de tes catégories)
+    $periods = array(
+        '-500', '-400', '-300', '-200', '-100', 
+        '1', '100', '200', '300', '400', '500', 
+        '600', '700', '800', '900', '1000', '1100', 
+        '1200', '1300', '1400', '1500', '1600', 
+        '1700', '1800', '1900', '2000-2025'
+    );
+    // Calculer l'index maximum pour le slider
+    $max_index = count($periods) - 1;
+    ?>
+    <div id="timeline-search" style="padding: 32px;">
+        <label for="timeline-range">
+            Choisissez une période : <span id="timeline-label"><?php echo esc_html($periods[0]); ?></span>
+        </label>
+        <br>
+        <input type="range" id="timeline-range" min="0" max="<?php echo $max_index; ?>" value="0" step="1">
+    </div>
+    <div id="timeline-results">
+        <!-- Les articles correspondant à la période sélectionnée seront chargés ici -->
+    </div>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        // Tableau des périodes passé depuis PHP
+        var periods = <?php echo json_encode($periods); ?>;
+        
+        // Fonction qui effectue la requête Ajax pour charger les articles
+        function loadTimelinePosts(index) {
+            var period = periods[index];
+            $('#timeline-label').text(period);
+            $.ajax({
+                url: "<?php echo admin_url('admin-ajax.php'); ?>",
+                type: "POST",
+                data: {
+                    action: "timeline_search_action",
+                    period: period
+                },
+                beforeSend: function() {
+                    $('#timeline-results').removeClass('loaded').html('<p>Chargement...</p>');
+                },
+                success: function(response) {
+                    $('#timeline-results').html(response).addClass('loaded');
+                },
+                error: function() {
+                    $('#timeline-results').html('<p>Une erreur est survenue.</p>').addClass('loaded');
+                }
+            });
+        }
+        
+        // Chargement initial avec la première période du tableau
+        loadTimelinePosts($('#timeline-range').val());
+        
+        // Au changement de valeur du slider
+        $('#timeline-range').on('input change', function() {
+            var index = $(this).val();
+            loadTimelinePosts(index);
+        });
+    });
+    </script>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('timeline_search', 'timeline_search_shortcode');
+
+function timeline_search_ajax_handler() {
+    // Récupérer la période depuis la requête Ajax
+    $period = isset($_POST['period']) ? sanitize_text_field($_POST['period']) : '';
+
+    // Si la valeur est "0" (ou toute autre valeur purement numérique) :
+    // on vérifie le terme par nom afin d'obtenir le slug réel.
+    $term = get_term_by('name', $period, 'category');
+    if ($term) {
+        $period_slug = $term->slug;
+    } else {
+        // Sinon, on utilise la valeur reçue
+        $period_slug = $period;
+    }
+
+    // Préparer la requête en utilisant tax_query pour filtrer par slug de catégorie
+    $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+    $args = array(
+        'post_type' => 'post',
+        'paged'     => $paged,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => $period_slug,
+                'operator' => 'IN'
+            )
+        )
+    );
+    $query = new WP_Query( $args );
+
+    if ( $query->have_posts() ) {
+        echo '<div class="article-cards-grid" style="padding: 0px;">';
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $image_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : get_template_directory_uri() . '/images/default.jpg';
+            ?>
+            <div class="article-card">
+                <div class="card-image" style="background-image: url('<?php echo esc_url($image_url); ?>');"></div>
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                    </h2>
+                    <p class="card-date"><?php echo get_the_date(); ?></p>
+                    <p class="card-excerpt"><?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?></p>
+                    <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                </div>
+            </div>
+            <?php
+        }
+        echo '</div>';
+    } else {
+        echo '<p class="info-msg">Désolé, aucun article n’a été trouvé pour cette période.</p>';
+    }
+    wp_reset_postdata();
+    wp_die();
+}
+add_action('wp_ajax_timeline_search_action', 'timeline_search_ajax_handler');
+add_action('wp_ajax_nopriv_timeline_search_action', 'timeline_search_ajax_handler');

@@ -1,0 +1,101 @@
+/* Conteneur principal */
+#timeline-search {
+    text-align: center;
+    background: #29354C;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: auto;
+    max-width: 1200px;
+}
+
+/* Label du slider */
+#timeline-label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #F7F1EB;
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+/* Slider stylisé */
+#timeline-range {
+    width: 100%;
+    margin-top: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 35px;
+    background: linear-gradient(to right, #F7F1EB, #D4A373);
+    border-radius: 4px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+#timeline-search label{
+    color:#F7F1EB;
+}
+
+/* Bouton du slider */
+#timeline-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 50px;
+    background: #3c5075;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#timeline-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+#timeline-range::-moz-range-thumb {
+    width: 20px;
+    height: 50px;
+    background: #3c5075;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#timeline-range::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Conteneur des résultats */
+#timeline-results {
+    margin-top: 20px;
+    padding: 16px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Quand on charge des articles */
+#timeline-results.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Message en cas d'absence de contenu */
+.info-msg {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #15070F;
+    padding: 20px;
+}
+
+/* Style du champ de recherche */
+#timeline-search input {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #F7F1EB;
+    border-radius: 8px;
+    font-size: 1rem;
+}
