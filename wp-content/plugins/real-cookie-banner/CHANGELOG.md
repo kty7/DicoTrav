@@ -3,6 +3,113 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.0.15 (2025-03-19)
+
+
+### Bug Fixes
+
+* accessibility issue with link shortcodes (CU-869813z13)
+* add role button to menu links (CU-869813z13)
+* compatibility with Tutor LMS and non visual content blockers (CU-8698bt1vz)
+* do not download defect TCF vendors every 6 hours which leads to daily cookie banner (CU-8697zkqjj)
+* invalidate the database scheme when upgrading from free to PRO version (CU-8697zkqjj)
+
+
+### Maintenance
+
+* add new ad-network The Moneytizer (CU-8693fhybx)
+* rmeove error log (CU-8697zkqjj)
+* upgrade TCF library to 1.5.15 (CU-86981r4ga)
+
+
+<details><summary>Dependency updates @devowl-wp/api-real-cookie-banner 1.1.2</summary>
+
+
+**_Purpose of dependency:_** _Shared typings for all Real Cookie Banner backend._
+##### Maintenance
+
+* upgrade TCF library to 1.5.15 (CU-86981r4ga)</details>
+
+<details><summary>Dependency updates @devowl-wp/cookie-consent-web-client 1.0.9</summary>
+
+
+**_Purpose of dependency:_** _Apply cookies consent (opt-in, opt-out) to the current webpage._
+##### Maintenance
+
+* upgrade TCF library to 1.5.15 (CU-86981r4ga)</details>
+
+<details><summary>Dependency updates @devowl-wp/freemium 1.3.100</summary>
+
+
+**_Purpose of dependency:_** _Make your plugin to a freemium plugin with predefined Envato support_
+##### Bug Fixes
+
+* invalidate the database scheme when upgrading from free to PRO version (CU-8697zkqjj)</details>
+
+<details><summary>Dependency updates @devowl-wp/headless-content-unblocker 1.1.5</summary>
+
+
+**_Purpose of dependency:_** _Unblock mechanism for @devowl-wp/headless-content-blocker with visual capabilities._
+##### Bug Fixes
+
+* compatibility with Elementor widget CSS and cut visual content blocker headline (CU-8698c7t2b)</details>
+
+<details><summary>Dependency updates @devowl-wp/react-cookie-banner 1.0.10</summary>
+
+
+**_Purpose of dependency:_** _Provide UI for a cookie banner and content blocker for multiple services._
+##### Maintenance
+
+* upgrade TCF library to 1.5.15 (CU-86981r4ga)</details>
+
+<details><summary>Dependency updates @devowl-wp/react-cookie-banner-admin 1.0.11</summary>
+
+
+**_Purpose of dependency:_** _Provide admin UI for a cookie banner and content blocker for multiple services._
+##### Maintenance
+
+* add new ad-network The Moneytizer (CU-8693fhybx)
+* upgrade TCF library to 1.5.15 (CU-86981r4ga)</details>
+
+<details><summary>Dependency updates @devowl-wp/service-cloud-consumer 1.0.9</summary>
+
+
+**_Purpose of dependency:_** _Consume service and blocker templates from service cloud_
+##### Maintenance
+
+* add new ad-network The Moneytizer (CU-8693fhybx)</details>
+
+<details><summary>Dependency updates @devowl-wp/utils 1.19.21</summary>
+
+
+**_Purpose of dependency:_** _Utility functionality for all your WordPress plugins._
+##### Bug Fixes
+
+* invalidate the database scheme when upgrading from free to PRO version (CU-8697zkqjj)</details>
+
+
+
+
+
+## 5.0.14 (2025-03-10) (not released)
+
+**Note:** This version of the package has not (yet) been released publicly. This happens if changes have been made in dependencies that do not affect this package (e.g. changes for the development of the package). The changes will be rolled out with the next official update.
+
+**Note:** This package (@devowl-wp/real-cookie-banner) has been updated because a dependency, which is also shipped with this package, has changed.
+
+
+<details><summary>Development dependency update @devowl-wp/iso-codes 1.2.0</summary>
+
+
+**_Purpose of dependency:_** _Enums and key value getters for all countries in different ISO code standards._
+##### Features
+
+* add Microsoft Azure to data processing country groups (CU-8697h1a7m)</details>
+
+
+
+
+
 ## 5.0.13 (2025-03-04)
 
 

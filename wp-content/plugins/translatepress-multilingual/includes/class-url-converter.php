@@ -248,13 +248,14 @@ class TRP_Url_Converter {
      */
     public function change_lang_attr_in_html_tag( $output ){
         global $TRP_LANGUAGE;
+        $tp_lang = str_replace('_formal', '', $TRP_LANGUAGE); // de-de-formal is not a valid lang attribute.
         $lang = get_bloginfo('language');
-        if ( $lang && !empty($TRP_LANGUAGE) ) {
+        if ( $lang && !empty($tp_lang) ) {
             if ( apply_filters( 'trp_add_default_lang_tags', true ) ) {
-                $output = str_replace( 'lang="' . $lang . '"', 'lang="' . str_replace( '_', '-', $TRP_LANGUAGE ) . '"', $output );
+                $output = str_replace( 'lang="' . $lang . '"', 'lang="' . str_replace( '_', '-', $tp_lang ) . '"', $output );
             }
             if ( apply_filters( 'trp_add_regional_lang_tags', true ) ) {
-                $language = strtok($TRP_LANGUAGE, '_');
+                $language = strtok($tp_lang, '_');
                 $output = str_replace( 'lang="' . $lang . '"', 'lang="' . $language . '"', $output );
 
             }
@@ -612,6 +613,9 @@ class TRP_Url_Converter {
         if( empty($this->absolute_home) ){
             $this->absolute_home = get_option("siteurl");
         }
+        // home_url can have a space in front braking TP.
+        $this->absolute_home = trim($this->absolute_home);
+
         if ( apply_filters('trp_adjust_absolute_home_https_based_on_server_variable', true) ) {
             // always return absolute_home based on the http or https version of the current page request. This means no more redirects.
             if ( !empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( $_SERVER['HTTPS'] ) ) != 'off' ) {
@@ -808,7 +812,7 @@ class TRP_Url_Converter {
         $trp     = TRP_Translate_Press::get_trp_instance();
         $upgrade = $trp->get_component( 'upgrade' );
 
-        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $upgrade->is_pro_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
+        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $upgrade->is_seo_pack_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
             return $value;
         }
 

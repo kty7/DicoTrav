@@ -1570,7 +1570,7 @@ msgid "The link to Real Cookie Banner is an affiliate link. If you buy the produ
 msgstr ""
 
 #: inc/overrides/pro/settings/CountryBypass.php:146
-#: inc/overrides/pro/settings/TCF.php:140
+#: inc/overrides/pro/settings/TCF.php:136
 msgid "This functionality is currently not available."
 msgstr ""
 
@@ -4216,7 +4216,7 @@ msgstr ""
 msgid "Success message"
 msgstr ""
 
-#: inc/view/navmenu/NavMenuLinks.php:293
+#: inc/view/navmenu/NavMenuLinks.php:297
 msgid "Add to Menu"
 msgstr ""
 
