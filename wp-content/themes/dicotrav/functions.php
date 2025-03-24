@@ -94,12 +94,20 @@ add_shortcode('alphabetical_index', 'alphabetical_index_shortcode');
 
 function afficher_lien_connexion_compte() {
     if (is_user_logged_in()) {
-        // Si l'utilisateur est connecté, afficher un lien vers la page "Mon Compte" Ultimate Member
-        $account_url = um_get_core_page('account'); // Récupère l'URL de la page "Mon Compte"
-        return '<a href="' . esc_url($account_url) . '">Mon Compte</a>';
+        // Récupère l'URL de la page "Mon Compte"
+        $account_url = um_get_core_page('account'); 
+        
+        // Récupère l'URL de la photo de profil Ultimate Member
+        $user_id = get_current_user_id();
+        $profile_picture = get_avatar_url($user_id, array('size' => 100)); // Taille ajustable si besoin
+        
+        // Retourne le lien avec l'image de profil
+        return '<a href="' . esc_url($account_url) . '" class="profile-logo-link">
+                    <img src="' . esc_url($profile_picture) . '" alt="Photo de profil">
+                </a>';
     } else {
-        // Si l'utilisateur n'est pas connecté, afficher un lien vers la page de connexion UM
-        $login_url = um_get_core_page('login'); // Récupère l'URL de la page de connexion
+        // Si l'utilisateur n'est pas connecté, afficher un lien vers la page de connexion
+        $login_url = um_get_core_page('login');
         return '<a href="' . esc_url($login_url) . '">Se connecter</a>';
     }
 }
@@ -598,3 +606,543 @@ function timeline_search_ajax_handler() {
 }
 add_action('wp_ajax_timeline_search_action', 'timeline_search_ajax_handler');
 add_action('wp_ajax_nopriv_timeline_search_action', 'timeline_search_ajax_handler');
+
+/*	-----------------------------------------------------------------------------------------------
+	barre de progression temps de lecture articles
+--------------------------------------------------------------------------------------------------- */
+
+function shortcode_progression_lecture() {
+    global $post;
+    
+    // Récupérer le contenu de l'article et compter les mots
+    $content = strip_tags($post->post_content);
+    $word_count = str_word_count($content);
+    
+    // Calculer le temps de lecture en minutes (en supposant 200 mots par minute)
+    //$reading_time = ceil($word_count / 200);
+
+    // Code HTML de la barre de progression et affichage du temps de lecture
+    $output = '<div id="reading-progress-container" style="position:fixed;top:0;left:0;width:100%;z-index:9999;">';
+    $output .= '<div id="reading-progress-bar" style="width:0%;height:5px;background:#3498db;"></div>';
+    $output .= '</div>';
+    //$output .= '<div id="reading-time" style="position:fixed;top:10px;right:10px;background:#fff;padding:5px;border:1px solid #ccc;border-radius:3px;">Temps de lecture : ' . $reading_time . ' min</div>';
+    
+    // Code JavaScript pour mettre à jour la barre de progression en fonction du scroll
+    $output .= '
+    <script>
+      document.addEventListener("scroll", function(){
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+        var winHeight = window.innerHeight;
+        var scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+        document.getElementById("reading-progress-bar").style.width = scrollPercent + "%";
+      });
+    </script>';
+    
+    return $output;
+}
+add_shortcode('progression_lecture', 'shortcode_progression_lecture');
+
+/*	-----------------------------------------------------------------------------------------------
+	Download PDF
+--------------------------------------------------------------------------------------------------- */
+
+// Crée le shortcode [download_pdf]
+function shortcode_download_pdf() {
+    global $post;
+    if ( function_exists('get_field') ) {
+        $pdf_file = get_field('pdf_upload', $post->ID);
+        if ( $pdf_file ) {
+            $pdf_url = is_array($pdf_file) ? $pdf_file['url'] : $pdf_file;
+            // Chemin de l'image PNG (doit être uploadée dans ton dossier /images/ de ton thème)
+            $png_url = get_template_directory_uri() . '/images/download.png';
+            
+            $output  = '<a class="download-pdf-btn" href="' . esc_url($pdf_url) . '" download>';
+            $output .= '<img src="' . esc_url($png_url) . '" alt="Télécharger le PDF" class="pdf-download-img" />';
+            $output .= '</a>';
+            
+            return $output;
+        }
+    }
+    return '';
+}
+add_shortcode('download_pdf', 'shortcode_download_pdf');
+
+/*	-----------------------------------------------------------------------------------------------
+	image article
+--------------------------------------------------------------------------------------------------- */
+
+function shortcode_featured_image_with_caption() {
+    global $post;
+
+    // Si l'article a une image mise en avant, récupère son URL et sa légende
+    if ( has_post_thumbnail( $post->ID ) ) {
+        $image_url = get_the_post_thumbnail_url( $post->ID, 'full' );
+        // Depuis WP 4.4, on peut utiliser cette fonction pour obtenir la légende de l'image mise en avant
+        $caption = get_the_post_thumbnail_caption( $post->ID );
+    } else {
+        // Sinon, on utilise une image par défaut
+        $image_url = get_template_directory_uri() . '/images/default.jpg';
+        $caption = '';
+    }
+
+    // On peut utiliser le titre de l'article comme alt text
+    $alt_text = get_the_title( $post->ID );
+
+    // Construction du code HTML avec une balise <figure> et <figcaption>
+    $output  = '<figure class="featured-image">';
+    $output .= '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( $alt_text ) . '" />';
+    if ( $caption ) {
+        $output .= '<figcaption>' . esc_html( $caption ) . '</figcaption>';
+    }
+    $output .= '</figure>';
+
+    return $output;
+}
+add_shortcode('featured_image', 'shortcode_featured_image_with_caption');
+
+function shortcode_bibliographie() {
+    global $post;
+    
+    if ( function_exists('get_field') ) {
+        // Récupère le contenu du champ textarea "bibliographie"
+        $biblio_text = get_field('bibliographie', $post->ID);
+        
+        if ( $biblio_text ) {
+            // Découpe le contenu en lignes (chaque ligne correspond à une entrée)
+            $lines = preg_split("/(\r\n|\n|\r)/", $biblio_text);
+            $output  = '<div class="bibliographie">';
+            $output .= '<h2>Bibliographie</h2>';
+            $output .= '<ul>';
+            foreach ( $lines as $line ) {
+                // Ignore les lignes vides
+                if ( trim($line) ) {
+                    $output .= '<li>' . esc_html( trim($line) ) . '</li>';
+                }
+            }
+            $output .= '</ul>';
+            $output .= '</div>';
+            return $output;
+        }
+    }
+    
+    return '';
+}
+add_shortcode('bibliographie', 'shortcode_bibliographie');
+
+function shortcode_citation() {
+    global $post;
+    
+    if ( function_exists('get_field') ) {
+        $citation = get_field('citation', $post->ID);
+        $doi_code = get_field('doi_code', $post->ID); // champ optionnel pour le DOI
+        
+        if ( $citation ) {
+            $output  = '<div class="citation">';
+            $output .= '<h2>Citation</h2>';
+            $output .= '<p>' . wp_kses_post( $citation ) . '</p>';
+            
+            // Si un DOI est renseigné, on l'affiche comme lien
+            if ( $doi_code ) {
+                $output .= '<p class="Account-link"><a href="https://doi.org/' . esc_attr( $doi_code ) . '" target="_blank">DOI : ' . esc_html( $doi_code ) . '</a></p>';
+            }
+            
+            $output .= '</div>';
+            return $output;
+        }
+    }
+    
+    return '';
+}
+add_shortcode('citation', 'shortcode_citation');
+
+/*	-----------------------------------------------------------------------------------------------
+	LeafLet
+--------------------------------------------------------------------------------------------------- */
+
+// Charger les fichiers CSS et JS de Leaflet et notre CSS custom
+if ( ! function_exists('enqueue_leaflet_assets') ) {
+    function enqueue_leaflet_assets() {
+        wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet/dist/leaflet.css');
+        wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet/dist/leaflet.js', array(), null, true);
+        // Charge ton fichier CSS custom (vérifie que le chemin est correct)
+        wp_enqueue_style('timeline-leaflet-style', get_template_directory_uri() . '/css/timeline-leaflet-style.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_leaflet_assets');
+
+function timeline_leaflet_shortcode($atts) {
+    ob_start();
+    ?>
+    <!-- La carte occupe toute la largeur et se positionne en dessous du header -->
+    <div id="map"></div>
+
+    <!-- Conteneur de la timeline sur toute la largeur -->
+    <div id="timeline">
+        <!-- Affichage de la valeur sélectionnée (placé au-dessus du slider) -->
+        <span id="timeline-year">2025</span>
+        <!-- Slider range -->
+        <input type="range" id="timeline-range" min="-500" max="2025" value="2025" />
+        <!-- Conteneur pour la graduation de la timeline (en arrière-plan, pointer-events désactivés) -->
+        <div id="timeline-graduation"></div>
+    </div>
+
+    <!-- Modale qui s'affiche sur la droite, masquée par défaut -->
+    <div id="modal">
+        <!-- Bouton de fermeture (croix rouge) -->
+        <button id="modal-close">&times;</button>
+        <h3 id="modal-title">Articles</h3>
+        <ul id="article-list"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialisation de la carte Leaflet
+            var map = L.map('map').setView([51.505, -0.09], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Tableau des "marqueurs globaux" pour les pays avec des coordonnées globales
+            var countries = [
+                { country: 'France', lat: 46.603354, lng: 1.888333 },
+                { country: 'Espagne', lat: 40.463667, lng: -3.74922 },
+                { country: 'Italie', lat: 41.87194, lng: 12.56738 },
+                { country: 'Royaume-Uni', lat: 55.378051, lng: -3.435973 },
+                { country: 'Allemagne', lat: 51.165691, lng: 10.451526 },
+                { country: 'Portugal', lat: 39.399872, lng: -8.224454 }
+                // Ajoutez d'autres pays si besoin...
+            ];
+
+            // Stocker les marqueurs par pays pour pouvoir les mettre à jour
+            var markerByCountry = {};
+
+            // Créer les marqueurs avec une icône personnalisée (affichant uniquement le compteur)
+            countries.forEach(function(item) {
+                var icon = L.divIcon({
+                    html: '<div class="marker-label"><span class="marker-count">0</span></div>',
+                    className: 'custom-marker-icon',
+                    iconSize: [40, 40]
+                });
+                var marker = L.marker([item.lat, item.lng], {icon: icon}).addTo(map);
+                marker.bindPopup(item.country);
+                marker.on('click', function() {
+                    console.log("Marker cliqué pour " + item.country);
+                    loadArticlesForCountry(item.country);
+                });
+                markerByCountry[item.country] = marker;
+            });
+
+            // Référence à l'élément slider et affichage
+            var timelineRange = document.getElementById('timeline-range');
+            var timelineYear = document.getElementById('timeline-year');
+            var minYear = parseInt(timelineRange.min);
+            var maxYear = parseInt(timelineRange.max);
+
+            // Déclaration de la variable pour le debounce des compteurs
+            var markerUpdateTimeout;
+
+            // Met à jour la valeur affichée et lance le chargement des articles et la mise à jour des compteurs
+            function updateYear(newVal) {
+                newVal = Math.max(minYear, Math.min(maxYear, newVal));
+                timelineRange.value = newVal;
+                timelineYear.innerText = newVal;
+                loadArticlesForPeriod(newVal);
+                updateMarkersCount(newVal);
+            }
+
+            // Événement sur le slider
+            timelineRange.addEventListener('input', function(event) {
+                updateYear(event.target.value);
+            });
+
+            // Génération dynamique de la graduation
+            var graduationContainer = document.getElementById('timeline-graduation');
+            for (var i = minYear; i <= maxYear; i += 10) {
+                var mark = document.createElement('div');
+                mark.classList.add('timeline-mark');
+                var percent = ((i - minYear) / (maxYear - minYear)) * 100;
+                mark.style.left = percent + '%';
+                if (i % 100 === 0) {
+                    mark.classList.add('mark-hundred');
+                } else if (i % 50 === 0) {
+                    mark.classList.add('mark-half');
+                } else {
+                    mark.classList.add('mark-ten');
+                }
+                graduationContainer.appendChild(mark);
+            }
+
+            // Fonction pour charger les articles pour la période
+            function loadArticlesForPeriod(year) {
+                var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', ajax_url + '?action=get_articles_for_year&year=' + year, true);
+                xhr.onload = function() {
+                    if (xhr.status == 200) {
+                        var responseText = xhr.responseText.trim();
+                        var articles = [];
+                        if (responseText.length > 0) {
+                            try {
+                                articles = JSON.parse(responseText);
+                            } catch(e) {
+                                console.error("Erreur lors de l'analyse JSON pour loadArticlesForPeriod:", e);
+                                articles = [];
+                            }
+                        } else {
+                            console.warn("Réponse vide reçue pour loadArticlesForPeriod.");
+                        }
+                        console.log('Articles pour la période (' + year + '): ', articles);
+                    }
+                };
+                xhr.send();
+            }
+
+            // Fonction pour charger et afficher les articles pour un pays et la période sélectionnée
+            function loadArticlesForCountry(country) {
+                var currentYear = timelineYear.innerText;
+                var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', ajax_url + '?action=get_articles_for_country&country=' + encodeURIComponent(country) + '&year=' + currentYear, true);
+                xhr.onload = function() {
+                    if (xhr.status == 200) {
+                        var responseText = xhr.responseText.trim();
+                        var articles = [];
+                        if (responseText.length > 0) {
+                            try {
+                                articles = JSON.parse(responseText);
+                            } catch(e) {
+                                console.error("Erreur lors de l'analyse JSON pour loadArticlesForCountry:", e);
+                                articles = [];
+                            }
+                        } else {
+                            console.warn("Réponse vide reçue pour loadArticlesForCountry.");
+                        }
+                        var articleList = document.getElementById('article-list');
+                        articleList.innerHTML = '';
+                        document.getElementById('modal-title').innerText = 'Articles pour ' + country;
+                        if (articles.length > 0) {
+                            articles.forEach(function(article) {
+                                var li = document.createElement('li');
+                                li.innerHTML = '(' + article.date + ') | <a href="' + article.url + '" target="_blank">' + article.title + '</a>';
+                                articleList.appendChild(li);
+                            });
+                        } else {
+                            articleList.innerHTML = '<li>Aucun article trouvé pour ' + country + '.</li>';
+                        }
+                        // Ouvrir la modale
+                        document.getElementById('modal').classList.add('open');
+                    } else {
+                        console.error("Erreur AJAX, statut: " + xhr.status);
+                        document.getElementById('article-list').innerHTML = '<li>Erreur lors du chargement des articles.</li>';
+                        document.getElementById('modal').classList.add('open');
+                    }
+                };
+                xhr.onerror = function() {
+                    console.error("Erreur lors de la requête AJAX pour loadArticlesForCountry.");
+                    document.getElementById('article-list').innerHTML = '<li>Erreur lors du chargement des articles.</li>';
+                    document.getElementById('modal').classList.add('open');
+                };
+                xhr.send();
+            }
+
+            // Fonction pour mettre à jour le compteur sur chaque marqueur avec debounce
+            function updateMarkersCount(year) {
+                // Annuler tout appel en attente
+                clearTimeout(markerUpdateTimeout);
+                // Attendre 300ms après le dernier changement
+                markerUpdateTimeout = setTimeout(function() {
+                    countries.forEach(function(item) {
+                        var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', ajax_url + '?action=get_articles_count_for_country&country=' + encodeURIComponent(item.country) + '&year=' + year, true);
+                        xhr.onload = function() {
+                            if (xhr.status == 200) {
+                                try {
+                                    var response = JSON.parse(xhr.responseText);
+                                    var count = parseInt(response.count, 10);
+                                    if (count > 20) {
+                                        count = "20+";
+                                    }
+                                    if (markerByCountry[item.country]) {
+                                        var newIcon = L.divIcon({
+                                            html: '<div class="marker-label"><span class="marker-count">' + count + '</span></div>',
+                                            className: 'custom-marker-icon',
+                                            iconSize: [40, 40]
+                                        });
+                                        markerByCountry[item.country].setIcon(newIcon);
+                                    }
+                                } catch(e) {
+                                    console.error("Erreur lors de l'analyse JSON pour updateMarkersCount:", e);
+                                }
+                            }
+                        };
+                        xhr.send();
+                    });
+                }, 300);
+            }
+
+            // Fermer la modale
+            document.getElementById('modal-close').addEventListener('click', function() {
+                document.getElementById('modal').classList.remove('open');
+            });
+
+            // Initialisation
+            updateYear(timelineRange.value);
+        });
+    </script>
+
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('timeline_leaflet', 'timeline_leaflet_shortcode');
+
+// Fonction AJAX pour la timeline (articles par période)
+function get_articles_for_year() {
+    if (isset($_GET['year'])) {
+        $year = intval($_GET['year']);
+        error_log('Year selected: ' . $year);
+        if ($year >= 0) {
+            $min = floor($year / 100) * 100;
+            $max = $min + 100;
+        } else {
+            $max = ceil($year / 100) * 100;
+            $min = $max - 100;
+        }
+        error_log('Period: ' . $min . ' - ' . $max);
+        $min_str = (string)$min;
+        $max_str = (string)$max;
+        $args = array(
+            'post_type' => 'post',
+            'meta_query' => array(
+                array(
+                    'key'     => 'date',
+                    'value'   => array($min_str, $max_str),
+                    'compare' => 'BETWEEN',
+                    'type'    => 'CHAR',
+                ),
+            ),
+        );
+        error_log('Query args (year): ' . print_r($args, true));
+        $query = new WP_Query($args);
+        $articles = array();
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $articles[] = array(
+                    'title' => get_the_title(),
+                    'url'   => get_permalink(),
+                    'date'  => get_post_meta(get_the_ID(), 'date', true)
+                );
+            }
+            wp_reset_postdata();
+        }
+        error_log('Articles retrieved (year): ' . print_r($articles, true));
+        echo json_encode($articles);
+    }
+    wp_die();
+}
+add_action('wp_ajax_get_articles_for_year', 'get_articles_for_year');
+add_action('wp_ajax_nopriv_get_articles_for_year', 'get_articles_for_year');
+
+// Fonction AJAX pour les articles par pays et période
+function get_articles_for_country() {
+    if (isset($_GET['country']) && isset($_GET['year'])) {
+        $country = sanitize_text_field($_GET['country']);
+        $year = intval($_GET['year']);
+        error_log('Country selected: ' . $country);
+        error_log('Year received for country filter: ' . $year);
+        if ($year >= 0) {
+            $min = floor($year / 100) * 100;
+            $max = $min + 100;
+        } else {
+            $max = ceil($year / 100) * 100;
+            $min = $max - 100;
+        }
+        error_log('Period for country filter: ' . $min . ' - ' . $max);
+        $min_str = (string)$min;
+        $max_str = (string)$max;
+        $args = array(
+            'post_type'  => 'post',
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key'     => 'country',
+                    'value'   => $country,
+                    'compare' => 'LIKE',
+                    'type'    => 'CHAR',
+                ),
+                array(
+                    'key'     => 'date',
+                    'value'   => array($min_str, $max_str),
+                    'compare' => 'BETWEEN',
+                    'type'    => 'CHAR',
+                ),
+            ),
+            'meta_key'  => 'date',
+            'orderby'   => 'meta_value',
+            'order'     => 'ASC'
+        );
+        error_log('Country query args: ' . print_r($args, true));
+        $query = new WP_Query($args);
+        $articles = array();
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $articles[] = array(
+                    'title' => get_the_title(),
+                    'url'   => get_permalink(),
+                    'date'  => get_post_meta(get_the_ID(), 'date', true)
+                );
+            }
+            wp_reset_postdata();
+        }
+        echo json_encode($articles);
+    }
+    wp_die();
+}
+add_action('wp_ajax_get_articles_for_country', 'get_articles_for_country');
+add_action('wp_ajax_nopriv_get_articles_for_country', 'get_articles_for_country');
+
+function get_articles_count_for_country() {
+    if ( isset($_GET['country']) && isset($_GET['year']) ) {
+        $country = sanitize_text_field($_GET['country']);
+        $year = intval($_GET['year']);
+        error_log('Count - Country selected: ' . $country);
+        error_log('Count - Year received: ' . $year);
+        if ($year >= 0) {
+            $min = floor($year / 100) * 100;
+            $max = $min + 100;
+        } else {
+            $max = ceil($year / 100) * 100;
+            $min = $max - 100;
+        }
+        error_log('Count - Period: ' . $min . ' - ' . $max);
+        $min_str = (string)$min;
+        $max_str = (string)$max;
+        $args = array(
+            'post_type'  => 'post',
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key'     => 'country',
+                    'value'   => $country,
+                    'compare' => '=',
+                    'type'    => 'CHAR',
+                ),
+                array(
+                    'key'     => 'date',
+                    'value'   => array($min_str, $max_str),
+                    'compare' => 'BETWEEN',
+                    'type'    => 'CHAR',
+                ),
+            )
+        );
+        $query = new WP_Query($args);
+        $count = $query->found_posts;
+        echo json_encode(array('count' => $count));
+    }
+    wp_die();
+}
+add_action('wp_ajax_get_articles_count_for_country', 'get_articles_count_for_country');
+add_action('wp_ajax_nopriv_get_articles_count_for_country', 'get_articles_count_for_country');

@@ -1,0 +1,150 @@
+/* Empêche tout overflow horizontal et fixe la largeur au viewport */
+html, body {
+    width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+    touch-action: pan-y;
+}
+
+/* La carte se positionne en relative avec une hauteur adaptée pour le header */
+#map {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 146px);
+    max-height: 600px;
+    z-index: 0;
+}
+
+/* Timeline sur toute la largeur, en bas de la carte */
+#timeline {
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255,255,255,0.8);
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+/* Affichage de la valeur sélectionnée (placé au-dessus du slider) */
+#timeline-year {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Le slider, placé en avant-plan */
+#timeline-range {
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Conteneur de la graduation (en arrière-plan, sans interférer avec les clics) */
+#timeline-graduation {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Marque de graduation de base */
+.timeline-mark {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    background: #000;
+}
+
+/* Marque pour les dizaines */
+.timeline-mark.mark-ten {
+    height: 5px;
+}
+
+/* Marque pour les moitiés */
+.timeline-mark.mark-half {
+    height: 10px;
+}
+
+/* Marque pour les centaines */
+.timeline-mark.mark-hundred {
+    height: 15px;
+}
+
+/* Modale glissante depuis la droite */
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1200;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    margin-block-start: 0 !important;
+}
+
+#modal.open {
+    transform: translateX(0);
+}
+
+#modal #modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+}
+
+#modal ul#article-list {
+    list-style: none;
+    padding: 0;
+    margin: 60px 0 0 0;
+}
+
+#modal ul#article-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#modal ul#article-list li a {
+    text-decoration: none;
+    color: #0073aa;
+}
+
+#modal ul#article-list li a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive pour mobile (<768px) */
+@media (max-width: 768px) {
+    #modal {
+        width: 100%;
+        transform: translateX(100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 !important;
+    }
+    #article-list {
+        padding: 10px !important;
+    }
+    #modal.open {
+        transform: translateX(0);
+    }
+    #map {
+        max-height: 400px !important;
+    }
+}
