@@ -63,18 +63,18 @@ function alphabetical_index_shortcode() {
                 $posts_by_letter[$first_letter] = array();
             }
 
-            $posts_by_letter[$first_letter][] = '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+            $posts_by_letter[$first_letter][] = '<li><a class="links-dark" href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
         }
     }
     wp_reset_postdata();
 
     // **Création du menu d'index**
     $output = '<div class="alphabet-index">';
-    $output .= '<a href="#special">#</a> '; // Bouton "#"
+    $output .= '<a class="links-dark-underline" href="#special">#</a> '; // Bouton "#"
 
     foreach ($letters as $letter) {
         if (isset($posts_by_letter[$letter])) {
-            $output .= '<a href="#' . $letter . '">' . $letter . '</a> ';
+            $output .= '<a class="links-dark-underline" href="#' . $letter . '">' . $letter . '</a> ';
         } else {
             $output .= '<span class="inactive">' . $letter . '</span> ';
         }
@@ -125,22 +125,33 @@ function afficher_lien_admin_auteur_um() {
 }
 add_shortcode('lien_admin_auteur', 'afficher_lien_admin_auteur_um');
 
-function enregistrer_like_utilisateur($post_id) {
-    if (is_user_logged_in()) {
-        $user_id = get_current_user_id();
-        $likes = get_user_meta($user_id, '_liked_posts', true);
-
-        if (!is_array($likes)) {
-            $likes = [];
-        }
-
-        if (!in_array($post_id, $likes)) {
-            $likes[] = $post_id;
-            update_user_meta($user_id, '_liked_posts', $likes);
-        }
+function enregistrer_like_utilisateur($post_id, $args = null) {
+    if ( !is_user_logged_in() ) {
+        return;
+    }
+    
+    $user_id = get_current_user_id();
+    $likes = get_user_meta($user_id, '_liked_posts', true);
+    if ( !is_array($likes) ) {
+        $likes = array();
+    }
+    
+    // On bascule le like : s'il est déjà liké, on le retire ; sinon, on l'ajoute.
+    if ( in_array($post_id, $likes) ) {
+        // Un-like : retirer le post
+        $key = array_search($post_id, $likes);
+        unset($likes[$key]);
+        $likes = array_values($likes);
+        update_user_meta($user_id, '_liked_posts', $likes);
+        error_log("Post retiré des likes (unlike)");
+    } else {
+        // Like : ajouter le post
+        $likes[] = $post_id;
+        update_user_meta($user_id, '_liked_posts', $likes);
+        error_log("Post ajouté aux likes");
     }
 }
-add_action('wp_ulike_after_process', 'enregistrer_like_utilisateur');
+add_action('wp_ulike_after_process', 'enregistrer_like_utilisateur', 10, 2);
 
 /*	-----------------------------------------------------------------------------------------------
 	Carousel
@@ -277,7 +288,9 @@ function display_search_results_cards_shortcode() {
                     <p class="card-excerpt">
                         <?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
                     </p>
+                    <p class="card-button-parent">
                     <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                    </p>
                 </div>
             </div>
             <?php
@@ -372,7 +385,9 @@ function display_category_cards_shortcode($atts) {
                     <p class="card-excerpt">
                         <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
                     </p>
+                    <p class="card-button-parent">
                     <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                    </p>
                 </div>
             </div>
             <?php
@@ -448,7 +463,9 @@ function afficher_likes_utilisateur() {
                             <p class="card-excerpt">
                                 <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
                             </p>
+                            <p class="card-button-parent">
                             <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                            </p>
                         </div>
                     </div>
                     <?php
@@ -592,7 +609,9 @@ function timeline_search_ajax_handler() {
                     </h2>
                     <p class="card-date"><?php echo get_the_date(); ?></p>
                     <p class="card-excerpt"><?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?></p>
+                    <p class="card-button-parent">
                     <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                    </p>
                 </div>
             </div>
             <?php
@@ -856,15 +875,21 @@ function timeline_leaflet_shortcode($atts) {
                 updateYear(event.target.value);
             });
 
-            // Génération dynamique de la graduation
+            // Génération dynamique de la graduation avec affichage des centaines en dessous
             var graduationContainer = document.getElementById('timeline-graduation');
             for (var i = minYear; i <= maxYear; i += 10) {
                 var mark = document.createElement('div');
                 mark.classList.add('timeline-mark');
                 var percent = ((i - minYear) / (maxYear - minYear)) * 100;
                 mark.style.left = percent + '%';
+                // Pour les dizaines et les moitiés, on ajoute simplement la classe
                 if (i % 100 === 0) {
                     mark.classList.add('mark-hundred');
+                    // Créer un span pour le label (les centaines)
+                    var label = document.createElement('span');
+                    label.classList.add('timeline-label');
+                    label.innerText = i;
+                    mark.appendChild(label);
                 } else if (i % 50 === 0) {
                     mark.classList.add('mark-half');
                 } else {
@@ -874,6 +899,7 @@ function timeline_leaflet_shortcode($atts) {
             }
 
             // Fonction pour charger les articles pour la période
+            // La plage utilisée sera [min, max[ (min inclus, max exclus)
             function loadArticlesForPeriod(year) {
                 var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
                 var xhr = new XMLHttpRequest();
@@ -948,9 +974,7 @@ function timeline_leaflet_shortcode($atts) {
 
             // Fonction pour mettre à jour le compteur sur chaque marqueur avec debounce
             function updateMarkersCount(year) {
-                // Annuler tout appel en attente
                 clearTimeout(markerUpdateTimeout);
-                // Attendre 300ms après le dernier changement
                 markerUpdateTimeout = setTimeout(function() {
                     countries.forEach(function(item) {
                         var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
@@ -997,7 +1021,9 @@ function timeline_leaflet_shortcode($atts) {
 }
 add_shortcode('timeline_leaflet', 'timeline_leaflet_shortcode');
 
+
 // Fonction AJAX pour la timeline (articles par période)
+// On modifie ici la requête pour retourner uniquement les articles dont la date est comprise entre [min, max[
 function get_articles_for_year() {
     if (isset($_GET['year'])) {
         $year = intval($_GET['year']);
@@ -1010,18 +1036,24 @@ function get_articles_for_year() {
             $min = $max - 100;
         }
         error_log('Period: ' . $min . ' - ' . $max);
-        $min_str = (string)$min;
-        $max_str = (string)$max;
+        // Conditions : date >= $min et date < $max
         $args = array(
             'post_type' => 'post',
             'meta_query' => array(
+                'relation' => 'AND',
                 array(
                     'key'     => 'date',
-                    'value'   => array($min_str, $max_str),
-                    'compare' => 'BETWEEN',
-                    'type'    => 'CHAR',
+                    'value'   => $min,
+                    'compare' => '>=',
+                    'type'    => 'NUMERIC'
                 ),
-            ),
+                array(
+                    'key'     => 'date',
+                    'value'   => $max,
+                    'compare' => '<',
+                    'type'    => 'NUMERIC'
+                )
+            )
         );
         error_log('Query args (year): ' . print_r($args, true));
         $query = new WP_Query($args);
@@ -1045,6 +1077,7 @@ function get_articles_for_year() {
 add_action('wp_ajax_get_articles_for_year', 'get_articles_for_year');
 add_action('wp_ajax_nopriv_get_articles_for_year', 'get_articles_for_year');
 
+
 // Fonction AJAX pour les articles par pays et période
 function get_articles_for_country() {
     if (isset($_GET['country']) && isset($_GET['year'])) {
@@ -1060,8 +1093,6 @@ function get_articles_for_country() {
             $min = $max - 100;
         }
         error_log('Period for country filter: ' . $min . ' - ' . $max);
-        $min_str = (string)$min;
-        $max_str = (string)$max;
         $args = array(
             'post_type'  => 'post',
             'meta_query' => array(
@@ -1074,10 +1105,16 @@ function get_articles_for_country() {
                 ),
                 array(
                     'key'     => 'date',
-                    'value'   => array($min_str, $max_str),
-                    'compare' => 'BETWEEN',
-                    'type'    => 'CHAR',
+                    'value'   => $min,
+                    'compare' => '>=',
+                    'type'    => 'NUMERIC'
                 ),
+                array(
+                    'key'     => 'date',
+                    'value'   => $max,
+                    'compare' => '<',
+                    'type'    => 'NUMERIC'
+                )
             ),
             'meta_key'  => 'date',
             'orderby'   => 'meta_value',
@@ -1104,6 +1141,8 @@ function get_articles_for_country() {
 add_action('wp_ajax_get_articles_for_country', 'get_articles_for_country');
 add_action('wp_ajax_nopriv_get_articles_for_country', 'get_articles_for_country');
 
+
+// Fonction AJAX pour obtenir le compte d'articles par pays et période
 function get_articles_count_for_country() {
     if ( isset($_GET['country']) && isset($_GET['year']) ) {
         $country = sanitize_text_field($_GET['country']);
@@ -1118,8 +1157,6 @@ function get_articles_count_for_country() {
             $min = $max - 100;
         }
         error_log('Count - Period: ' . $min . ' - ' . $max);
-        $min_str = (string)$min;
-        $max_str = (string)$max;
         $args = array(
             'post_type'  => 'post',
             'meta_query' => array(
@@ -1132,10 +1169,16 @@ function get_articles_count_for_country() {
                 ),
                 array(
                     'key'     => 'date',
-                    'value'   => array($min_str, $max_str),
-                    'compare' => 'BETWEEN',
-                    'type'    => 'CHAR',
+                    'value'   => $min,
+                    'compare' => '>=',
+                    'type'    => 'NUMERIC'
                 ),
+                array(
+                    'key'     => 'date',
+                    'value'   => $max,
+                    'compare' => '<',
+                    'type'    => 'NUMERIC'
+                )
             )
         );
         $query = new WP_Query($args);

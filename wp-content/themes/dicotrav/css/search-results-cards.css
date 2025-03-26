@@ -17,7 +17,12 @@
     border-radius: 5px;
     max-width: 350px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Assure que le contenu est bien réparti */
+    height: 100%; /* Permet de remplir l’espace */
 }
+
 
 .card-image {
     width: 100%;
@@ -30,8 +35,10 @@
 .card-content {
     padding: 10px 1em 1em 1em;
     background-color: #29354C;
+    flex-grow: 1; /* Permet au contenu de prendre tout l’espace dispo */
+    display: flex;
+    flex-direction: column;
 }
-
 .card-title {
     margin: 0 0 10px;
 }
@@ -57,6 +64,11 @@
     color: #F7F1EB;
 }
 
+.card-button-parent{
+    margin-top: auto; /* Force le bouton à rester en bas */
+    margin-bottom: 0 !important;
+}
+
 .card-button {
     display: block;
     background: #D4A373;
@@ -68,6 +80,7 @@
     margin-bottom: 20px;
     transition: background 0.3s ease, transform 0.2s ease;
 }
+
 
 .card-button:hover {
     background: #F7F1EB;
