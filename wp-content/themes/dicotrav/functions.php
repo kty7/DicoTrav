@@ -347,9 +347,47 @@ function display_category_cards_shortcode($atts) {
 
     // Afficher le H1 avec le nom de la catégorie
     if ( $current_category && isset($current_category->name) ) {
-        echo '<h1 style="padding:32px 0 0 0 !important; padding-top:var(--wp--preset--spacing--40); margin-top:0; margin-bottom:0;" class="has-text-align-left alignwide wp-block-post-title has-extra-large-font-size">' . esc_html($current_category->name) . '</h1>';
+        $cat_name = $current_category->name;
+        echo '<h1 style="padding:8px 0 0 0 !important; padding-top:var(--wp--preset--spacing--40); margin-top:0; margin-bottom:0;" class="has-text-align-left alignwide wp-block-post-title has-extra-large-font-size">' . esc_html($cat_name) . '</h1>';
     } else {
-        echo '<h1 style="padding:32px 0 0 0 !important; padding-top:var(--wp--preset--spacing--40); margin-top:0; margin-bottom:0;" class="has-text-align-left alignwide wp-block-post-title has-extra-large-font-size">Catégorie</h1>';
+        $cat_name = 'Catégorie';
+        echo '<h1 style="padding:8px 0 0 0 !important; padding-top:var(--wp--preset--spacing--40); margin-top:0; margin-bottom:0;" class="has-text-align-left alignwide wp-block-post-title has-extra-large-font-size">Catégorie</h1>';
+    }
+
+    // Définir le texte descriptif en fonction de la catégorie
+    $description = '';
+    switch ( $cat_name ) {
+        case 'Concepts':
+            $description = "Cette section regroupe les notions fondamentales qui ont structuré la pensée et les discours sur le travail au fil du temps. On y trouve des définitions de termes tels que « exploitation », « salariat », « division du travail » ou encore « artisanat », qui permettent de saisir les grandes évolutions idéologiques et économiques du travail.";
+            break;
+        case 'Corps':
+            $description = "Le travail engage le corps humain, tant dans ses efforts que dans ses souffrances. Cette catégorie examine la place du corps dans l’histoire du travail : ses gestes, ses postures, ses conditions physiques, mais aussi les impacts du travail sur la santé et les représentations corporelles associées à certaines professions.";
+            break;
+        case 'Figures':
+            $description = "Certains individus ou groupes ont marqué l’histoire du travail par leur action, leur pensée ou leur engagement. Cette section met en lumière des penseurs du travail, des entrepreneurs, des syndicalistes, des ouvriers emblématiques ou encore des figures politiques ayant influencé l’organisation du travail.";
+            break;
+        case 'Institutions':
+            $description = "Le travail ne se développe pas sans cadres normatifs et organisationnels. Ici, sont recensées les institutions qui encadrent, réglementent et transforment le travail : guildes, corporations, syndicats, patronats, ministères du travail, organisations internationales, etc.";
+            break;
+        case 'Lieux':
+            $description = "Le travail se déploie dans des espaces variés, façonnés par les exigences économiques et sociales. Ateliers, usines, bureaux, chantiers, mines, domiciles… Cette section décrit les lieux du travail, leurs évolutions et leurs implications dans l’organisation de l’activité laborieuse.";
+            break;
+        case 'Pratiques':
+            $description = "Les métiers et les techniques de production évoluent au gré des innovations et des transformations sociales. Cette catégorie détaille les manières de travailler, les outils utilisés, les savoir-faire mobilisés, ainsi que les formes d’organisation du travail à travers l’histoire.";
+            break;
+        case 'Relations':
+            $description = "Le travail est indissociable des liens qu’il tisse entre les individus et les groupes sociaux. Ici sont explorées les relations de pouvoir, de solidarité, de subordination ou de coopération qui structurent le monde du travail : hiérarchies, conflits sociaux, négociations, réseaux professionnels, etc.";
+            break;
+        case 'Temps':
+            $description = "Cette catégorie interroge les rythmes du travail, son organisation dans le temps et son évolution historique. On y trouve des notions comme la durée du travail, les congés, la retraite, mais aussi les grandes périodes de mutation du travail, des révolutions industrielles aux transformations numériques contemporaines.";
+            break;
+        default:
+            $description = ""; // Pas de description si la catégorie ne correspond pas
+    }
+
+    // Affichage du texte descriptif sous le H1 (uniquement s'il existe)
+    if ( !empty( $description ) ) {
+        echo '<p class="category-description" style="margin-top: 16px;">' . esc_html($description) . '</p>';
     }
 
     // Préparer la requête personnalisée
@@ -386,7 +424,7 @@ function display_category_cards_shortcode($atts) {
                         <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
                     </p>
                     <p class="card-button-parent">
-                    <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                        <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
                     </p>
                 </div>
             </div>
@@ -798,8 +836,8 @@ function timeline_leaflet_shortcode($atts) {
 
     <!-- Conteneur de la timeline sur toute la largeur -->
     <div id="timeline">
-        <!-- Affichage de la valeur sélectionnée (placé au-dessus du slider) -->
-        <span id="timeline-year">2025</span>
+        <!-- Zone de texte pour saisir et afficher directement une année -->
+        <input type="text" id="timeline-input" placeholder="Entrez une année" style="width:80px; margin-left:10px;" />
         <!-- Slider range -->
         <input type="range" id="timeline-range" min="-500" max="2025" value="2025" />
         <!-- Conteneur pour la graduation de la timeline (en arrière-plan, pointer-events désactivés) -->
@@ -852,9 +890,9 @@ function timeline_leaflet_shortcode($atts) {
                 markerByCountry[item.country] = marker;
             });
 
-            // Référence à l'élément slider et affichage
+            // Référence aux éléments du slider et de la zone de texte
             var timelineRange = document.getElementById('timeline-range');
-            var timelineYear = document.getElementById('timeline-year');
+            var timelineInput = document.getElementById('timeline-input');
             var minYear = parseInt(timelineRange.min);
             var maxYear = parseInt(timelineRange.max);
 
@@ -865,7 +903,7 @@ function timeline_leaflet_shortcode($atts) {
             function updateYear(newVal) {
                 newVal = Math.max(minYear, Math.min(maxYear, newVal));
                 timelineRange.value = newVal;
-                timelineYear.innerText = newVal;
+                timelineInput.value = newVal;
                 loadArticlesForPeriod(newVal);
                 updateMarkersCount(newVal);
             }
@@ -873,6 +911,17 @@ function timeline_leaflet_shortcode($atts) {
             // Événement sur le slider
             timelineRange.addEventListener('input', function(event) {
                 updateYear(event.target.value);
+            });
+
+            // Événement sur la zone de texte : validation au clic sur Entrée
+            timelineInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    var inputYear = parseInt(this.value, 10);
+                    if (!isNaN(inputYear)) {
+                        updateYear(inputYear);
+                    }
+                }
             });
 
             // Génération dynamique de la graduation avec affichage des centaines en dessous
@@ -926,7 +975,7 @@ function timeline_leaflet_shortcode($atts) {
 
             // Fonction pour charger et afficher les articles pour un pays et la période sélectionnée
             function loadArticlesForCountry(country) {
-                var currentYear = timelineYear.innerText;
+                var currentYear = timelineInput.value;
                 var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', ajax_url + '?action=get_articles_for_country&country=' + encodeURIComponent(country) + '&year=' + currentYear, true);

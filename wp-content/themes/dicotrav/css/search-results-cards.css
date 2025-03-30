@@ -48,6 +48,7 @@
     text-decoration: none;
     font-size: 24px;
     margin-top: 10px !important;
+    line-height: 20px;
 }
 
 .card-date {
@@ -101,6 +102,10 @@
     color: #29354C;
 }
 
+.article-cards-grid{
+    padding: 0px !important;
+}
+
 /* Sur desktop (>=768px) */
 @media screen and (min-width: 768px) {
     .article-cards-grid {
@@ -108,6 +113,10 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
         max-width: 1200px !important;
+    }
+
+    .article-cards-grid{
+        padding: 32px !important;
     }
 }
 

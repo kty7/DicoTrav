@@ -148,3 +148,30 @@ html, body {
         max-height: 400px !important;
     }
 }
+
+.timeline-mark {
+    position: absolute;
+    bottom: -5px; /* Décale vers le bas */
+    width: 1px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#timeline-graduation{
+    margin-top: 20px;
+    width: 100%;
+}
+
+#timeline{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.timeline-mark span{
+    position: relative;
+    top: -20px;
+}
