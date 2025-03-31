@@ -19,7 +19,7 @@ html, body {
 #timeline {
     width: 100%;
     z-index: 1000;
-    background: rgba(255,255,255,0.8);
+    background: #F7F1EB; /* Couleur primaire */
     padding: 10px 20px;
     box-sizing: border-box;
 }
@@ -30,6 +30,7 @@ html, body {
     text-align: center;
     font-weight: bold;
     margin-bottom: 5px;
+    color: #15070F; /* Texte */
 }
 
 /* Le slider, placé en avant-plan */
@@ -41,6 +42,31 @@ html, body {
     z-index: 2;
 }
 
+#timeline-input{
+    text-align: center;
+}
+
+/* Personnalisation du slider thumb (navigateur WebKit) */
+#timeline-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #D4A373; /* Call to action */
+    border: 2px solid #29354C; /* Couleur secondaire */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Pour Firefox */
+#timeline-range::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    background: #D4A373;
+    border: 2px solid #29354C;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 /* Conteneur de la graduation (en arrière-plan, sans interférer avec les clics) */
 #timeline-graduation {
     position: relative;
@@ -50,14 +76,6 @@ html, body {
     height: 100%;
     z-index: 1;
     pointer-events: none;
-}
-
-/* Marque de graduation de base */
-.timeline-mark {
-    position: absolute;
-    bottom: 0;
-    width: 1px;
-    background: #000;
 }
 
 /* Marque pour les dizaines */
@@ -83,7 +101,8 @@ html, body {
     width: 400px;
     max-width: 100%;
     height: 100%;
-    background: #fff;
+    background: #29354C; /* Couleur secondaire */
+    color: #F7F1EB; /* Texte clair pour contraste */
     z-index: 1200;
     transform: translateX(100%);
     transition: transform 0.3s ease;
@@ -104,7 +123,7 @@ html, body {
     background: transparent;
     border: none;
     font-size: 24px;
-    color: red;
+    color: #D4A373; /* Call to action */
     cursor: pointer;
 }
 
@@ -120,12 +139,18 @@ html, body {
 }
 
 #modal ul#article-list li a {
+    color: #F7F1EB !important;
     text-decoration: none;
-    color: #0073aa;
+    display: inline-block;
+    transition: transform 0.2s ease, color 0.2s ease;
+    will-change: transform;
+    margin-left: 10px !important;
 }
 
 #modal ul#article-list li a:hover {
     text-decoration: underline;
+    transform: scale(1.05);
+    color: #D4A373 !important;
 }
 
 /* Responsive pour mobile (<768px) */
@@ -153,25 +178,102 @@ html, body {
     position: absolute;
     bottom: -5px; /* Décale vers le bas */
     width: 1px;
-    background: #000;
+    background: #29354C;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#timeline-graduation{
+#timeline-graduation {
     margin-top: 20px;
     width: 100%;
 }
 
-#timeline{
+#timeline {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.timeline-mark span{
+.timeline-mark span {
     position: relative;
     top: -20px;
+}
+
+@media screen and (max-width: 1399px) {
+    .timeline-mark span {
+      display: none;
+    }
+
+    #timeline-graduation {
+        margin-top: 0;
+    }
+}
+
+/* Ronds de la carte en bleu et texte presque blanc */
+.custom-marker-icon .marker-label {
+    border-radius: 50%;
+    background-color: #29354C; 
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-marker-icon .marker-label .marker-count {
+    font-weight: bold;
+    color: #F7F1EB; /* Texte presque blanc */
+}
+
+/* Barre du slider pour WebKit (Chrome, Edge, Safari) */
+#timeline-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: transparent; /* On enlève la couleur de fond par défaut */
+    position: relative;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+/* Barre visible du slider */
+#timeline-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #29354C; /* Bleu */
+    border-radius: 3px;
+    border: none;
+}
+
+/* Bouton du slider */
+#timeline-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    background: #D4A373; /* Couleur "call to action" */
+    border: 2px solid #29354C;
+    border-radius: 50%;
+    margin-top: -6px; /* Pour centrer le bouton sur la barre */
+    cursor: pointer;
+}
+
+/* Pour Firefox */
+#timeline-range::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #29354C;
+    border-radius: 3px;
+    border: none;
+}
+
+#timeline-range::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    background: #D4A373;
+    border: 2px solid #29354C;
+    border-radius: 50%;
+    cursor: pointer;
 }

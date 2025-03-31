@@ -1,81 +1,99 @@
-/* Conteneur principal */
+/* Conteneur principal de la timeline */
 #timeline-search {
     text-align: center;
     background: #29354C;
-    padding: 32px;
+    padding: 20px !important;
     border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    width: auto;
     max-width: 1200px;
 }
 
 /* Label du slider */
-#timeline-label {
+#timeline-search label {
     font-size: 1.4rem;
     font-weight: bold;
     color: #F7F1EB;
     display: inline-block;
-    margin-top: 0px;
     margin-bottom: 10px;
 }
 
-/* Slider stylisé */
-#timeline-range {
+/* Style du slider (jQuery UI Slider) */
+#slider-range {
     width: 100%;
-    margin-top: 10px;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 35px;
-    background: linear-gradient(to right, #F7F1EB, #D4A373);
-    border-radius: 4px;
-    outline: none;
-    transition: background 0.3s ease;
+    margin-top: 20px;
+    position: relative;
 }
 
-#timeline-search label{
-    color:#F7F1EB;
+/* Personnalisation de la piste du slider (la plage) */
+.ui-slider-range {
+    background: linear-gradient(to right, #F7F1EB, #D4A373) !important;
+    border: none;
 }
 
-/* Bouton du slider */
-#timeline-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
+/* Style du handle (bouton) du slider */
+.ui-slider-handle {
     width: 20px;
     height: 50px;
-    background: #3c5075;
-    border-radius: 1px;
+    top: -6px !important;  /* Pour centrer verticalement par rapport à la piste */
     cursor: pointer;
     transition: transform 0.2s ease;
+    background: #D4A373 !important; /* Couleur "call to action" */
+    border: 2px solid #29354C !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
 }
-
-#timeline-range::-webkit-slider-thumb:hover {
+.ui-slider-handle:hover {
     transform: scale(1.2);
 }
 
-#timeline-range::-moz-range-thumb {
-    width: 20px;
-    height: 50px;
-    background: #3c5075;
-    border-radius: 1px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+/* Conteneur de la graduation sous le slider */
+#slider-graduation {
+    position: relative;
+    height: 30px;
+    margin-top: 20px !important;
 }
 
-#timeline-range::-moz-range-thumb:hover {
-    transform: scale(1.2);
+/* Marque de graduation de base */
+.slider-mark {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    background: #F7F1EB !important;
+    height: 5px;
+}
+/* Marque pour les moitiés */
+.slider-mark.mark-half {
+    height: 10px;
+}
+/* Marque pour les centaines */
+.slider-mark.mark-hundred {
+    height: 15px;
+}
+/* Label des marques (pour les centaines) */
+.slider-mark .timeline-label {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-size: 12px;
+    color: #F7F1EB;
 }
 
 /* Conteneur des résultats */
 #timeline-results {
     margin-top: 20px;
-    padding: 16px;
+    margin-bottom: 20px;
+    padding: 0px;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.4s ease, transform 0.4s ease;
+    max-width: 1400px !important;
 }
 
-/* Quand on charge des articles */
+.article-cards-grid{
+    padding: 0 !important;
+}
+
 #timeline-results.loaded {
     opacity: 1;
     transform: translateY(0);
@@ -89,13 +107,31 @@
     padding: 20px;
 }
 
-/* Style du champ de recherche */
-#timeline-search input {
+/* Style du champ de recherche (si présent) */
+#timeline-search input[type="text"] {
     width: 100%;
-    max-width: 100%;
     box-sizing: border-box;
     padding: 10px;
     border: 1px solid #F7F1EB;
     border-radius: 8px;
     font-size: 1rem;
+    text-align: center;
+    color: #29354C;
+}
+
+/* Disparition du texte des graduations sous 1400px */
+@media screen and (max-width: 1399px) {
+    .timeline-label {
+        display: none !important;
+    }
+
+    #slider-graduation {
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #timeline-results{
+        padding: 0 !important;
+    }
 }

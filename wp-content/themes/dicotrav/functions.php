@@ -525,7 +525,7 @@ function afficher_likes_utilisateur() {
 add_shortcode('mes_coups_de_coeur', 'afficher_likes_utilisateur');
 
 /**
- * Shortcode pour la recherche timeline
+ * Shortcode pour la recherche timeline (plage de dates via ACF)
  */
 function timeline_search_shortcode() {
     ob_start();
@@ -536,45 +536,90 @@ function timeline_search_shortcode() {
     // Charger le style de la timeline
     wp_enqueue_style('timeline-style', get_template_directory_uri() . '/css/timeline-style.css');
 
-    // S'assurer que jQuery est chargé
-    wp_enqueue_script('jquery');
+    // Charger jQuery UI Slider et son CSS (exemple via CDN)
+    wp_enqueue_script('jquery-ui-slider');
+    wp_enqueue_style('jquery-ui-css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
 
-    // Définition des périodes (le tableau doit correspondre aux slug de tes catégories)
-    $periods = array(
-        '-500', '-400', '-300', '-200', '-100', 
-        '1', '100', '200', '300', '400', '500', 
-        '600', '700', '800', '900', '1000', '1100', 
-        '1200', '1300', '1400', '1500', '1600', 
-        '1700', '1800', '1900', '2000-2025'
-    );
-    // Calculer l'index maximum pour le slider
-    $max_index = count($periods) - 1;
     ?>
     <div id="timeline-search" style="padding: 32px;">
-        <label for="timeline-range">
-            Choisissez une période : <span id="timeline-label"><?php echo esc_html($periods[0]); ?></span>
+        <label for="slider-range">
+            (<span id="timeline-label-min"></span>) - (<span id="timeline-label-max"></span>)
         </label>
-        <br>
-        <input type="range" id="timeline-range" min="0" max="<?php echo $max_index; ?>" value="0" step="1">
+        <div id="slider-range" style="margin-top:20px; position: relative;"></div>
+        <!-- Conteneur pour la graduation -->
+        <div id="slider-graduation" style="position: relative; height: 30px; margin-top: 10px;"></div>
     </div>
     <div id="timeline-results">
         <!-- Les articles correspondant à la période sélectionnée seront chargés ici -->
     </div>
     <script type="text/javascript">
     jQuery(document).ready(function($) {
-        // Tableau des périodes passé depuis PHP
-        var periods = <?php echo json_encode($periods); ?>;
-        
+        // Définir les bornes de la timeline
+        var periodMin = -500;
+        var periodMax = 2025;
+
+        // Initialisation des labels
+        $('#timeline-label-min').text(periodMin);
+        $('#timeline-label-max').text(periodMax);
+
+        // Initialisation du slider à double poignée
+        $("#slider-range").slider({
+            range: true,
+            min: periodMin,
+            max: periodMax,
+            values: [ periodMin, periodMax ],
+            step: 5,
+            slide: function( event, ui ) {
+                $('#timeline-label-min').text(ui.values[0]);
+                $('#timeline-label-max').text(ui.values[1]);
+            },
+            change: function( event, ui ) {
+                loadTimelinePosts(ui.values[0], ui.values[1]);
+            }
+        });
+
+        // Génération de la graduation similaire à la seconde timeline
+        function generateGraduation() {
+            var graduationContainer = $('#slider-graduation');
+            graduationContainer.empty();
+            // On choisit un pas de 10 pour les marques
+            for(var i = periodMin; i <= periodMax; i += 10) {
+                var percent = ((i - periodMin) / (periodMax - periodMin)) * 100;
+                var mark = $('<div></div>').addClass('slider-mark').css({
+                    position: 'absolute',
+                    left: percent + '%',
+                    bottom: '0',
+                    width: '1px',
+                    background: '#000',
+                    height: '5px'
+                });
+                if(i % 100 === 0) {
+                    mark.addClass('mark-hundred').css('height', '15px');
+                    // Créer un label pour les centaines
+                    var label = $('<span></span>').addClass('timeline-label').text(i).css({
+                        position: 'absolute',
+                        top: '-20px',
+                        left: '-10px',
+                        fontSize: '12px'
+                    });
+                    mark.append(label);
+                } else if(i % 50 === 0) {
+                    mark.addClass('mark-half').css('height', '10px');
+                }
+                graduationContainer.append(mark);
+            }
+        }
+        generateGraduation();
+
         // Fonction qui effectue la requête Ajax pour charger les articles
-        function loadTimelinePosts(index) {
-            var period = periods[index];
-            $('#timeline-label').text(period);
+        function loadTimelinePosts(minVal, maxVal) {
             $.ajax({
                 url: "<?php echo admin_url('admin-ajax.php'); ?>",
                 type: "POST",
                 data: {
                     action: "timeline_search_action",
-                    period: period
+                    period_min: minVal,
+                    period_max: maxVal
                 },
                 beforeSend: function() {
                     $('#timeline-results').removeClass('loaded').html('<p>Chargement...</p>');
@@ -588,14 +633,8 @@ function timeline_search_shortcode() {
             });
         }
         
-        // Chargement initial avec la première période du tableau
-        loadTimelinePosts($('#timeline-range').val());
-        
-        // Au changement de valeur du slider
-        $('#timeline-range').on('input change', function() {
-            var index = $(this).val();
-            loadTimelinePosts(index);
-        });
+        // Chargement initial avec l'intervalle complet
+        loadTimelinePosts(periodMin, periodMax);
     });
     </script>
     <?php
@@ -604,30 +643,18 @@ function timeline_search_shortcode() {
 add_shortcode('timeline_search', 'timeline_search_shortcode');
 
 function timeline_search_ajax_handler() {
-    // Récupérer la période depuis la requête Ajax
-    $period = isset($_POST['period']) ? sanitize_text_field($_POST['period']) : '';
+    $period_min = isset($_POST['period_min']) ? intval($_POST['period_min']) : -500;
+    $period_max = isset($_POST['period_max']) ? intval($_POST['period_max']) : 2025;
 
-    // Si la valeur est "0" (ou toute autre valeur purement numérique) :
-    // on vérifie le terme par nom afin d'obtenir le slug réel.
-    $term = get_term_by('name', $period, 'category');
-    if ($term) {
-        $period_slug = $term->slug;
-    } else {
-        // Sinon, on utilise la valeur reçue
-        $period_slug = $period;
-    }
-
-    // Préparer la requête en utilisant tax_query pour filtrer par slug de catégorie
-    $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+    // Requête sur le champ ACF "date"
     $args = array(
         'post_type' => 'post',
-        'paged'     => $paged,
-        'tax_query' => array(
+        'meta_query' => array(
             array(
-                'taxonomy' => 'category',
-                'field'    => 'slug',
-                'terms'    => $period_slug,
-                'operator' => 'IN'
+                'key'     => 'date',
+                'value'   => array( $period_min, $period_max ),
+                'compare' => 'BETWEEN',
+                'type'    => 'NUMERIC'
             )
         )
     );
@@ -648,7 +675,7 @@ function timeline_search_ajax_handler() {
                     <p class="card-date"><?php echo get_the_date(); ?></p>
                     <p class="card-excerpt"><?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?></p>
                     <p class="card-button-parent">
-                    <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
+                        <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
                     </p>
                 </div>
             </div>
@@ -882,7 +909,7 @@ function timeline_leaflet_shortcode($atts) {
                     iconSize: [40, 40]
                 });
                 var marker = L.marker([item.lat, item.lng], {icon: icon}).addTo(map);
-                marker.bindPopup(item.country);
+                //marker.bindPopup(item.country);
                 marker.on('click', function() {
                     console.log("Marker cliqué pour " + item.country);
                     loadArticlesForCountry(item.country);
