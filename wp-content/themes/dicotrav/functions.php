@@ -283,7 +283,11 @@ function display_search_results_cards_shortcode() {
                         </a>
                     </h2>
                     <p class="card-date">
-                        <?php echo get_the_date(); ?>
+                        <?php 
+                        $pays = get_field('country');
+                        $periode = get_field('date');
+                        echo esc_html($pays) . ', ' . esc_html($periode); 
+                        ?>
                     </p>
                     <p class="card-excerpt">
                         <?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
@@ -418,7 +422,11 @@ function display_category_cards_shortcode($atts) {
                         </a>
                     </h2>
                     <p class="card-date">
-                        <?php echo get_the_date(); ?>
+                        <?php
+                        $pays = get_field('country');
+                        $periode = get_field('date');
+                        echo esc_html($pays) . ', ' . esc_html($periode); 
+                        ?>
                     </p>
                     <p class="card-excerpt">
                         <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
@@ -496,7 +504,11 @@ function afficher_likes_utilisateur() {
                                 </a>
                             </h2>
                             <p class="card-date">
-                                <?php echo get_the_date(); ?>
+                                <?php
+                                $pays = get_field('country');
+                                $periode = get_field('date');
+                                echo esc_html($pays) . ', ' . esc_html($periode); 
+                                ?>
                             </p>
                             <p class="card-excerpt">
                                 <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
@@ -672,7 +684,12 @@ function timeline_search_ajax_handler() {
                     <h2 class="card-title">
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </h2>
-                    <p class="card-date"><?php echo get_the_date(); ?></p>
+                    <p class="card-date"><?php 
+                    $pays = get_field('country');
+                    $periode = get_field('date');
+                    echo esc_html($pays) . ', ' . esc_html($periode); 
+                    ?>
+                    </p>
                     <p class="card-excerpt"><?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?></p>
                     <p class="card-button-parent">
                         <a class="card-button" href="<?php the_permalink(); ?>">Lire</a>
@@ -703,7 +720,7 @@ function shortcode_progression_lecture() {
     $word_count = str_word_count($content);
     
     // Calculer le temps de lecture en minutes (en supposant 200 mots par minute)
-    //$reading_time = ceil($word_count / 200);
+    $reading_time = ceil($word_count / 200);
 
     // Code HTML de la barre de progression et affichage du temps de lecture
     $output = '<div id="reading-progress-container" style="position:fixed;top:0;left:0;width:100%;z-index:9999;">';
@@ -840,6 +857,188 @@ function shortcode_citation() {
 }
 add_shortcode('citation', 'shortcode_citation');
 
+function display_country_period_shortcode() {
+    $pays = get_field('country');
+    $periode = get_field('date');
+    return '<p>' . esc_html($pays) . ', ' . esc_html($periode) . '</p>';
+}
+add_shortcode('country_period', 'display_country_period_shortcode');
+
+function um_set_display_name_after_registration( $user_id ) {
+    // Récupérer les données de l'utilisateur
+    $user = get_userdata( $user_id );
+    
+    // Récupérez ici les champs souhaités. Par exemple, si vous stockez le prénom et le nom dans les meta "first_name" et "last_name" :
+    $first_name = get_user_meta( $user_id, 'first_name', true );
+    $last_name  = get_user_meta( $user_id, 'last_name', true );
+
+    // Vous pouvez aussi utiliser d'autres champs du formulaire Ultimate Member selon votre configuration.
+    if ( !empty( $first_name ) && !empty( $last_name ) ) {
+        $display_name = $first_name . ' ' . $last_name;
+    } else {
+        // En cas d'absence de ces données, on peut utiliser le login
+        $display_name = $user->user_login;
+    }
+
+    // Mise à jour du nom affiché
+    wp_update_user( array(
+        'ID'           => $user_id,
+        'display_name' => $display_name,
+    ));
+}
+add_action( 'um_registration_complete', 'um_set_display_name_after_registration', 10, 1 );
+
+function alphabetical_authors_shortcode() {
+    // Récupérer tous les utilisateurs avec le rôle 'author', triés par nom affiché
+    $args = array(
+        'role'    => 'author',
+        'orderby' => 'display_name',
+        'order'   => 'ASC'
+    );
+    $users = get_users($args);
+
+    $authors_by_letter = array();
+    $letters = range('A', 'Z');
+    $special_characters = '#';
+
+    // Initialiser le tableau avec toutes les lettres et la catégorie spéciale
+    foreach ($letters as $letter) {
+        $authors_by_letter[$letter] = array();
+    }
+    $authors_by_letter[$special_characters] = array();
+
+    // Parcourir les utilisateurs et les regrouper par la première lettre de leur nom affiché
+    foreach ($users as $user) {
+        $first_letter = strtoupper(mb_substr($user->display_name, 0, 1));
+
+        // Si la première lettre n'est pas une lettre de A à Z, la placer dans la catégorie spéciale "#"
+        if (!preg_match('/[A-Z]/', $first_letter)) {
+            $first_letter = $special_characters;
+        }
+
+        $authors_by_letter[$first_letter][] = '<li><a class="links-dark" href="' . esc_url( get_author_posts_url($user->ID) ) . '">' . esc_html($user->display_name) . '</a></li>';
+    }
+
+    // Création du menu d'index
+    $output = '<div class="alphabet-index">';
+    $output .= '<a class="links-dark-underline" href="#special">#</a> '; // Bouton "#"
+    foreach ($letters as $letter) {
+        if (!empty($authors_by_letter[$letter])) {
+            $output .= '<a class="links-dark-underline" href="#' . $letter . '">' . $letter . '</a> ';
+        } else {
+            $output .= '<span class="inactive">' . $letter . '</span> ';
+        }
+    }
+    $output .= '</div>';
+
+    // Création du contenu du dictionnaire d'auteurs
+    $output .= '<div class="alphabetical-index">';
+    foreach ($authors_by_letter as $letter => $authors) {
+        if (!empty($authors)) {
+            $section_id = ($letter == $special_characters) ? 'special' : $letter;
+            $output .= '<h2 id="' . $section_id . '">' . $letter . '</h2><ul>' . implode('', $authors) . '</ul>';
+        }
+    }
+    $output .= '</div>';
+
+    return $output;
+}
+add_shortcode('alphabetical_authors', 'alphabetical_authors_shortcode');
+
+function add_reading_time_to_title($title, $id = null) {
+    // S'exécute uniquement sur les articles (post) en page unique et dans la boucle principale
+    if ( is_singular('post') && in_the_loop() && is_main_query() ) {
+        global $post;
+        // Vérifie que l'ID correspond bien à celui du post actuel
+        if ($id == $post->ID) {
+            // Récupération du contenu de l'article et comptage des mots
+            $content = strip_tags($post->post_content);
+            $word_count = str_word_count($content);
+            if ($word_count > 0) {
+                // Calcul du temps de lecture en secondes
+                $total_seconds = ceil($word_count / 400 * 60);
+                $minutes = floor($total_seconds / 60);
+                $seconds = $total_seconds % 60;
+
+                // Construction du texte du temps de lecture
+                if ($minutes > 0 && $seconds > 0) {
+                    $reading_time_str = $minutes . ' min ' . $seconds . ' secs';
+                } elseif ($minutes > 0) {
+                    $reading_time_str = $minutes . ' min';
+                } else {
+                    $reading_time_str = $seconds . ' secs';
+                }
+
+                // Ajout du temps de lecture au titre sous forme d'annotation
+                $title .= '<p class="reading-time"> (' . $reading_time_str . ') </p>';
+            }
+        }
+    }
+    return $title;
+}
+add_filter('the_title', 'add_reading_time_to_title', 10, 2);
+
+function custom_language_switcher_redirect_script() {
+    ?>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        // Sélectionne tous les liens du language switcher
+        var lsLinks = document.querySelectorAll("#trp-floater-ls-language-list a");
+        lsLinks.forEach(function(link) {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                // Récupère la langue sélectionnée (en minuscule)
+                var selectedLang = this.innerText.trim().toLowerCase();
+                var origin = window.location.origin;
+                var pathname = window.location.pathname; // ex: "/DicoTrav/it/dictionnaire" ou "/DicoTrav/dictionnaire" ou "/DicoTrav/en/dictionnaire"
+                
+                // Découpe le chemin en segments
+                var segments = pathname.split('/');
+                // segments[0] est vide, segments[1] doit contenir "DicoTrav"
+                var baseFolder = "DicoTrav";
+                if (segments[1].toLowerCase() !== baseFolder.toLowerCase()) {
+                    // Si on n'est pas dans le dossier attendu, on ne change rien
+                    window.location.href = origin + pathname + window.location.search + window.location.hash;
+                    return;
+                }
+                
+                // Liste des codes de langue potentiels
+                var langCodes = ["fr", "it", "en"];
+                
+                // La partie langue potentielle se trouve dans segments[2]
+                // Pour IT : si segments[2] n'est pas "it", on l'insère ou le remplace par "it"
+                if (selectedLang === "it") {
+                    if (segments.length > 2 && langCodes.includes(segments[2].toLowerCase())) {
+                        if (segments[2].toLowerCase() !== "it") {
+                            segments[2] = "it";
+                        }
+                    } else {
+                        // Si aucun segment langue n'est présent, insère "it" à l'index 2
+                        segments.splice(2, 0, "it");
+                    }
+                }
+                // Pour FR : si segments[2] existe et est un code langue, le retirer pour revenir à la version par défaut
+                else if (selectedLang === "fr") {
+                    if (segments.length > 2 && langCodes.includes(segments[2].toLowerCase())) {
+                        segments.splice(2, 1);
+                    }
+                }
+                
+                // Reconstruire le chemin
+                var newPath = segments.join('/');
+                if (newPath.charAt(0) !== "/") {
+                    newPath = "/" + newPath;
+                }
+                // Rediriger en conservant la query string et le fragment
+                window.location.href = origin + newPath + window.location.search + window.location.hash;
+            });
+        });
+    });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'custom_language_switcher_redirect_script');
+
 /*	-----------------------------------------------------------------------------------------------
 	LeafLet
 --------------------------------------------------------------------------------------------------- */
@@ -856,19 +1055,31 @@ if ( ! function_exists('enqueue_leaflet_assets') ) {
 add_action('wp_enqueue_scripts', 'enqueue_leaflet_assets');
 
 function timeline_leaflet_shortcode($atts) {
+    // Enqueue jQuery UI Slider et son CSS
+    wp_enqueue_script('jquery-ui-slider');
+    wp_enqueue_style('jquery-ui-css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
+
+    // Enqueue également tes assets Leaflet et ton CSS custom pour la timeline
+    wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet/dist/leaflet.css');
+    wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet/dist/leaflet.js', array(), null, true);
+    wp_enqueue_style('timeline-leaflet-style', get_template_directory_uri() . '/css/timeline-leaflet-style.css');
+
     ob_start();
     ?>
     <!-- La carte occupe toute la largeur et se positionne en dessous du header -->
     <div id="map"></div>
 
-    <!-- Conteneur de la timeline sur toute la largeur -->
-    <div id="timeline">
-        <!-- Zone de texte pour saisir et afficher directement une année -->
-        <input type="text" id="timeline-input" placeholder="Entrez une année" style="width:80px; margin-left:10px;" />
-        <!-- Slider range -->
-        <input type="range" id="timeline-range" min="-500" max="2025" value="2025" />
-        <!-- Conteneur pour la graduation de la timeline (en arrière-plan, pointer-events désactivés) -->
-        <div id="timeline-graduation"></div>
+    <!-- Conteneur de la timeline avec sélection de période (début et fin) -->
+    <div id="timeline" style="padding: 32px;">
+        <div id="label-panel">
+            <label for="timeline-input-min">De : </label>
+            <input type="text" id="timeline-input-min" placeholder="Année début" style="width:80px; margin-left:10px;" />
+            <label class="margin-label" for="timeline-input-max">à : </label>
+            <input type="text" id="timeline-input-max" placeholder="Année fin" style="width:80px; margin-left:10px;" />
+        </div>
+        <div id="slider-range" style="margin-top:20px; position: relative;"></div>
+        <!-- Conteneur pour la graduation (en arrière-plan, pointer-events désactivés) -->
+        <div id="slider-graduation" style="position: relative; height: 30px; margin-top: 10px;"></div>
     </div>
 
     <!-- Modale qui s'affiche sur la droite, masquée par défaut -->
@@ -880,262 +1091,269 @@ function timeline_leaflet_shortcode($atts) {
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialisation de la carte Leaflet
-            var map = L.map('map').setView([51.505, -0.09], 2);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialisation de la carte Leaflet
+        var map = L.map('map').setView([51.505, -0.09], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-            // Tableau des "marqueurs globaux" pour les pays avec des coordonnées globales
-            var countries = [
-                { country: 'France', lat: 46.603354, lng: 1.888333 },
-                { country: 'Espagne', lat: 40.463667, lng: -3.74922 },
-                { country: 'Italie', lat: 41.87194, lng: 12.56738 },
-                { country: 'Royaume-Uni', lat: 55.378051, lng: -3.435973 },
-                { country: 'Allemagne', lat: 51.165691, lng: 10.451526 },
-                { country: 'Portugal', lat: 39.399872, lng: -8.224454 }
-                // Ajoutez d'autres pays si besoin...
-            ];
+        // Tableau des "marqueurs globaux" pour les pays avec des coordonnées globales
+        var countries = [
+            { country: 'France', lat: 46.603354, lng: 1.888333 },
+            { country: 'Espagne', lat: 40.463667, lng: -3.74922 },
+            { country: 'Italie', lat: 41.87194, lng: 12.56738 },
+            { country: 'Royaume-Uni', lat: 55.378051, lng: -3.435973 },
+            { country: 'Allemagne', lat: 51.165691, lng: 10.451526 },
+            { country: 'Portugal', lat: 39.399872, lng: -8.224454 }
+            // Ajoutez d'autres pays si besoin...
+        ];
 
-            // Stocker les marqueurs par pays pour pouvoir les mettre à jour
-            var markerByCountry = {};
+        // Stocker les marqueurs par pays pour pouvoir les mettre à jour
+        var markerByCountry = {};
 
-            // Créer les marqueurs avec une icône personnalisée (affichant uniquement le compteur)
-            countries.forEach(function(item) {
-                var icon = L.divIcon({
-                    html: '<div class="marker-label"><span class="marker-count">0</span></div>',
-                    className: 'custom-marker-icon',
-                    iconSize: [40, 40]
-                });
-                var marker = L.marker([item.lat, item.lng], {icon: icon}).addTo(map);
-                //marker.bindPopup(item.country);
-                marker.on('click', function() {
-                    console.log("Marker cliqué pour " + item.country);
-                    loadArticlesForCountry(item.country);
-                });
-                markerByCountry[item.country] = marker;
+        // Créer les marqueurs avec une icône personnalisée (affichant uniquement le compteur)
+        countries.forEach(function(item) {
+            var icon = L.divIcon({
+                html: '<div class="marker-label"><span class="marker-count">0</span></div>',
+                className: 'custom-marker-icon',
+                iconSize: [40, 40]
             });
-
-            // Référence aux éléments du slider et de la zone de texte
-            var timelineRange = document.getElementById('timeline-range');
-            var timelineInput = document.getElementById('timeline-input');
-            var minYear = parseInt(timelineRange.min);
-            var maxYear = parseInt(timelineRange.max);
-
-            // Déclaration de la variable pour le debounce des compteurs
-            var markerUpdateTimeout;
-
-            // Met à jour la valeur affichée et lance le chargement des articles et la mise à jour des compteurs
-            function updateYear(newVal) {
-                newVal = Math.max(minYear, Math.min(maxYear, newVal));
-                timelineRange.value = newVal;
-                timelineInput.value = newVal;
-                loadArticlesForPeriod(newVal);
-                updateMarkersCount(newVal);
-            }
-
-            // Événement sur le slider
-            timelineRange.addEventListener('input', function(event) {
-                updateYear(event.target.value);
+            var marker = L.marker([item.lat, item.lng], {icon: icon}).addTo(map);
+            marker.on('click', function() {
+                console.log("Marker cliqué pour " + item.country);
+                loadArticlesForCountry(item.country);
             });
+            markerByCountry[item.country] = marker;
+        });
 
-            // Événement sur la zone de texte : validation au clic sur Entrée
-            timelineInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    var inputYear = parseInt(this.value, 10);
-                    if (!isNaN(inputYear)) {
-                        updateYear(inputYear);
-                    }
-                }
-            });
+        // Référence aux éléments des champs de texte et du slider
+        var timelineInputMin = document.getElementById('timeline-input-min');
+        var timelineInputMax = document.getElementById('timeline-input-max');
+        var sliderRange = document.getElementById('slider-range');
+        var periodMin = -500;
+        var periodMax = 2025;
 
-            // Génération dynamique de la graduation avec affichage des centaines en dessous
-            var graduationContainer = document.getElementById('timeline-graduation');
-            for (var i = minYear; i <= maxYear; i += 10) {
-                var mark = document.createElement('div');
-                mark.classList.add('timeline-mark');
-                var percent = ((i - minYear) / (maxYear - minYear)) * 100;
-                mark.style.left = percent + '%';
-                // Pour les dizaines et les moitiés, on ajoute simplement la classe
-                if (i % 100 === 0) {
-                    mark.classList.add('mark-hundred');
-                    // Créer un span pour le label (les centaines)
-                    var label = document.createElement('span');
-                    label.classList.add('timeline-label');
-                    label.innerText = i;
-                    mark.appendChild(label);
-                } else if (i % 50 === 0) {
-                    mark.classList.add('mark-half');
-                } else {
-                    mark.classList.add('mark-ten');
-                }
-                graduationContainer.appendChild(mark);
+        // Initialiser les valeurs des inputs
+        timelineInputMin.value = periodMin;
+        timelineInputMax.value = periodMax;
+
+        // Déclaration de la variable pour le debounce des compteurs
+        var markerUpdateTimeout;
+
+        // Initialisation du slider à double poignée via jQuery UI Slider
+        jQuery("#slider-range").slider({
+            range: true,
+            min: periodMin,
+            max: periodMax,
+            values: [ periodMin, periodMax ],
+            step: 5,
+            slide: function( event, ui ) {
+                timelineInputMin.value = ui.values[0];
+                timelineInputMax.value = ui.values[1];
+            },
+            change: function( event, ui ) {
+                loadArticlesForPeriod(ui.values[0], ui.values[1]);
+                updateMarkersCount(ui.values[0], ui.values[1]);
             }
+        });
 
-            // Fonction pour charger les articles pour la période
-            // La plage utilisée sera [min, max[ (min inclus, max exclus)
-            function loadArticlesForPeriod(year) {
-                var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', ajax_url + '?action=get_articles_for_year&year=' + year, true);
-                xhr.onload = function() {
-                    if (xhr.status == 200) {
-                        var responseText = xhr.responseText.trim();
-                        var articles = [];
-                        if (responseText.length > 0) {
-                            try {
-                                articles = JSON.parse(responseText);
-                            } catch(e) {
-                                console.error("Erreur lors de l'analyse JSON pour loadArticlesForPeriod:", e);
-                                articles = [];
-                            }
-                        } else {
-                            console.warn("Réponse vide reçue pour loadArticlesForPeriod.");
-                        }
-                        console.log('Articles pour la période (' + year + '): ', articles);
-                    }
-                };
-                xhr.send();
+        // Gestion des événements sur les zones de texte : au clic sur Entrée, mettre à jour le slider
+        timelineInputMin.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                var minVal = parseInt(this.value, 10);
+                var maxVal = parseInt(timelineInputMax.value, 10);
+                jQuery("#slider-range").slider("values", 0, minVal);
             }
+        });
+        timelineInputMax.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                var minVal = parseInt(timelineInputMin.value, 10);
+                var maxVal = parseInt(this.value, 10);
+                jQuery("#slider-range").slider("values", 1, maxVal);
+            }
+        });
 
-            // Fonction pour charger et afficher les articles pour un pays et la période sélectionnée
-            function loadArticlesForCountry(country) {
-                var currentYear = timelineInput.value;
-                var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', ajax_url + '?action=get_articles_for_country&country=' + encodeURIComponent(country) + '&year=' + currentYear, true);
-                xhr.onload = function() {
-                    if (xhr.status == 200) {
-                        var responseText = xhr.responseText.trim();
-                        var articles = [];
-                        if (responseText.length > 0) {
-                            try {
-                                articles = JSON.parse(responseText);
-                            } catch(e) {
-                                console.error("Erreur lors de l'analyse JSON pour loadArticlesForCountry:", e);
-                                articles = [];
-                            }
-                        } else {
-                            console.warn("Réponse vide reçue pour loadArticlesForCountry.");
+        // Génération dynamique de la graduation avec affichage des centaines en dessous
+        var graduationContainer = document.getElementById('slider-graduation');
+        for(var i = periodMin; i <= periodMax; i += 10) {
+            var percent = ((i - periodMin) / (periodMax - periodMin)) * 100;
+            var mark = document.createElement('div');
+            mark.classList.add('slider-mark');
+            mark.style.left = percent + '%';
+            mark.style.position = 'absolute';
+            mark.style.bottom = '0';
+            mark.style.width = '1px';
+            mark.style.background = '#000';
+            mark.style.height = '5px';
+            if(i % 100 === 0) {
+                mark.classList.add('mark-hundred');
+                mark.style.height = '15px';
+                // Créer un label pour les centaines
+                var label = document.createElement('span');
+                label.classList.add('timeline-label');
+                label.innerText = i;
+                label.style.position = 'absolute';
+                label.style.top = '-20px';
+                label.style.left = '-10px';
+                label.style.fontSize = '12px';
+                mark.appendChild(label);
+            } else if(i % 50 === 0) {
+                mark.classList.add('mark-half');
+                mark.style.height = '10px';
+            } else {
+                mark.classList.add('mark-ten');
+            }
+            graduationContainer.appendChild(mark);
+        }
+
+        // Fonction pour charger les articles pour la période sélectionnée (plage [min, max[)
+        function loadArticlesForPeriod(minVal, maxVal) {
+            var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', ajax_url + '?action=get_articles_for_year&year=' + minVal + '&max=' + maxVal, true);
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var responseText = xhr.responseText.trim();
+                    var articles = [];
+                    if (responseText.length > 0) {
+                        try {
+                            articles = JSON.parse(responseText);
+                        } catch(e) {
+                            console.error("Erreur lors de l'analyse JSON pour loadArticlesForPeriod:", e);
+                            articles = [];
                         }
-                        var articleList = document.getElementById('article-list');
-                        articleList.innerHTML = '';
-                        document.getElementById('modal-title').innerText = 'Articles pour ' + country;
-                        if (articles.length > 0) {
-                            articles.forEach(function(article) {
-                                var li = document.createElement('li');
-                                li.innerHTML = '(' + article.date + ') | <a href="' + article.url + '" target="_blank">' + article.title + '</a>';
-                                articleList.appendChild(li);
-                            });
-                        } else {
-                            articleList.innerHTML = '<li>Aucun article trouvé pour ' + country + '.</li>';
-                        }
-                        // Ouvrir la modale
-                        document.getElementById('modal').classList.add('open');
                     } else {
-                        console.error("Erreur AJAX, statut: " + xhr.status);
-                        document.getElementById('article-list').innerHTML = '<li>Erreur lors du chargement des articles.</li>';
-                        document.getElementById('modal').classList.add('open');
+                        console.warn("Réponse vide reçue pour loadArticlesForPeriod.");
                     }
-                };
-                xhr.onerror = function() {
-                    console.error("Erreur lors de la requête AJAX pour loadArticlesForCountry.");
+                    console.log('Articles pour la période (' + minVal + ' - ' + maxVal + '): ', articles);
+                }
+            };
+            xhr.send();
+        }
+
+        // Fonction pour charger et afficher les articles pour un pays et la période sélectionnée
+        function loadArticlesForCountry(country) {
+            var minVal = timelineInputMin.value;
+            var maxVal = timelineInputMax.value;
+            var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', ajax_url + '?action=get_articles_for_country&country=' + encodeURIComponent(country) + '&year=' + minVal + '&max=' + maxVal, true);
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var responseText = xhr.responseText.trim();
+                    var articles = [];
+                    if (responseText.length > 0) {
+                        try {
+                            articles = JSON.parse(responseText);
+                        } catch(e) {
+                            console.error("Erreur lors de l'analyse JSON pour loadArticlesForCountry:", e);
+                            articles = [];
+                        }
+                    } else {
+                        console.warn("Réponse vide reçue pour loadArticlesForCountry.");
+                    }
+                    var articleList = document.getElementById('article-list');
+                    articleList.innerHTML = '';
+                    document.getElementById('modal-title').innerText = 'Articles pour ' + country;
+                    if (articles.length > 0) {
+                        articles.forEach(function(article) {
+                            var li = document.createElement('li');
+                            li.innerHTML = '(' + article.date + ') | <a href="' + article.url + '" target="_blank">' + article.title + '</a>';
+                            articleList.appendChild(li);
+                        });
+                    } else {
+                        articleList.innerHTML = '<li>Aucun article trouvé pour ' + country + '.</li>';
+                    }
+                    // Ouvrir la modale
+                    document.getElementById('modal').classList.add('open');
+                } else {
+                    console.error("Erreur AJAX, statut: " + xhr.status);
                     document.getElementById('article-list').innerHTML = '<li>Erreur lors du chargement des articles.</li>';
                     document.getElementById('modal').classList.add('open');
-                };
-                xhr.send();
-            }
+                }
+            };
+            xhr.onerror = function() {
+                console.error("Erreur lors de la requête AJAX pour loadArticlesForCountry.");
+                document.getElementById('article-list').innerHTML = '<li>Erreur lors du chargement des articles.</li>';
+                document.getElementById('modal').classList.add('open');
+            };
+            xhr.send();
+        }
 
-            // Fonction pour mettre à jour le compteur sur chaque marqueur avec debounce
-            function updateMarkersCount(year) {
-                clearTimeout(markerUpdateTimeout);
-                markerUpdateTimeout = setTimeout(function() {
-                    countries.forEach(function(item) {
-                        var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', ajax_url + '?action=get_articles_count_for_country&country=' + encodeURIComponent(item.country) + '&year=' + year, true);
-                        xhr.onload = function() {
-                            if (xhr.status == 200) {
-                                try {
-                                    var response = JSON.parse(xhr.responseText);
-                                    var count = parseInt(response.count, 10);
-                                    if (count > 20) {
-                                        count = "20+";
-                                    }
-                                    if (markerByCountry[item.country]) {
-                                        var newIcon = L.divIcon({
-                                            html: '<div class="marker-label"><span class="marker-count">' + count + '</span></div>',
-                                            className: 'custom-marker-icon',
-                                            iconSize: [40, 40]
-                                        });
-                                        markerByCountry[item.country].setIcon(newIcon);
-                                    }
-                                } catch(e) {
-                                    console.error("Erreur lors de l'analyse JSON pour updateMarkersCount:", e);
+        // Fonction pour mettre à jour le compteur sur chaque marqueur avec debounce
+        function updateMarkersCount(minVal, maxVal) {
+            clearTimeout(markerUpdateTimeout);
+            markerUpdateTimeout = setTimeout(function() {
+                countries.forEach(function(item) {
+                    var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', ajax_url + '?action=get_articles_count_for_country&country=' + encodeURIComponent(item.country) + '&year=' + minVal + '&max=' + maxVal, true);
+                    xhr.onload = function() {
+                        if (xhr.status == 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                var count = parseInt(response.count, 10);
+                                if (count > 20) {
+                                    count = "20+";
                                 }
+                                if (markerByCountry[item.country]) {
+                                    var newIcon = L.divIcon({
+                                        html: '<div class="marker-label"><span class="marker-count">' + count + '</span></div>',
+                                        className: 'custom-marker-icon',
+                                        iconSize: [40, 40]
+                                    });
+                                    markerByCountry[item.country].setIcon(newIcon);
+                                }
+                            } catch(e) {
+                                console.error("Erreur lors de l'analyse JSON pour updateMarkersCount:", e);
                             }
-                        };
-                        xhr.send();
-                    });
-                }, 300);
-            }
+                        }
+                    };
+                    xhr.send();
+                });
+            }, 300);
+        }
 
-            // Fermer la modale
-            document.getElementById('modal-close').addEventListener('click', function() {
-                document.getElementById('modal').classList.remove('open');
-            });
-
-            // Initialisation
-            updateYear(timelineRange.value);
+        // Fermer la modale
+        document.getElementById('modal-close').addEventListener('click', function() {
+            document.getElementById('modal').classList.remove('open');
         });
-    </script>
 
+        // Initialisation
+        loadArticlesForPeriod(periodMin, periodMax);
+        updateMarkersCount(periodMin, periodMax);
+    });
+    </script>
     <?php
     return ob_get_clean();
 }
 add_shortcode('timeline_leaflet', 'timeline_leaflet_shortcode');
 
 
-// Fonction AJAX pour la timeline (articles par période)
-// On modifie ici la requête pour retourner uniquement les articles dont la date est comprise entre [min, max[
+// Fonction AJAX pour récupérer les articles sur une période (plage [min, max])
 function get_articles_for_year() {
-    if (isset($_GET['year'])) {
-        $year = intval($_GET['year']);
-        error_log('Year selected: ' . $year);
-        if ($year >= 0) {
-            $min = floor($year / 100) * 100;
-            $max = $min + 100;
-        } else {
-            $max = ceil($year / 100) * 100;
-            $min = $max - 100;
-        }
-        error_log('Period: ' . $min . ' - ' . $max);
-        // Conditions : date >= $min et date < $max
+    if ( isset($_GET['year']) && isset($_GET['max']) ) {
+        $min = intval($_GET['year']);
+        $max = intval($_GET['max']);
+        // Conditions : date >= $min et date < $max (ou utiliser BETWEEN)
         $args = array(
             'post_type' => 'post',
             'meta_query' => array(
-                'relation' => 'AND',
                 array(
                     'key'     => 'date',
-                    'value'   => $min,
-                    'compare' => '>=',
-                    'type'    => 'NUMERIC'
-                ),
-                array(
-                    'key'     => 'date',
-                    'value'   => $max,
-                    'compare' => '<',
+                    'value'   => array($min, $max),
+                    'compare' => 'BETWEEN',
                     'type'    => 'NUMERIC'
                 )
             )
         );
-        error_log('Query args (year): ' . print_r($args, true));
         $query = new WP_Query($args);
         $articles = array();
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
                 $query->the_post();
                 $articles[] = array(
                     'title' => get_the_title(),
@@ -1145,7 +1363,6 @@ function get_articles_for_year() {
             }
             wp_reset_postdata();
         }
-        error_log('Articles retrieved (year): ' . print_r($articles, true));
         echo json_encode($articles);
     }
     wp_die();
@@ -1154,21 +1371,12 @@ add_action('wp_ajax_get_articles_for_year', 'get_articles_for_year');
 add_action('wp_ajax_nopriv_get_articles_for_year', 'get_articles_for_year');
 
 
-// Fonction AJAX pour les articles par pays et période
+// Fonction AJAX pour récupérer les articles pour un pays dans une période donnée
 function get_articles_for_country() {
-    if (isset($_GET['country']) && isset($_GET['year'])) {
+    if ( isset($_GET['country']) && isset($_GET['year']) && isset($_GET['max']) ) {
         $country = sanitize_text_field($_GET['country']);
-        $year = intval($_GET['year']);
-        error_log('Country selected: ' . $country);
-        error_log('Year received for country filter: ' . $year);
-        if ($year >= 0) {
-            $min = floor($year / 100) * 100;
-            $max = $min + 100;
-        } else {
-            $max = ceil($year / 100) * 100;
-            $min = $max - 100;
-        }
-        error_log('Period for country filter: ' . $min . ' - ' . $max);
+        $min = intval($_GET['year']);
+        $max = intval($_GET['max']);
         $args = array(
             'post_type'  => 'post',
             'meta_query' => array(
@@ -1181,14 +1389,8 @@ function get_articles_for_country() {
                 ),
                 array(
                     'key'     => 'date',
-                    'value'   => $min,
-                    'compare' => '>=',
-                    'type'    => 'NUMERIC'
-                ),
-                array(
-                    'key'     => 'date',
-                    'value'   => $max,
-                    'compare' => '<',
+                    'value'   => array($min, $max),
+                    'compare' => 'BETWEEN',
                     'type'    => 'NUMERIC'
                 )
             ),
@@ -1196,11 +1398,10 @@ function get_articles_for_country() {
             'orderby'   => 'meta_value',
             'order'     => 'ASC'
         );
-        error_log('Country query args: ' . print_r($args, true));
         $query = new WP_Query($args);
         $articles = array();
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
                 $query->the_post();
                 $articles[] = array(
                     'title' => get_the_title(),
@@ -1218,21 +1419,12 @@ add_action('wp_ajax_get_articles_for_country', 'get_articles_for_country');
 add_action('wp_ajax_nopriv_get_articles_for_country', 'get_articles_for_country');
 
 
-// Fonction AJAX pour obtenir le compte d'articles par pays et période
+// Fonction AJAX pour obtenir le compte d'articles pour un pays dans une période donnée
 function get_articles_count_for_country() {
-    if ( isset($_GET['country']) && isset($_GET['year']) ) {
+    if ( isset($_GET['country']) && isset($_GET['year']) && isset($_GET['max']) ) {
         $country = sanitize_text_field($_GET['country']);
-        $year = intval($_GET['year']);
-        error_log('Count - Country selected: ' . $country);
-        error_log('Count - Year received: ' . $year);
-        if ($year >= 0) {
-            $min = floor($year / 100) * 100;
-            $max = $min + 100;
-        } else {
-            $max = ceil($year / 100) * 100;
-            $min = $max - 100;
-        }
-        error_log('Count - Period: ' . $min . ' - ' . $max);
+        $min = intval($_GET['year']);
+        $max = intval($_GET['max']);
         $args = array(
             'post_type'  => 'post',
             'meta_query' => array(
@@ -1245,14 +1437,8 @@ function get_articles_count_for_country() {
                 ),
                 array(
                     'key'     => 'date',
-                    'value'   => $min,
-                    'compare' => '>=',
-                    'type'    => 'NUMERIC'
-                ),
-                array(
-                    'key'     => 'date',
-                    'value'   => $max,
-                    'compare' => '<',
+                    'value'   => array($min, $max),
+                    'compare' => 'BETWEEN',
                     'type'    => 'NUMERIC'
                 )
             )

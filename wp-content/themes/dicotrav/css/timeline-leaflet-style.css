@@ -19,9 +19,28 @@ html, body {
 #timeline {
     width: 100%;
     z-index: 1000;
-    background: #F7F1EB; /* Couleur primaire */
-    padding: 10px 20px;
     box-sizing: border-box;
+    text-align: center;
+    background: #29354C;
+    padding: 20px !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+#label-panel{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color :#F7F1EB;
+}
+
+.margin-label{
+    margin-left: 10px;
 }
 
 /* Affichage de la valeur sélectionnée (placé au-dessus du slider) */
@@ -34,7 +53,7 @@ html, body {
 }
 
 /* Le slider, placé en avant-plan */
-#timeline-range {
+#slider-range {
     width: 100%;
     display: block;
     margin-bottom: 5px;
@@ -42,29 +61,9 @@ html, body {
     z-index: 2;
 }
 
-#timeline-input{
-    text-align: center;
-}
-
-/* Personnalisation du slider thumb (navigateur WebKit) */
-#timeline-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    background: #D4A373; /* Call to action */
-    border: 2px solid #29354C; /* Couleur secondaire */
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-/* Pour Firefox */
-#timeline-range::-moz-range-thumb {
-    height: 20px;
-    width: 20px;
-    background: #D4A373;
-    border: 2px solid #29354C;
-    border-radius: 50%;
-    cursor: pointer;
+#slider-graduation {
+    width: 100%;
+    color :#F7F1EB;
 }
 
 /* Conteneur de la graduation (en arrière-plan, sans interférer avec les clics) */
@@ -227,53 +226,33 @@ html, body {
     color: #F7F1EB; /* Texte presque blanc */
 }
 
-/* Barre du slider pour WebKit (Chrome, Edge, Safari) */
-#timeline-range {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 6px;
-    background: transparent; /* On enlève la couleur de fond par défaut */
-    position: relative;
-    cursor: pointer;
-    margin-top: 5px;
-    margin-bottom: 25px;
-}
-
-/* Barre visible du slider */
-#timeline-range::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 6px;
-    background: #29354C; /* Bleu */
-    border-radius: 3px;
+/* Personnalisation de la piste du slider (la plage) */
+.ui-slider-range {
+    background: linear-gradient(to right, #F7F1EB, #D4A373) !important;
     border: none;
 }
 
-/* Bouton du slider */
-#timeline-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 18px;
-    width: 18px;
-    background: #D4A373; /* Couleur "call to action" */
-    border: 2px solid #29354C;
-    border-radius: 50%;
-    margin-top: -6px; /* Pour centrer le bouton sur la barre */
+/* Style du handle (bouton) du slider */
+.ui-slider-handle {
+    width: 20px;
+    height: 50px;
+    top: -6px !important;  /* Pour centrer verticalement par rapport à la piste */
     cursor: pointer;
+    transition: transform 0.2s ease;
+    background: #D4A373 !important; /* Couleur "call to action" */
+    border: 2px solid #29354C !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+}
+.ui-slider-handle:hover {
+    transform: scale(1.2);
 }
 
-/* Pour Firefox */
-#timeline-range::-moz-range-track {
-    width: 100%;
-    height: 6px;
-    background: #29354C;
-    border-radius: 3px;
-    border: none;
+#label-panel input{
+    border-radius: 5px;
+    text-align: center;
 }
 
-#timeline-range::-moz-range-thumb {
-    height: 18px;
-    width: 18px;
-    background: #D4A373;
-    border: 2px solid #29354C;
-    border-radius: 50%;
-    cursor: pointer;
+.slider-mark{
+    background :#F7F1EB !important;
 }
