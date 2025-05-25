@@ -36,18 +36,26 @@ if ( ! class_exists( 'um\core\Password' ) ) {
 		/**
 		 * Get Reset URL
 		 *
-		 * @return bool|string
+		 * @param int|null $user_id
+		 *
+		 * @return string
 		 */
-		public function reset_url() {
+		public function reset_url( $user_id = null ) {
 			static $reset_key = null;
 
-			$user_id = um_user( 'ID' );
+			if ( is_null( $user_id ) ) {
+				$user_id = um_user( 'ID' );
+			}
 
 			delete_option( "um_cache_userdata_{$user_id}" );
 
 			// New reset password key via WordPress native field. It maybe already exists here but generated twice to make sure that emailed with a proper and fresh hash.
 			// But doing that only once in 1 request using static variable. Different email placeholders can use reset_url() and we have to use 1 time generated to avoid invalid keys.
 			$user_data = get_userdata( $user_id );
+			if ( empty( $user_data ) ) {
+				return '';
+			}
+
 			if ( empty( $reset_key ) ) {
 				$reset_key = UM()->user()->maybe_generate_password_reset_key( $user_data );
 			}
@@ -209,14 +217,10 @@ if ( ! class_exists( 'um\core\Password' ) ) {
 		 *
 		 * @return bool
 		 */
-		function is_reset_request() {
-			if ( um_is_core_page( 'password-reset' ) && isset( $_POST['_um_password_reset'] ) ) {
-				return true;
-			}
-
-			return false;
+		public function is_reset_request() {
+			// phpcs:ignore WordPress.Security.NonceVerification -- already verified here
+			return ! empty( $_POST['_um_password_reset'] );
 		}
-
 
 		/**
 		 * Check if a legitimate password change request is in action
@@ -225,16 +229,18 @@ if ( ! class_exists( 'um\core\Password' ) ) {
 		 *
 		 * @return bool
 		 */
-		function is_change_request() {
-			if ( isset( $_POST['_um_account'] ) == 1 && isset( $_POST['_um_account_tab'] ) && sanitize_key( $_POST['_um_account_tab'] ) === 'password' ) {
+		public function is_change_request() {
+			// phpcs:ignore WordPress.Security.NonceVerification -- already verified here
+			if ( ! empty( $_POST['_um_account'] ) && isset( $_POST['_um_account_tab'] ) && 'password' === sanitize_key( $_POST['_um_account_tab'] ) ) {
 				return true;
-			} elseif ( isset( $_POST['_um_password_change'] ) && $_POST['_um_password_change'] == 1 ) {
+			}
+
+			if ( ! empty( $_POST['_um_password_change'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- already verified here
 				return true;
 			}
 
 			return false;
 		}
-
 
 		/**
 		 * Password page form
@@ -466,14 +472,13 @@ if ( ! class_exists( 'um\core\Password' ) ) {
 				um_fetch_user( $data->ID );
 
 				if ( false === UM()->options()->get( 'only_approved_user_reset_password' ) || UM()->common()->users()->has_status( $data->ID, 'approved' ) ) {
-					UM()->user()->password_reset();
+					UM()->user()->password_reset( $data->ID );
 				}
 			}
 
 			wp_safe_redirect( um_get_core_page( 'password-reset', 'checkemail' ) );
 			exit;
 		}
-
 
 		/**
 		 * Error handler: changing password
@@ -487,7 +492,7 @@ if ( ! class_exists( 'um\core\Password' ) ) {
 				wp_die( esc_html__( 'Hello, spam bot!', 'ultimate-member' ) );
 			}
 
-			if ( isset( $args['_um_account'] ) == 1 && isset( $args['_um_account_tab'] ) && 'password' === sanitize_key( $args['_um_account_tab'] ) ) {
+			if ( ! empty( $args['_um_account'] ) && isset( $args['_um_account_tab'] ) && 'password' === sanitize_key( $args['_um_account_tab'] ) ) {
 				// validate for security on the account change password page
 				if ( ! is_user_logged_in() ) {
 					wp_die( esc_html__( 'This is not possible for security reasons.', 'ultimate-member' ) );

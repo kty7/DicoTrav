@@ -548,9 +548,11 @@ if( !class_exists('TRP_LICENSE_PAGE') ) {
 
 class TRP_Plugin_Updater{
 
-    private $store_url = "https://translatepress.com";
+    private $store_url;
 
     public function __construct(){
+        // Use constant from wp-config.php if defined, otherwise use default URL
+        $this->store_url = defined('TRP_STORE_URL') ? TRP_STORE_URL : "https://translatepress.com";
     }
 
     protected function get_option( $license_key_option ){
@@ -596,8 +598,8 @@ class TRP_Plugin_Updater{
 
             $trp = TRP_Translate_Press::get_trp_instance();
 
-            if (!empty($trp->active_pro_addons)) {
-                foreach ($trp->active_pro_addons as $active_pro_addon_name) {
+            if (!empty($trp->tp_product_name)) {
+                foreach ($trp->tp_product_name as $active_pro_addon_name) {
                     // data to send in our API request
                     $api_params = array(
                         'edd_action' => 'activate_license',                  //as the license is already activated this does not do anything. We could use check_license action but it gives different results  so we can't use it consistently with the result we get from the moment we activate it
@@ -687,8 +689,8 @@ class TRP_Plugin_Updater{
             $license_information_for_all_addons = array();
 
             $trp = TRP_Translate_Press::get_trp_instance();
-            if( !empty( $trp->active_pro_addons ) ){
-                foreach ( $trp->active_pro_addons as $active_pro_addon_name ){
+            if( !empty( $trp->tp_product_name ) ){
+                foreach ($trp->tp_product_name as $active_pro_addon_name ){
                     // data to send in our API request
                     $api_params = array(
                         'edd_action' => 'activate_license',
@@ -794,8 +796,8 @@ class TRP_Plugin_Updater{
             $license = trim( $this->get_option( 'trp_license_key' ) );
 
             $trp = TRP_Translate_Press::get_trp_instance();
-            if( !empty( $trp->active_pro_addons ) ){
-                foreach ( $trp->active_pro_addons as $active_pro_addon_name ){//this loop will actually run just once, as we redirect at the end in all cases
+            if( !empty( $trp->tp_product_name ) ){
+                foreach ($trp->tp_product_name as $active_pro_addon_name ){//this loop will actually run just once, as we redirect at the end in all cases
 
                     // data to send in our API request
                     $api_params = array(

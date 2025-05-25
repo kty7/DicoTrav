@@ -13,6 +13,12 @@ use DevOwl\RealCookieBanner\Vendor\DevOwl\FastHtmlTag\finder\SelectorSyntaxFinde
 abstract class AbstractBlockable implements SelectorSyntaxAttributeFunctionVariableResolver
 {
     /**
+     * Key of blockable data to store the legal basis (multiple legal basis are possible)
+     * as string array. If one of the legal basis is `legitimate-interest`, the blockable has
+     * higher priority.
+     */
+    const DATA_KEY_LEGAL_BASIS = 'legalBasis';
+    /**
      * See `SelectorSyntaxFinder`.
      *
      * @var SelectorSyntaxFinder[]
@@ -33,6 +39,7 @@ abstract class AbstractBlockable implements SelectorSyntaxAttributeFunctionVaria
      * @var string[]
      */
     private $variables = [];
+    private $data = [];
     /**
      * C'tor.
      *
@@ -86,6 +93,20 @@ abstract class AbstractBlockable implements SelectorSyntaxAttributeFunctionVaria
             $this->regexp['contains'][$host] = Utils::createRegexpPatternFromWildcardName('*' . $host . '*');
         }
         $this->expressionToStrposCache = null;
+    }
+    /**
+     * Check if the blockable matches the expression loosely.
+     *
+     * @param string $str
+     */
+    public function matchesLoose($str)
+    {
+        foreach ($this->getRegularExpressions() as $expression => $regexp) {
+            if ($this->matchesExpressionLoose($expression, $str)) {
+                return $expression;
+            }
+        }
+        return null;
     }
     /**
      * It is a performance-boost to extract the searchable strings for this expression, so we can first check for simple `contains` pattern
@@ -174,6 +195,20 @@ abstract class AbstractBlockable implements SelectorSyntaxAttributeFunctionVaria
      */
     public abstract function getCriteria();
     /**
+     * Get the priority of the blockable. It gets reused in `BlockablesSorter` to sort the blockables.
+     * If lower, the blockable gets sorted to the top.
+     *
+     * @return int
+     */
+    public function getPriority()
+    {
+        $legalBasis = $this->getData(self::DATA_KEY_LEGAL_BASIS);
+        if (\is_array($legalBasis) && \in_array('legitimate-interest', $legalBasis, \true)) {
+            return 5;
+        }
+        return 10;
+    }
+    /**
      * Determine if this blockable should be blocked.
      */
     public function hasBlockerId()
@@ -227,5 +262,24 @@ abstract class AbstractBlockable implements SelectorSyntaxAttributeFunctionVaria
     public function getVariable($variableName, $default = '')
     {
         return $this->variables[$variableName] ?? $default;
+    }
+    /**
+     * Allows to set additional data for this blockable.
+     *
+     * @param string $key
+     * @param mixed $data
+     */
+    public function setData($key, $data)
+    {
+        $this->data[$key] = $data;
+    }
+    /**
+     * Get additional data.
+     *
+     * @param string $key
+     */
+    public function getData($key)
+    {
+        return $this->data[$key] ?? null;
     }
 }

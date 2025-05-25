@@ -325,6 +325,23 @@ function secupress_new_upgrade( $secupress_version, $actual_version ) {
 			secupress_activate_submodule( 'sensitive-data', 'bad-url-access' );
 		}
 	}
+	// < 2.3.13
+	if ( version_compare( $actual_version, '2.3.13', '<' ) ) {
+		if ( secupress_is_submodule_active( 'sensitive-data', 'bad-url-access' ) ) {
+			secupress_deactivate_submodule( 'sensitive-data', 'bad-url-access' );
+			$GLOBALS['contentprotectbadurlaccess'] = 'disallowed';
+			secupress_activate_submodule( 'sensitive-data', 'bad-url-access' );
+		}
+	}
+	// < 2.3.16.2
+	if ( version_compare( $actual_version, '2.3.16.2', '<' ) ) {
+		$files = secupress_find_mu_plugin( 'salt_keys' );
+		if ( count( $files ) > 1 ) {
+			unset( $files[0] );
+			// Delete all others salt keys files
+			array_map( 'secupress_delete_mu_plugin', $files );
+		}
+	}
 }
 
 
@@ -567,7 +584,7 @@ exit;
 }
 
 if ( ! secupress_is_white_label() ) {
-	//// add_action( 'admin_notices', 'secupress_display_whats_new' );
+	add_action( 'admin_notices', 'secupress_display_whats_new' );
 	/**
 	 * Display a "what's new" notice when not in WhiteLabel and user has the correct capa
 	 *
@@ -579,17 +596,16 @@ if ( ! secupress_is_white_label() ) {
 	 * @return (void)
 	 **/
 	function secupress_display_whats_new() {
-		$notice_id = 'new-' . sanitize_key( SECUPRESS_VERSION );
+		$notice_id = 'new-' . sanitize_key( SECUPRESS_MAJOR_VERSION );
 		if ( ! current_user_can( secupress_get_capability() ) || secupress_notice_is_dismissed( $notice_id ) ) {
 			return;
 		}
 
-		$title    = sprintf( '<strong>' . __( 'What’s new in SecuPress %s', 'secupress' ) . '</strong>', SECUPRESS_VERSION );
-		$readmore = '<a href="https://secupress.me/changelog" target="_blank"><em>' . __( 'Or read full changelog on secupress.me', 'secupress' ) . '</em></a>';
-		$newitems = [ 	//__( '.', 'secupress' ),
-						// __( 'New Vulnerable Themes and Plugins API', 'secupress' ),
-						// __( 'New GeoIP API', 'secupress' ),
-						// __( 'New Sessions Details', 'secupress' ),
+		$title     = sprintf( '<strong>' . __( 'What’s new in SecuPress %s%s', 'secupress' ) . '</strong>', defined( 'SECUPRESS_PRO_VERSION' ) ? 'Pro ' : '', SECUPRESS_MAJOR_VERSION );
+		$readmore  = '<a href="https://secupress.me/changelog" target="_blank"><em>' . __( 'Or read full changelog on secupress.me', 'secupress' ) . '</em></a>';
+		$blogpost  = __( 'https://secupress.me/blog/secupress-v2-3/', 'secupress' );
+		$newitems  = [ 	
+						sprintf( __( 'So many things have changed, read our dedicated blogpost %sSecuPress v2.3 aka Starboost%s!', 'secupress' ), sprintf( '<a href="%s" target="_blank">', $blogpost ), '</a>' ),
 					];
 		if ( ! empty( $newitems ) ) {
 			$newitems = '<ul><li>• ' . implode( '</li><li>• ', $newitems ) . '</li></ul>';

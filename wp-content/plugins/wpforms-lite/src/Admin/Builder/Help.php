@@ -226,6 +226,8 @@ class Help {
 			'settings/form_pages'                     => 'form pages',
 			'settings/save_resume'                    => 'save and resume',
 			'settings/google_sheets'                  => 'google sheets',
+			'settings/dropbox'                        => 'dropbox',
+			'settings/google_drive'                   => 'google drive',
 			'settings/webhooks'                       => 'webhooks',
 			'providers'                               => '',
 			'providers/aweber'                        => 'aweber',
@@ -234,19 +236,20 @@ class Help {
 			'providers/constant_contact'              => 'constant contact',
 			'providers/convertkit'                    => 'kit',
 			'providers/drip'                          => 'drip',
-			'providers/dropbox'                       => 'dropbox',
 			'providers/getresponse'                   => 'getresponse',
 			'providers/getresponse_v3'                => 'getresponse',
 			'providers/mailchimp'                     => 'mailchimp',
 			'providers/mailchimpv3'                   => 'mailchimp',
 			'providers/mailerlite'                    => 'mailerlite',
 			'providers/mailpoet'                      => 'mailpoet',
+			'providers/make'                          => 'make',
 			'providers/zapier'                        => 'zapier',
 			'providers/salesforce'                    => 'salesforce',
 			'providers/sendinblue'                    => 'brevo',
 			'providers/slack'                         => 'slack',
 			'providers/hubspot'                       => 'hubspot',
 			'providers/twilio'                        => 'twilio',
+			'providers/pipedrive'                     => 'pipedrive',
 			'payments'                                => '',
 			'payments/paypal_commerce'                => 'paypal commerce',
 			'payments/paypal_standard'                => 'paypal standard',
@@ -1193,6 +1196,9 @@ class Help {
 			'dropbox'                   => [
 				'/docs/dropbox-addon/',
 			],
+			'google-drive'              => [
+				'/docs/google-drive-addon/',
+			],
 			'getresponse'               => [
 				'/docs/how-to-install-and-use-getresponse-addon-with-wpforms/',
 			],
@@ -1209,8 +1215,14 @@ class Help {
 			'mailpoet'                  => [
 				'/docs/mailpoet-addon/',
 			],
+			'make'                      => [
+				'/docs/make-addon/',
+			],
 			'zapier'                    => [
 				'/docs/how-to-install-and-use-zapier-addon-with-wpforms/',
+			],
+			'pipedrive'                 => [
+				'/docs/pipedrive-addon/',
 			],
 			'salesforce'                => [
 				'/docs/how-to-install-and-use-the-salesforce-addon-with-wpforms/',

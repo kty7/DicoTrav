@@ -45,7 +45,7 @@ class TRP_Translate_Press{
     protected $preferred_user_language;
     protected $gutenberg_blocks;
 
-    public $active_pro_addons = array();
+    public $tp_product_name = array();
     public static $translate_press = null;
 
     /**
@@ -69,13 +69,13 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.9.10' );
+        define( 'TRP_PLUGIN_VERSION', '2.9.15' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
         $this->load_dependencies();
         $this->initialize_components();
-        $this->get_active_pro_addons();
+        $this->get_tp_product_name();
         $this->define_admin_hooks();
         $this->define_frontend_hooks();
     }
@@ -203,29 +203,39 @@ class TRP_Translate_Press{
     /**
      * We use this function to detect if we have any addons that require a license
      */
-    public function get_active_pro_addons(){
+    public function get_tp_product_name(){
 
         //don't do nothing in frontend
         if( !is_admin() )
             return;
 
         // the names of your product should match the download names in EDD exactly
-        $trp_all_pro_addons = array(
+        // The order is important because we only match the last one.
+        $trp_all_tp_product_names = array(
+            "translatepress-multilingual"  => "TranslatePress AI Free",
             "translatepress-business"      => "TranslatePress Business",
             "translatepress-developer"     => "TranslatePress Developer",
             "translatepress-personal"      => "TranslatePress Personal",
         );
         $active_plugins = get_option('active_plugins');
-        foreach ( $trp_all_pro_addons as $trp_pro_addon_folder => $trp_pro_addon_name ){
+        foreach ( $trp_all_tp_product_names as $trp_tp_product_folder => $trp_tp_product_name ){
             foreach( $active_plugins as $active_plugin ){
-                if( strpos( $active_plugin, $trp_pro_addon_folder.'/' ) === 0 ){
-                    $this->active_pro_addons[$trp_pro_addon_folder] = $trp_pro_addon_name;
+                if( strpos( $active_plugin, $trp_tp_product_folder.'/' ) === 0 ){
+                    $this->tp_product_name[$trp_tp_product_folder] = $trp_tp_product_name;
+                    break;
                 }
             }
         }
+
+        // Only define the last found product name. We can only have ONE product name.
+        $this->tp_product_name = array(end( $this->tp_product_name ));
+
         //for the dev version simulate PRO version active
-        if( ( defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Dev' ) )
-            $this->active_pro_addons["translatepress-business"] = "TranslatePress Business";
+        if( ( defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Dev' ) ){
+            $this->tp_product_name["translatepress-business"] = "TranslatePress Business";
+        } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress AI Free' ){
+            $this->tp_product_name["translatepress-multilingual"] = "TranslatePress AI Free";
+        }
     }
 
     /**
@@ -301,7 +311,7 @@ class TRP_Translate_Press{
         $this->loader->add_action( 'wp_ajax_trp_install_plugins', $this->install_plugins, 'install_plugins_request' );
 
         /* add hooks for license operations  */
-        if( !empty( $this->active_pro_addons ) ) {
+        if( !empty( $this->tp_product_name ) ) {
             $this->loader->add_action('admin_init', $this->plugin_updater, 'activate_license');
             $this->loader->add_filter('pre_set_site_transient_update_plugins', $this->plugin_updater, 'check_license');
             $this->loader->add_action('admin_init', $this->plugin_updater, 'deactivate_license');

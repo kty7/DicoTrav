@@ -339,6 +339,23 @@ class TRP_Trigger_Plugin_Notifications{
         $license_details = get_option( 'trp_license_details' );
         $is_demosite = ( strpos(site_url(), 'https://demo.translatepress.com' ) !== false );
         $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
+
+        if ( empty($license_details) && !$is_demosite && !$free_version ){
+            /* this must be unique */
+            $notification_id = 'trp_invalid_license';
+            $message = '<p style="padding-right:30px;">';
+            $message .= sprintf( __('Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_license_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-SN-Purchase' target='_blank' class='button-primary'>", "</a>" );
+            if ( !$notifications->is_plugin_page() ) {
+                //make sure to use the trp_dismiss_admin_notification arg
+                $message .= '<a style="text-decoration: none;z-index:100;" href="' . add_query_arg( array( 'trp_dismiss_admin_notification' => $notification_id ) ) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'translatepress-multilingual' ) . '</span></a>';
+                $force_show = false;
+            } else {
+                $force_show = true; //ignore dismissal on own plugin pages
+            }
+            $message .= '</p>';
+            $notifications->add_notification( $notification_id, $message, 'trp-notice notice error', true, array('translate-press'), true, $force_show );
+        }
+
         if( !empty($license_details) && !$is_demosite && !$free_version){
             /* if we have any invalid response for any of the addon show just the error notification and ignore any valid responses */
             if( !empty( $license_details['invalid'] ) ){
@@ -350,14 +367,25 @@ class TRP_Trigger_Plugin_Notifications{
                 $notification_id = 'trp_invalid_license';
 
                 $message = '<p style="padding-right:30px;">';
-
-                    if( $license_detail->error == 'missing' )
-                        $message .= '<p>'. sprintf( __('Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_license_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-SN-Purchase' target='_blank' class='button-primary'>", "</a>" ).'</p>';
+                    // https://easydigitaldownloads.com/docs/software-licensing-api/#activate_license
+                    if(
+                        $license_detail->error == 'missing' ||
+                        $license_detail->error == 'disabled' ||
+                        $license_detail->error == 'no_activations_left' ||
+                        $license_detail->error == 'key_mismatch' ||
+                        $license_detail->error == 'item_name_mismatch' ||
+                        $license_detail->error == 'site_inactive'
+                    )
+                        $message .= sprintf( __('Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_license_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-SN-Purchase' target='_blank' class='button-primary'>", "</a>" );
                     elseif( $license_detail->error == 'expired' )
-                        $message .= '<p>'. sprintf( __('Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s' , 'translatepress-multilingual' ), "<a href='https://www.translatepress.com/account/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-Renewal' target='_blank'>", "</a>", "<a href='https://www.translatepress.com/account/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-Renewal' target='_blank' class='button-primary'>", "</a>" ). '</p>';
-                    else
-                        $message .= '<p>' . __( 'Something went wrong, please try again.', 'translatepress-multilingual' ) . '</p>';
-
+                        $message .= sprintf( __('Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s' , 'translatepress-multilingual' ), "<a href='https://www.translatepress.com/account/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-Renewal' target='_blank'>", "</a>", "<a href='https://www.translatepress.com/account/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TP-Renewal' target='_blank' class='button-primary'>", "</a>" );
+                    else {
+                        $license_error = __("Error: ", "translatepress-multilingual");
+                        if (!empty($license_detail->error)){
+                            $license_error .= $license_detail->error;
+                        }
+                        $message .= __('Something went wrong, please try again.', 'translatepress-multilingual') . $license_error ;
+                    }
                     if ( !$notifications->is_plugin_page() ) {
                         //make sure to use the trp_dismiss_admin_notification arg
                         $message .= '<a style="text-decoration: none;z-index:100;" href="' . add_query_arg( array( 'trp_dismiss_admin_notification' => $notification_id ) ) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'translatepress-multilingual' ) . '</span></a>';
@@ -482,16 +510,16 @@ class TRP_Trigger_Plugin_Notifications{
             // Plugin pages
             if( $notifications->is_plugin_page() ){
 
-                $notification_id = 'trp_bf_2024';
+                $notification_id = 'trp_bf_2025';
 
                 $message = '<img style="max-width: 60px;" src="' . TRP_PLUGIN_URL . 'assets/images/tp-logo.png" />';
 
                 if ( !$free_version && $license_status == 'expired' ){
                     $message .= '<div><p style="font-size: 110%;margin-top:0px;margin-bottom:4px;padding:0px;">' . '<strong>Get PRO back at a fraction of the cost!</strong>' . '</p>';
-                    $message .= '<p style="font-size: 110%;margin-top:0px;margin-bottom: 0px;padding:0px;">Get our <strong>Black Friday</strong> deal and renew your TranslatePress license with our <strong>biggest sale of the year</strong>. <a class="button-primary" style="margin-top:6px;" href="https://translatepress.com/black-friday/?utm_source=tpsettings&utm_medium=clientsite&utm_campaign=BF-2024" target="_blank">Get discount</a></p></div>';
+                    $message .= '<p style="font-size: 110%;margin-top:0px;margin-bottom: 0px;padding:0px;">Get our <strong>Black Friday</strong> deal and renew your TranslatePress license with our <strong>biggest sale of the year</strong>. <a class="button-primary" style="margin-top:6px;" href="https://translatepress.com/black-friday/?utm_source=tpsettings&utm_medium=clientsite&utm_campaign=BF-2025" target="_blank">Get discount</a></p></div>';
                 } else {
                     $message .= '<div><p style="font-size: 110%;margin-top:0px;margin-bottom:4px;padding:0px;">' . '<strong>Go PRO at a fraction of the cost!</strong>' . '</p>';
-                    $message .= '<p style="font-size: 110%;margin-top:0px;margin-bottom: 0px;padding:0px;">Get our <strong>Black Friday</strong> deal and switch to a premium license of TranslatePress with our <strong>biggest sale of the year</strong>. <a class="button-primary" style="margin-top:6px;" href="https://translatepress.com/black-friday/?utm_source=tpsettings&utm_medium=clientsite&utm_campaign=BF-2024" target="_blank">Get discount</a></p></div>';
+                    $message .= '<p style="font-size: 110%;margin-top:0px;margin-bottom: 0px;padding:0px;">Get our <strong>Black Friday</strong> deal and switch to a premium license of TranslatePress with our <strong>biggest sale of the year</strong>. <a class="button-primary" style="margin-top:6px;" href="https://translatepress.com/black-friday/?utm_source=tpsettings&utm_medium=clientsite&utm_campaign=BF-2025" target="_blank">Get discount</a></p></div>';
                 }
 
                 $message .= '<a href="' . add_query_arg( array( 'trp_dismiss_admin_notification' => $notification_id ) ) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'translatepress-multilingual' ) . '</span></a>';
@@ -500,14 +528,14 @@ class TRP_Trigger_Plugin_Notifications{
 
             } else {
 
-                $notification_id = 'trp_bf_2024';
+                $notification_id = 'trp_bf_2025';
 
                 $message = '<img style="float: left; margin: 10px 8px 10px 0px; max-width: 20px;" src="' . TRP_PLUGIN_URL . 'assets/images/tp-logo-2d.png" />';
                 
                 if ( !$free_version && $license_status == 'expired' )
-                    $message .= '<p style="padding-right:30px;font-size: 110%;"><strong>TranslatePress Black Friday is here!</strong> Renew your <strong>PRO</strong> license with our biggest discount of the year. <a href="https://translatepress.com/black-friday/?utm_source=wpdashboard&utm_medium=clientsite&utm_campaign=BF-2024" target="_blank">Learn more</a></p>';
+                    $message .= '<p style="padding-right:30px;font-size: 110%;"><strong>TranslatePress Black Friday is here!</strong> Renew your <strong>PRO</strong> license with our biggest discount of the year. <a href="https://translatepress.com/black-friday/?utm_source=wpdashboard&utm_medium=clientsite&utm_campaign=BF-2025" target="_blank">Learn more</a></p>';
                 else
-                    $message .= '<p style="padding-right:30px;font-size: 110%;"><strong>TranslatePress Black Friday is here!</strong> Go <strong>PRO</strong> with our biggest discount of the year. <a href="https://translatepress.com/black-friday/?utm_source=wpdashboard&utm_medium=clientsite&utm_campaign=BF-2024" target="_blank">Learn more</a></p>';
+                    $message .= '<p style="padding-right:30px;font-size: 110%;"><strong>TranslatePress Black Friday is here!</strong> Go <strong>PRO</strong> with our biggest discount of the year. <a href="https://translatepress.com/black-friday/?utm_source=wpdashboard&utm_medium=clientsite&utm_campaign=BF-2025" target="_blank">Learn more</a></p>';
                 
                 $message .= '<a href="' . add_query_arg( array( 'trp_dismiss_admin_notification' => $notification_id ) ) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'translatepress-multilingual' ) . '</span></a>';
         
@@ -553,8 +581,8 @@ function trp_bf_show_promotion(){
 function trp_bf_promotion_is_active(){
 
     $black_friday = array(
-        'start_date' => '11/25/2024 00:00',
-        'end_date'   => '12/03/2024 23:59',
+        'start_date' => '11/24/2025 00:00',
+        'end_date'   => '12/02/2025 23:59',
     );
 
     $current_date = time();

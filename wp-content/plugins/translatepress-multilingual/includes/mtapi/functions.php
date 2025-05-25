@@ -64,6 +64,11 @@ function trp_mtapi_add_settings( $mt_settings ){
         set_transient("trp_mtapi_cached_quota", $site_status['quota'], 5*60);
 
         $quota       = ceil($site_status['quota'] / 5 );
+
+        // this $total_quota is not correct due to quota_used should account for ALL websites added to this license.
+        // however, in case the site does have a user defined limit, the quota_used is correct.
+        // without further changes to mtapi we don't have a proper way of knowing what's the quota_used.
+        // will hide total_quota and let progress bar in place as the approximation is good enough
         $total_quota = ceil( ( $site_status['quota'] + $site_status['quota_used'] ) / 5 );
 
         $formatted_quota = number_format( $quota );
@@ -90,7 +95,7 @@ function trp_mtapi_add_settings( $mt_settings ){
         </div>
 
         <span class="trp-secondary-text">
-            <?php echo "<strong>" . esc_html( $formatted_quota ) . "</strong>" . " / " . esc_html( $formatted_total_quota ) .  esc_html__( ' words remaining. ', 'translatepress-multilingual' ); ?>
+            <?php echo "<strong>" . esc_html( $formatted_quota ) . "</strong>" .  esc_html__( ' words remaining. ', 'translatepress-multilingual' ); ?>
 
             <?php if ( isset( $site_status['exception'][0]['message'] ) && $site_status['exception'][0]['message'] == "Site not found." ){ ?>
                 <span id="trp-refresh-tpai">
@@ -128,13 +133,13 @@ function trp_mtapi_add_settings( $mt_settings ){
 /**
  * Store url
  *
- * In order of priority MTAPI_STORE_URL, tpcom.local, translatepress.com
+ * In order of priority MTAPI_STORE_URL, tpcom.ddev.site, translatepress.com
  *
  * @return string
  */
 function trp_mtapi_get_store_url() {
     $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_STORE_URL' ) ) ? MTAPI_STORE_URL : null ) : $store_url;
-    $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_URL' ) && MTAPI_URL == 'http://mtapi.local' ) ? 'http://tpcom.local' : null ) : $store_url;
+    $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_URL' ) && MTAPI_URL == 'https://mtapi.ddev.site' ) ? 'https://tpcom.ddev.site' : null ) : $store_url;
     return ( !isset( $store_url ) ) ? "https://translatepress.com" : $store_url;
 }
 
@@ -145,7 +150,11 @@ function trp_mtapi_get_store_url() {
  */
 add_filter( 'trp_machine_translation_sanitize_settings', 'trp_mtapi_sync_license', 10, 2 );
 function trp_mtapi_sync_license( $settings, $mt_settings ) {
-    if ( $settings['translation-engine'] === 'mtapi' ) {
+    if ( isset ( $_POST['option_page'] ) &&
+        $_POST['option_page'] === 'trp_machine_translation_settings' &&
+        current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) &&
+        $settings['translation-engine'] === 'mtapi' )
+    {
         $license = get_option( 'trp_license_key' );
         $status  = get_option( 'trp_license_status' );
 
@@ -163,13 +172,14 @@ function trp_mtapi_sync_license( $settings, $mt_settings ) {
 function trp_mtapi_sync_license_call( $license_key ) {
     $trp = TRP_Translate_Press::get_trp_instance();
 
-    if ( !empty( $trp->active_pro_addons ) ) {
+    if ( !empty( $trp->tp_product_name ) ) {
 
         // data to send in our API request
         $api_params = array(
             'edd_action' => 'sync_mtapi_license',
             'license'    => $license_key,
-            'url'        => home_url()
+            'url'        => home_url(),
+            'version'    => TRP_PLUGIN_VERSION
         );
         $store_url  = trp_mtapi_get_store_url();
         // Call the custom API.

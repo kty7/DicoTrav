@@ -128,18 +128,14 @@ msgstr ""
 "cartelle significativi e otterrà un miglior posizionamento nei motori di "
 "ricerca!"
 
-#: Service.php:162 Service.php:276
+#: Service.php:140
 msgid "No such plugin slug available."
 msgstr "Non è disponibile uno slug per il plugin."
 
-#: Service.php:214
+#: Service.php:192
 msgid "The abstract implementation for your slug could not be found."
 msgstr ""
 "Non è stato possibile trovare l'implementazione astratta per il suo slug."
-
-#: Service.php:269
-msgid "You must agree to our privacy policy to continue."
-msgstr "Per continuare, deve accettare la nostra informativa sulla privacy."
 
 #. translators:
 #: view/Options.php:48
@@ -180,61 +176,55 @@ msgid_plural "Key features"
 msgstr[0] "Caratteristica principale"
 msgstr[1] "Caratteristiche principali"
 
-#: WelcomePage.php:179
-msgid "Newsletter"
-msgstr "Newsletter"
-
-#: WelcomePage.php:182
-msgid ""
-"Receive the latest news about devowl.io WordPress plugins directly in your "
-"inbox"
-msgstr ""
-"Riceva le ultime notizie sui plugin WordPress di devowl.io direttamente "
-"nella sua casella di posta elettronica"
-
-#: WelcomePage.php:186
-msgid "Enter your email..."
-msgstr "Inserisca la sua e-mail..."
-
-#. translators:
-#: WelcomePage.php:194
-msgctxt "legal-text"
-msgid ""
-"I hereby consent to the processing of my data by devowl.io GmbH for the "
-"purpose of sending the newsletter. The consent can be revoked at any time "
-"with effect for the future by clicking on the \"Unsubscribe\" button or by e-"
-"mail."
-msgstr ""
-"Acconsento al trattamento dei miei dati da parte di devowl.io GmbH ai fini "
-"dell'invio della newsletter. Il consenso può essere revocato in qualsiasi "
-"momento con effetto per il futuro, cliccando sul pulsante \"Unsubscribe\" o "
-"via e-mail."
-
-#. translators:
-#: WelcomePage.php:206
-msgctxt "legal-text"
-msgid ""
-"Information on the processing of your personal data can be found in our <a "
-"%s>privacy policy</a>."
-msgstr ""
-"Le informazioni sul trattamento dei suoi dati personali si trovano nella "
-"nostra <a %s>politica sulla privacy</a>."
-
-#: WelcomePage.php:211
-msgid "https://devowl.io/privacy-policy/"
-msgstr "https://devowl.io/privacy-policy/"
-
-#: WelcomePage.php:216
-msgid "Subscribe"
-msgstr "Abbonarsi"
-
-#: WelcomePage.php:290
+#: WelcomePage.php:247
 msgid "Additional plugins by devowl.io"
 msgstr "Ulteriori plugin di devowl.io"
 
-#: WelcomePage.php:366
+#: WelcomePage.php:328
 msgid "Available in"
 msgstr "Disponibile in"
+
+#~ msgid "You must agree to our privacy policy to continue."
+#~ msgstr "Per continuare, deve accettare la nostra informativa sulla privacy."
+
+#~ msgid "Newsletter"
+#~ msgstr "Newsletter"
+
+#~ msgid ""
+#~ "Receive the latest news about devowl.io WordPress plugins directly in "
+#~ "your inbox"
+#~ msgstr ""
+#~ "Riceva le ultime notizie sui plugin WordPress di devowl.io direttamente "
+#~ "nella sua casella di posta elettronica"
+
+#~ msgid "Enter your email..."
+#~ msgstr "Inserisca la sua e-mail..."
+
+#~ msgctxt "legal-text"
+#~ msgid ""
+#~ "I hereby consent to the processing of my data by devowl.io GmbH for the "
+#~ "purpose of sending the newsletter. The consent can be revoked at any time "
+#~ "with effect for the future by clicking on the \"Unsubscribe\" button or "
+#~ "by e-mail."
+#~ msgstr ""
+#~ "Acconsento al trattamento dei miei dati da parte di devowl.io GmbH ai "
+#~ "fini dell'invio della newsletter. Il consenso può essere revocato in "
+#~ "qualsiasi momento con effetto per il futuro, cliccando sul pulsante "
+#~ "\"Unsubscribe\" o via e-mail."
+
+#~ msgctxt "legal-text"
+#~ msgid ""
+#~ "Information on the processing of your personal data can be found in our "
+#~ "<a %s>privacy policy</a>."
+#~ msgstr ""
+#~ "Le informazioni sul trattamento dei suoi dati personali si trovano nella "
+#~ "nostra <a %s>politica sulla privacy</a>."
+
+#~ msgid "https://devowl.io/privacy-policy/"
+#~ msgstr "https://devowl.io/privacy-policy/"
+
+#~ msgid "Subscribe"
+#~ msgstr "Abbonarsi"
 
 #~ msgctxt "legal-text"
 #~ msgid ""

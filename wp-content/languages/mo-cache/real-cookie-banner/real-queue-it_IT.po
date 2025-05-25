@@ -33,10 +33,10 @@ msgstr ""
 "La funzione callable passata e salvata nel job non può essere chiamata "
 "(`is_callable`)"
 
-#: queue/Job.php:381
+#: queue/Job.php:382
 msgid "This job is already running in another thread on your server."
 msgstr "Questo lavoro è già in esecuzione in un altro thread sul suo server."
 
-#: queue/Job.php:409
+#: queue/Job.php:410
 msgid "Unexpected exception."
 msgstr "Eccezione inaspettata."

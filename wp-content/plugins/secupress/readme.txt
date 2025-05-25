@@ -1,10 +1,10 @@
-=== SecuPress Free — WordPress Security ===
+=== SecuPress Free with Simple SSL – Simple and Performant Security ===
 Contributors: SecuPress, juliobox, GregLone, Superment
 Tags: wordpress security, malware, security plugin, security
 Requires at least: 4.9
-Tested up to: 6.7.2
+Tested up to: 6.8.1
 Requires PHP: 7.0
-Stable tag: 2.3.8
+Stable tag: 2.3.16.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -179,18 +179,17 @@ The answer is no. SecuPress is not compatible with another security plugin. Just
 3. The first scan
 4. The 1st step: result of the scan
 5. The 2nd step: choose what to automatically fix (1)
-6. SecuPress is fixing issue for you
+6. SecuPress is fixing issues for you
 7. The 3rd step: manual fix, when you have to decide something
 8. The 4th step: final report, you can export it as PDF (1)
 
 == Changelog ==
 
-= 2.3.8 =
-* 28 March 2025
-* Improvement: Password Lifespan Module: It's now mandatory to renew your password if expired.
-* Fix: Allow .xml/.xsl in bad url access module (hello sitemaps) + allow non existing files to be added (hello redirections)
-* Fix: Prevent a possible error on Actions on plugins, not allowing to deactivate the module.
-* Fix: Add a condition before destroying the session.
+= 2.3.16.2 =
+* 24 May 2025
+* Fix: A possible loop when login
+* Fix: A too big SQL query on site with too many users
+
 
 == Upgrade Notice ==
 * SecuPress 2.3+ now requires PHP 7.0 minimum.

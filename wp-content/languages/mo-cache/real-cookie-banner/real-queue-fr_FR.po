@@ -33,12 +33,12 @@ msgstr ""
 "Le callable passé et persistant dans la tâche ne peut pas être appelé "
 "(`is_callable`)"
 
-#: queue/Job.php:381
+#: queue/Job.php:382
 msgid "This job is already running in another thread on your server."
 msgstr ""
 "Cette t$ache est déjà en cours d'exécution dans un autre processus sur votre "
 "serveur."
 
-#: queue/Job.php:409
+#: queue/Job.php:410
 msgid "Unexpected exception."
 msgstr "Exception inattendue."

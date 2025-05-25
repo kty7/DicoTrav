@@ -528,20 +528,8 @@ function secupress_add_cookiehash_muplugin() {
 		'{{HASH}}'        => wp_generate_password( 64 ),
 	);
 	$cookiehash = str_replace( array_keys( $args ), $args, $cookiehash );
-	$uniqid     = uniqid();
 
-	// retro compat (<2.2.6)
-	$files = secupress_find_muplugin( '_secupress-cookiehash-' );
-	if ( ! empty( $files ) ) {
-		array_map( 'secupress_delete_mu_plugin', $files );
-	}
-
-	// 2.2.6+
-	if ( ! empty( $files ) ) {
-		array_map( 'secupress_delete_mu_plugin', $files );
-	}
-
-	if ( ! $cookiehash || ! secupress_create_mu_plugin( 'cookiehash_' . $uniqid, $cookiehash ) ) {
+	if ( ! $cookiehash || ! secupress_create_mu_plugin( 'cookiehash', $cookiehash, uniqid() ) ) {
 		// MU Plugin creation failed.
 		secupress_set_site_transient( 'secupress-cookiehash-muplugin-failed', 1 );
 		secupress_fixit( 'WP_Config' );
@@ -602,28 +590,17 @@ function secupress_add_salt_muplugin() {
 			'{{HASH2}}'        => wp_generate_password( 64, true, true ),
 		);
 		$alicia_keys = str_replace( array_keys( $args ), $args, $alicia_keys );
-		$uniqid      = uniqid();
-		$file        = secupress_find_muplugin( '_secupress_salt_keys_' );
-		$file        = reset( $file );
-		$created     = secupress_create_mu_plugin( 'salt_keys_' . $uniqid, $alicia_keys );
-		if ( file_exists( $file ) ) {
-			secupress_delete_mu_plugin( $file );
-		}
+		$created     = secupress_create_mu_plugin( 'salt_keys', $alicia_keys, uniqid() );
 		if ( ! $alicia_keys || ! $created ) {
-			var_dump($created);
 			return;
 		}
 	}
 
-	$keys = array( 'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY', 'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT' );
 	// Remove old secret keys from the database.
-	foreach ( $keys as $constant ) {
-		delete_site_option( $constant );
-	}
+	secupress_delete_db_salt_keys();
 
 	// Make sure we find the `wp-config.php` file.
 	$wpconfig_filepath = secupress_is_wpconfig_writable();
-
 
 	if ( $wpconfig_filepath ) {
 		/**
@@ -635,6 +612,7 @@ function secupress_add_salt_muplugin() {
 		$comment_added    = false;
 		$comment          = '/** If you want to add secret keys back in wp-config.php, get new ones at https://api.wordpress.org/secret-key/1.1/salt, then delete this file. */';
 		$placeholder      = '/** SecuPress salt placeholder. */';
+		$keys             = secupress_get_db_salt_keys();
 
 		foreach ( $keys as $i => $constant ) {
 			$pattern = '@define\s*\(\s*([\'"])' . $constant . '\1.*@';
@@ -654,7 +632,6 @@ function secupress_add_salt_muplugin() {
 	}
 
 	secupress_auto_login( 'Salt_Keys' );
-	die();
 }
 
 
@@ -709,24 +686,6 @@ function secupress_give_him_a_user( $user, $username ) {
 	return get_user_by( 'login', $username );
 }
 
-/**
- * Return all possible matches for a muplugin filename
- *
- * @since 2.0
- * @author Julio Potier
- *
- * @param (string) $filename A part of the filename you are looking for
- * @return (array) Empty if no file found.
- **/
-function secupress_find_muplugin( $filename ) {
-	$mus = wp_get_mu_plugins();
-	foreach ( $mus as $i => $mu ) {
-		if ( false === strpos( $mu, $filename ) ) {
-			unset( $mus[ $i ] );
-		}
-	}
-	return $mus;
-}
 
 /**
  * Add HTML header
